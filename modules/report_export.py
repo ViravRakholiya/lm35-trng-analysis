@@ -121,9 +121,8 @@ def sp800_22_table(
     )
 
 
-def appendix_table(results: list[PipelineResult], out_path: Path) -> str:
-    """Full granular per-sensor/per-condition data for the appendix."""
-    df = pd.DataFrame(
+def _build_summary_dataframe(results: list[PipelineResult]) -> pd.DataFrame:
+    return pd.DataFrame(
         [
             {
                 "Sensor": r.sensor_id,
@@ -142,6 +141,21 @@ def appendix_table(results: list[PipelineResult], out_path: Path) -> str:
             for r in results
         ]
     ).sort_values(["Variant", "Sensor", "Temp (C)", "Voltage (V)"])
+
+
+def appendix_table(results: list[PipelineResult], out_path: Path) -> str:
+    """Full granular per-sensor/per-condition data for the appendix."""
+    df = _build_summary_dataframe(results)
     return _write_latex(
         df, out_path, "Full per-sensor, per-condition results.", "tab:appendix-full"
     )
+
+
+def summary_csv(results: list[PipelineResult], out_path: Path) -> pd.DataFrame:
+    """Compact CSV of the same per-sensor/per-condition summary, for lightweight
+    downstream consumers (e.g. a cloud results viewer) that shouldn't need the
+    raw data or NIST tools to display results."""
+    df = _build_summary_dataframe(results)
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    df.to_csv(out_path, index=False)
+    return df

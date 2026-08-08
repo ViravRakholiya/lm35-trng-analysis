@@ -8,9 +8,11 @@ __pycache__/
 .venv/
 venv/
 
-# Generated results
+# Generated results (LaTeX tables are regenerated locally; keep the small
+# CSV summary for the cloud results viewer)
 results/*
 !results/.gitkeep
+!results/summary.csv
 
 # OS
 .DS_Store
