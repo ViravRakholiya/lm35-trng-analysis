@@ -1,4 +1,4 @@
-"""Streamlit UI: pick a sensor/condition CSV, run the pipeline, view and export results."""
+"""Streamlit UI: pick a sensor/condition, run the pipeline, view and export results."""
 
 import pandas as pd
 import streamlit as st
@@ -6,8 +6,53 @@ import streamlit as st
 import main
 from modules import data_loader, report_export
 
-st.set_page_config(page_title="LM35 TRNG Analysis", layout="wide")
-st.title("LM35 TRNG Analysis")
+st.set_page_config(page_title="LM35 TRNG Analysis", layout="wide", page_icon="🌡️")
+
+# ---------------------------------------------------------------------------
+# Styling — a light, professional palette layered on top of Streamlit's
+# defaults via well-established, stable selectors (button, metric, container).
+# ---------------------------------------------------------------------------
+st.markdown(
+    """
+    <style>
+    h1, h2, h3 { letter-spacing: -0.01em; }
+
+    .app-header {
+        padding: 1.75rem 2rem;
+        margin: -1rem -1rem 1.5rem -1rem;
+        background: linear-gradient(135deg, #0b0b0b 0%, #262625 100%);
+        border-radius: 0 0 16px 16px;
+    }
+    .app-header h1 { color: #ffffff; margin: 0; font-size: 1.9rem; }
+    .app-header p { color: #c3c2b7; margin: 0.35rem 0 0 0; font-size: 0.95rem; }
+
+    div[data-testid="stVerticalBlockBorderWrapper"] {
+        border-radius: 12px;
+    }
+
+    .stButton > button {
+        border-radius: 8px;
+        font-weight: 500;
+        padding: 0.5rem 1rem;
+    }
+
+    div[data-testid="stMetric"] {
+        background: #fcfcfb;
+        border: 1px solid rgba(11,11,11,0.08);
+        border-radius: 10px;
+        padding: 0.75rem 1rem;
+    }
+    div[data-testid="stMetricValue"] { font-weight: 600; }
+
+    div[data-baseweb="segmented-control"] { gap: 0.25rem; }
+    </style>
+    <div class="app-header">
+        <h1>LM35 TRNG Analysis</h1>
+        <p>ADS1115 (16-bit ADC) entropy pipeline — SP 800-90B min-entropy, Von Neumann debiasing, SP 800-22</p>
+    </div>
+    """,
+    unsafe_allow_html=True,
+)
 
 if "results" not in st.session_state:
     st.session_state.results = {}  # str(path) -> PipelineResult
@@ -17,25 +62,77 @@ if not files:
     st.error(f"No CSV files found under {main.DATA_DIR}")
     st.stop()
 
+# ---------------------------------------------------------------------------
+# Index available data: (variant, number, temp, voltage) -> path, plus what's
+# actually available per sensor, so the selector can validate against reality
+# instead of assuming the full 3x2 condition matrix exists for every sensor.
+# ---------------------------------------------------------------------------
+file_index = {}
+sensors_by_variant: dict[str, set[int]] = {}
+conditions_by_sensor: dict[tuple[str, int], list[tuple[int, float]]] = {}
 
-def label_for(path):
-    meta = data_loader.parse_filename(path)
-    return f"{meta['sensor_id']} ({meta['variant']}) — {meta['temperature_c']}°C @ {meta['voltage_v']}V"
+for f in files:
+    meta = data_loader.parse_filename(f)
+    variant = meta["variant"]
+    number = int(meta["sensor_id"][len(variant) :])
+    temp, voltage = meta["temperature_c"], meta["voltage_v"]
 
+    file_index[(variant, number, temp, voltage)] = f
+    sensors_by_variant.setdefault(variant, set()).add(number)
+    conditions_by_sensor.setdefault((variant, number), []).append((temp, voltage))
 
-file_labels = {label_for(f): f for f in files}
-selected_label = st.selectbox("Sensor / condition", list(file_labels.keys()))
-selected_path = file_labels[selected_label]
+TEMPS = [0, 24, 40]
+VOLTAGES = [3.3, 5.0]
 
-btn_col1, btn_col2 = st.columns(2)
-run_single = btn_col1.button("Run selected")
-run_all = btn_col2.button(f"Run all ({len(files)} files)")
+with st.container(border=True):
+    st.markdown("##### Select sensor & condition")
+    c1, c2, c3, c4 = st.columns(4)
+    with c1:
+        variant = st.segmented_control("Group", ["A", "B", "C"], default="A", required=True)
+    with c2:
+        number_str = st.text_input("Sensor number", value="1", help="Numeric ID within the group, e.g. 1")
+    with c3:
+        temp = st.segmented_control("Temperature (°C)", TEMPS, default=0, required=True)
+    with c4:
+        voltage = st.segmented_control("Voltage (V)", VOLTAGES, default=3.3, required=True)
 
-if run_single:
+    selected_path = None
+    number_stripped = number_str.strip()
+
+    if not number_stripped:
+        st.error("Enter a sensor number.")
+    elif not number_stripped.isdigit():
+        st.error(f"'{number_str}' isn't a valid sensor number — enter digits only, e.g. 1.")
+    else:
+        number = int(number_stripped)
+        available_numbers = sorted(sensors_by_variant.get(variant, []))
+        if number not in available_numbers:
+            avail = ", ".join(str(n) for n in available_numbers) or "none"
+            st.error(f"No data for sensor {variant}{number}. Available in group {variant}: {avail}")
+        else:
+            key = (variant, number, temp, voltage)
+            if key in file_index:
+                selected_path = file_index[key]
+                st.success(f"Selected **{variant}{number}** — {temp}°C @ {voltage}V")
+            else:
+                available = sorted(conditions_by_sensor[(variant, number)])
+                cond_str = ", ".join(f"{t}°C/{v}V" for t, v in available)
+                st.error(
+                    f"No data for {variant}{number} at {temp}°C / {voltage}V. "
+                    f"Available for {variant}{number}: {cond_str}"
+                )
+
+    btn_col1, btn_col2 = st.columns(2)
+    run_single = btn_col1.button(
+        "Run selected", type="primary", disabled=selected_path is None, use_container_width=True
+    )
+    run_all = btn_col2.button(f"Run all ({len(files)} files)", use_container_width=True)
+
+if run_single and selected_path is not None:
     with st.spinner(f"Processing {selected_path.name}..."):
         reading = data_loader.load_sensor_reading(selected_path, columns=["Raw_ADC"])
         st.session_state.results[str(selected_path)] = main.process_one(reading)
-    st.success("Done")
+    st.toast("Done", icon="✅")
 
 if run_all:
     progress = st.progress(0.0)
@@ -50,10 +147,12 @@ if run_all:
 results_list = list(st.session_state.results.values())
 
 if not results_list:
-    st.info("Run a sensor/condition above to see results here.")
+    st.info("Select a sensor and condition above, then run it to see results here.")
     st.stop()
 
-st.subheader("Results summary")
+st.markdown("### Results")
+
+st.markdown("##### Summary")
 summary_df = pd.DataFrame(
     [
         {
@@ -71,9 +170,9 @@ summary_df = pd.DataFrame(
 )
 st.dataframe(summary_df, width="stretch")
 
-if str(selected_path) in st.session_state.results:
-    st.subheader(f"Detail: {selected_label}")
+if selected_path is not None and str(selected_path) in st.session_state.results:
     r = st.session_state.results[str(selected_path)]
+    st.markdown(f"##### Detail: {r.sensor_id} ({r.variant}) — {r.temperature_c}°C @ {r.voltage_v}V")
 
     m1, m2, m3 = st.columns(3)
     m1.metric("Min-Entropy (bits/bit)", f"{r.min_entropy.min_entropy_per_bit:.4f}")
@@ -103,7 +202,7 @@ if str(selected_path) in st.session_state.results:
         )
         st.dataframe(sub_df, width="stretch")
 
-st.subheader("LaTeX export")
+st.markdown("##### LaTeX export")
 if st.button("Generate LaTeX tables"):
     main.RESULTS_DIR.mkdir(parents=True, exist_ok=True)
     report_export.min_entropy_table(results_list, main.RESULTS_DIR / "rq3_min_entropy.tex")
@@ -112,9 +211,14 @@ if st.button("Generate LaTeX tables"):
         results_list, main.AYYADA_SP800_22_REFERENCE, main.RESULTS_DIR / "rq5_sp800_22.tex"
     )
     report_export.appendix_table(results_list, main.RESULTS_DIR / "appendix_full.tex")
+    report_export.summary_csv(results_list, main.RESULTS_DIR / "summary.csv")
     st.success(f"Tables written to {main.RESULTS_DIR}")
 
-for name in ["rq3_min_entropy.tex", "rq4_von_neumann.tex", "rq5_sp800_22.tex", "appendix_full.tex"]:
+export_cols = st.columns(5)
+for col, name in zip(
+    export_cols,
+    ["rq3_min_entropy.tex", "rq4_von_neumann.tex", "rq5_sp800_22.tex", "appendix_full.tex", "summary.csv"],
+):
     path = main.RESULTS_DIR / name
     if path.is_file():
-        st.download_button(f"Download {name}", path.read_text(), file_name=name)
+        col.download_button(f"Download {name}", path.read_text(), file_name=name, use_container_width=True)
