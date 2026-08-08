@@ -1,0 +1,16 @@
+# Raw sensor data (large, not version controlled)
+data/**/*.csv
+!data/rename_manifest.csv
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Generated results
+results/*
+!results/.gitkeep
+
+# OS
+.DS_Store
