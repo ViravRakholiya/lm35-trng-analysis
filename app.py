@@ -202,23 +202,38 @@ if selected_path is not None and str(selected_path) in st.session_state.results:
         )
         st.dataframe(sub_df, width="stretch")
 
-st.markdown("##### LaTeX export")
-if st.button("Generate LaTeX tables"):
+st.markdown("##### Export & save results")
+st.caption(
+    "Saves this session's results into docs/data/ (the dashboard's data source) and "
+    "results/*.tex (LaTeX for the thesis), merged with whatever's already there — running "
+    "sensors one at a time across separate sessions accumulates into the same permanent "
+    "record instead of overwriting it."
+)
+if st.button("Save results", type="primary"):
     main.RESULTS_DIR.mkdir(parents=True, exist_ok=True)
+    main.DOCS_DATA_DIR.mkdir(parents=True, exist_ok=True)
     report_export.min_entropy_table(results_list, main.RESULTS_DIR / "rq3_min_entropy.tex")
     report_export.von_neumann_table(results_list, main.RESULTS_DIR / "rq4_von_neumann.tex")
     report_export.sp800_22_table(
         results_list, main.AYYADA_SP800_22_REFERENCE, main.RESULTS_DIR / "rq5_sp800_22.tex"
     )
     report_export.appendix_table(results_list, main.RESULTS_DIR / "appendix_full.tex")
-    report_export.summary_csv(results_list, main.RESULTS_DIR / "summary.csv")
-    st.success(f"Tables written to {main.RESULTS_DIR}")
+    combined_summary = report_export.summary_csv(results_list, main.DOCS_DATA_DIR / "summary.csv")
+    report_export.full_detail_json(results_list, main.DOCS_DATA_DIR / "full_details.json")
+    st.success(f"Saved. {len(combined_summary)} conditions on record ({main.RESULTS_DIR} + {main.DOCS_DATA_DIR})")
 
-export_cols = st.columns(5)
-for col, name in zip(
-    export_cols,
-    ["rq3_min_entropy.tex", "rq4_von_neumann.tex", "rq5_sp800_22.tex", "appendix_full.tex", "summary.csv"],
-):
+tex_names = ["rq3_min_entropy.tex", "rq4_von_neumann.tex", "rq5_sp800_22.tex", "appendix_full.tex"]
+data_names = ["summary.csv", "full_details.json"]
+export_cols = st.columns(3)
+for i, name in enumerate(tex_names):
     path = main.RESULTS_DIR / name
     if path.is_file():
-        col.download_button(f"Download {name}", path.read_text(), file_name=name, use_container_width=True)
+        export_cols[i % 3].download_button(
+            f"Download {name}", path.read_text(), file_name=name, use_container_width=True
+        )
+for i, name in enumerate(data_names):
+    path = main.DOCS_DATA_DIR / name
+    if path.is_file():
+        export_cols[(i + len(tex_names)) % 3].download_button(
+            f"Download {name}", path.read_text(), file_name=name, use_container_width=True
+        )

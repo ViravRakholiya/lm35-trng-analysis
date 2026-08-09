@@ -7,6 +7,7 @@ from modules.report_export import PipelineResult
 
 DATA_DIR = Path(__file__).parent / "data"
 RESULTS_DIR = Path(__file__).parent / "results"
+DOCS_DATA_DIR = Path(__file__).parent / "docs" / "data"
 
 LSB_BITS = 1
 STS_STREAM_LENGTH_CANDIDATES = [1_000_000, 100_000, 10_000]
@@ -70,8 +71,9 @@ def run_pipeline(data_dir: Path = DATA_DIR, results_dir: Path = RESULTS_DIR) -> 
     report_export.von_neumann_table(results, results_dir / "rq4_von_neumann.tex")
     report_export.sp800_22_table(results, AYYADA_SP800_22_REFERENCE, results_dir / "rq5_sp800_22.tex")
     report_export.appendix_table(results, results_dir / "appendix_full.tex")
-    report_export.summary_csv(results, results_dir / "summary.csv")
-    print(f"Done. {len(results)} conditions processed, tables written to {results_dir}")
+    report_export.summary_csv(results, DOCS_DATA_DIR / "summary.csv")
+    report_export.full_detail_json(results, DOCS_DATA_DIR / "full_details.json")
+    print(f"Done. {len(results)} conditions processed. LaTeX in {results_dir}, dashboard data in {DOCS_DATA_DIR}")
 
     return results
 

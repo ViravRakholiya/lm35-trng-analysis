@@ -7,6 +7,7 @@ Neumann is reported as raw min-entropy + retention rate + post-debiasing bias
 estimate. SP 800-22 pass rate (RQ5) is the actual post-processing randomness signal.
 """
 
+import json
 from dataclasses import dataclass
 from pathlib import Path
 
@@ -151,11 +152,86 @@ def appendix_table(results: list[PipelineResult], out_path: Path) -> str:
     )
 
 
+_RESULT_KEY_COLUMNS = ["Sensor", "Temp (C)", "Voltage (V)"]
+
+
 def summary_csv(results: list[PipelineResult], out_path: Path) -> pd.DataFrame:
     """Compact CSV of the same per-sensor/per-condition summary, for lightweight
     downstream consumers (e.g. a cloud results viewer) that shouldn't need the
-    raw data or NIST tools to display results."""
-    df = _build_summary_dataframe(results)
+    raw data or NIST tools to display results.
+
+    Merges with whatever's already at out_path (keyed by sensor + condition) so
+    results accumulate across separate runs — e.g. running sensors one at a time
+    through the UI over several sessions — instead of each run overwriting the
+    last."""
+    new_df = _build_summary_dataframe(results)
+
+    if out_path.is_file():
+        existing_df = pd.read_csv(out_path)
+        combined = pd.concat([existing_df, new_df], ignore_index=True)
+        combined = combined.drop_duplicates(subset=_RESULT_KEY_COLUMNS, keep="last")
+    else:
+        combined = new_df
+
+    combined = combined.sort_values(["Variant", "Sensor", "Temp (C)", "Voltage (V)"])
     out_path.parent.mkdir(parents=True, exist_ok=True)
-    df.to_csv(out_path, index=False)
-    return df
+    combined.to_csv(out_path, index=False)
+    return combined
+
+
+def _result_to_detail_record(r: PipelineResult) -> dict:
+    return {
+        "sensor_id": r.sensor_id,
+        "variant": r.variant,
+        "temperature_c": r.temperature_c,
+        "voltage_v": r.voltage_v,
+        "min_entropy": {
+            "min_entropy_per_bit": r.min_entropy.min_entropy_per_bit,
+            "estimators": r.min_entropy.estimator_results,
+        },
+        "debias": {
+            "input_bit_count": r.debias.input_bit_count,
+            "output_bit_count": r.debias.output_bit_count,
+            "retention_rate": r.debias.retention_rate,
+            "post_debias_one_fraction": r.post_debias_one_fraction,
+        },
+        "sp800_22": {
+            "pass_rate": r.sp800_22_pass_rate,
+            "sub_tests": [
+                {
+                    "test_name": t.test_name,
+                    "uniformity_p_value": t.uniformity_p_value,
+                    "num_passed": t.num_passed,
+                    "num_total": t.num_total,
+                    "passed": t.passed,
+                }
+                for t in r.sp800_22_results
+            ],
+        },
+    }
+
+
+def full_detail_json(results: list[PipelineResult], out_path: Path) -> list[dict]:
+    """Complete per-condition detail — every SP 800-90B estimator sub-result and
+    every SP 800-22 sub-test row, not just the aggregate numbers in summary_csv.
+    This is the permanent record: what's shown live in the app disappears once
+    the session ends, so this file is what a future session (or a professor
+    looking at the deployed viewer) can actually drill into.
+
+    Merges with whatever's already at out_path (same accumulate-don't-overwrite
+    behavior as summary_csv, keyed by sensor + condition)."""
+    new_records = [_result_to_detail_record(r) for r in results]
+
+    existing_records = json.loads(out_path.read_text()) if out_path.is_file() else []
+
+    merged = {(rec["sensor_id"], rec["temperature_c"], rec["voltage_v"]): rec for rec in existing_records}
+    for rec in new_records:
+        merged[(rec["sensor_id"], rec["temperature_c"], rec["voltage_v"])] = rec
+
+    combined = sorted(
+        merged.values(), key=lambda r: (r["variant"], r["sensor_id"], r["temperature_c"], r["voltage_v"])
+    )
+
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    out_path.write_text(json.dumps(combined, indent=2))
+    return combined

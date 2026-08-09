@@ -8,11 +8,10 @@ __pycache__/
 .venv/
 venv/
 
-# Generated results (LaTeX tables are regenerated locally; keep the small
-# CSV summary for the cloud results viewer)
+# Generated LaTeX tables (regenerated locally for the thesis; the dashboard's
+# data lives in docs/data/ instead, which is tracked normally)
 results/*
 !results/.gitkeep
-!results/summary.csv
 
 # OS
 .DS_Store
