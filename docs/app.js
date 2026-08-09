@@ -523,7 +523,7 @@ function renderTable(rows) {
   ).join("")}</tr></thead>`;
 
   const tbody = `<tbody>${data.map((r) =>
-    `<tr>${TABLE_COLUMNS.map((c) => `<td class="${c === "Sensor" || c === "Variant" ? "text-cell" : ""}">${formatCell(r[c])}</td>`).join("")}</tr>`
+    `<tr>${TABLE_COLUMNS.map((c) => `<td class="${c === "Sensor" || c === "Variant" ? "text-cell" : ""}">${formatCell(r[c], c)}</td>`).join("")}</tr>`
   ).join("")}</tbody>`;
 
   el.innerHTML = thead + tbody;
@@ -538,8 +538,13 @@ function renderTable(rows) {
   });
 }
 
-function formatCell(v) {
-  if (typeof v === "number") return escapeHtml(Number.isInteger(v) ? v : v.toFixed(4));
+function formatCell(v, column) {
+  if (typeof v === "number") {
+    // Voltage is a label (3.3V, 5V), not a measurement — show it as typed,
+    // not forced to 4 decimal places like the actual result columns.
+    if (column === "Voltage (V)") return escapeHtml(String(v));
+    return escapeHtml(Number.isInteger(v) ? v : v.toFixed(4));
+  }
   return escapeHtml(v);
 }
 
@@ -1120,58 +1125,67 @@ function renderAyyadaChart(allRows) {
   }));
   const hasAyyada = variants.some((v) => AYYADA_REFERENCE[v] && AYYADA_REFERENCE[v].raw != null);
 
-  const width = Math.max(420, variants.length * 200);
-  const height = 300;
-  const margin = { top: 12, right: 16, bottom: 40, left: 52 };
-  const plotW = width - margin.left - margin.right;
-  const plotH = height - margin.top - margin.bottom;
-
+  // One small chart per variant (not 3 bars sharing one axis) — a shared
+  // y-domain keeps them honestly comparable at a glance, same idea as the
+  // fixed-axis fix on the retention/pass-rate charts.
   const dataMax = Math.max(...ours.map((o) => o.value), ...variants.map((v) => (AYYADA_REFERENCE[v]?.raw) || 0));
   const yMax = Math.max(...niceTicks(dataMax, 4));
 
-  const svg = svgEl("svg", { viewBox: `0 0 ${width} ${height}` });
-  const g = svgEl("g", { transform: `translate(${margin.left},${margin.top})` });
-  svg.appendChild(g);
-
-  const x = pointScale(variants, [0, plotW]);
-  const y = linearScale([0, yMax], [plotH, 0]);
-
-  // Collected and appended after the bars — see the note in renderBarChart.
-  const yLabels = [];
-  niceTicks(yMax, 5).forEach((t) => {
-    g.appendChild(svgEl("line", { class: "gridline", x1: 0, x2: plotW, y1: y(t), y2: y(t) }));
-    const label = svgEl("text", { class: "axis-label", x: -8, y: y(t) + 3, "text-anchor": "end" });
-    label.textContent = t.toFixed(3);
-    yLabels.push(label);
-  });
-  g.appendChild(svgEl("line", { class: "baseline", x1: 0, x2: plotW, y1: y(0), y2: y(0) }));
-
-  const pairW = Math.min(70, x.step * 0.6);
-  const barW = pairW / 2 - 2;
+  const facetWidth = 260, height = 300;
+  const margin = { top: 12, right: 16, bottom: 40, left: 52 };
+  const plotW = facetWidth - margin.left - margin.right;
+  const plotH = height - margin.top - margin.bottom;
 
   variants.forEach((v) => {
-    const cx = x(v);
     const ourValue = ours.find((o) => o.variant === v).value;
     const ayyadaValue = AYYADA_REFERENCE[v]?.raw;
     const color = VARIANT_COLOR[v] || "var(--ink-muted)";
 
+    const card = document.createElement("section");
+    card.className = "chart-card";
+    const head = document.createElement("div");
+    head.className = "card-head";
+    head.innerHTML = `<div><h3>Variant ${escapeHtml(v)}</h3><p class="card-sub">ADS1115 (this study) vs. MCP3008 (Ayyada)</p></div>`;
+    card.appendChild(head);
+
+    const svg = svgEl("svg", { viewBox: `0 0 ${facetWidth} ${height}` });
+    const g = svgEl("g", { transform: `translate(${margin.left},${margin.top})` });
+    svg.appendChild(g);
+
+    // Single centered pair per facet, so there's no "first category flush
+    // against the axis" edge case at all — the bars sit in the middle of
+    // their own dedicated plot area, well clear of the y-axis labels.
+    const barW = 44;
+    const pairCenter = plotW / 2;
+
+    const y = linearScale([0, yMax], [plotH, 0]);
+
+    const yLabels = [];
+    niceTicks(yMax, 5).forEach((t) => {
+      g.appendChild(svgEl("line", { class: "gridline", x1: 0, x2: plotW, y1: y(t), y2: y(t) }));
+      const label = svgEl("text", { class: "axis-label", x: -8, y: y(t) + 3, "text-anchor": "end" });
+      label.textContent = t.toFixed(3);
+      yLabels.push(label);
+    });
+    g.appendChild(svgEl("line", { class: "baseline", x1: 0, x2: plotW, y1: y(0), y2: y(0) }));
+
     const ourH = Math.max(0, y(0) - y(ourValue));
-    g.appendChild(svgEl("rect", { class: "mark-bar", x: cx - barW - 1, y: y(ourValue), width: barW, height: ourH, rx: 3, fill: color }));
+    g.appendChild(svgEl("rect", {
+      class: "mark-bar", x: pairCenter - barW - 1, y: y(ourValue), width: barW, height: ourH, rx: 3, fill: color,
+    }));
 
     if (ayyadaValue != null) {
       const ayyH = Math.max(0, y(0) - y(ayyadaValue));
       g.appendChild(svgEl("rect", {
-        class: "mark-bar", x: cx + 1, y: y(ayyadaValue), width: barW, height: ayyH, rx: 3, fill: color, "fill-opacity": 0.45,
+        class: "mark-bar", x: pairCenter + 1, y: y(ayyadaValue), width: barW, height: ayyH, rx: 3, fill: color, "fill-opacity": 0.45,
       }));
     } else {
-      g.appendChild(svgEl("rect", { class: "mark-bar pending", x: cx + 1, y: margin.top, width: barW, height: plotH - margin.top, rx: 3 }));
+      g.appendChild(svgEl("rect", {
+        class: "mark-bar pending", x: pairCenter + 1, y: margin.top, width: barW, height: plotH - margin.top, rx: 3,
+      }));
     }
 
-    const label = svgEl("text", { class: "axis-label", x: cx, y: plotH + 20, "text-anchor": "middle" });
-    label.textContent = `Variant ${v}`;
-    g.appendChild(label);
-
-    const hit = svgEl("rect", { class: "hit-target", x: cx - pairW / 2, y: 0, width: pairW, height: plotH });
+    const hit = svgEl("rect", { class: "hit-target", x: pairCenter - barW - 1, y: 0, width: barW * 2 + 2, height: plotH });
     hit.addEventListener("pointerenter", (e) => {
       showTooltip(e.clientX, e.clientY,
         `<div class="tt-title">Variant ${escapeHtml(v)}</div>` +
@@ -1183,25 +1197,27 @@ function renderAyyadaChart(allRows) {
     hit.addEventListener("pointermove", (e) => showTooltip(e.clientX, e.clientY, document.getElementById("tooltip").innerHTML));
     hit.addEventListener("pointerleave", hideTooltip);
     g.appendChild(hit);
+
+    yLabels.forEach((label) => g.appendChild(label));
+
+    card.appendChild(svg);
+
+    const legend = document.createElement("div");
+    legend.className = "legend";
+    legend.innerHTML =
+      `<div class="legend-item"><span class="legend-swatch-rect" style="background:${color}"></span>This study (ADS1115)</div>` +
+      (ayyadaValue != null
+        ? `<div class="legend-item"><span class="legend-swatch-rect" style="background:${color};opacity:.45"></span>Ayyada (MCP3008)</div>`
+        : '<div class="legend-item"><span class="legend-swatch-hatch"></span>Ayyada (MCP3008) — pending</div>');
+    card.appendChild(legend);
+
+    container.appendChild(card);
   });
-
-  yLabels.forEach((label) => g.appendChild(label));
-
-  container.appendChild(svg);
-
-  const legend = document.createElement("div");
-  legend.className = "legend";
-  legend.innerHTML =
-    '<div class="legend-item"><span class="legend-swatch-rect" style="background:var(--series-a)"></span>This study (ADS1115)</div>' +
-    (hasAyyada
-      ? '<div class="legend-item"><span class="legend-swatch-rect" style="background:var(--series-a);opacity:.45"></span>Ayyada (MCP3008)</div>'
-      : '<div class="legend-item"><span class="legend-swatch-hatch"></span>Ayyada (MCP3008) — not yet available</div>');
-  container.appendChild(legend);
 
   if (!hasAyyada) {
     const note = document.createElement("p");
     note.className = "card-sub";
-    note.style.marginTop = "0.75rem";
+    note.style.cssText = "flex-basis: 100%; margin: 0;";
     note.innerHTML =
       'Ayyada’s published per-variant min-entropy figures aren’t transcribed into the dashboard yet — his ' +
       'summary gives an overall range (~0.83–0.91 bits/bit after Von Neumann) but not broken out by A/B/C. Add ' +

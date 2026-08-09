@@ -145,6 +145,16 @@ main {
   flex-direction: column;
   gap: 1.5rem;
 }
+/* Flex items default to min-width: auto, which lets a wide child (an SVG
+   chart with a large intrinsic viewBox) force the card wider than the page
+   instead of respecting its own width:100% — the classic flexbox "min-width
+   auto" trap. Overriding to 0 lets every card actually shrink to fit. */
+main > * { min-width: 0; }
+
+.ayyada-intro { margin-bottom: -0.75rem; }
+.ayyada-intro h2 { font-size: 1.05rem; }
+.chart-row { display: flex; flex-wrap: wrap; gap: 1.5rem; }
+.chart-row > .chart-card { flex: 1 1 260px; min-width: 260px; }
 
 /* ---------------------------------------------------------------------
    Stat tiles
@@ -248,6 +258,7 @@ main {
 .chart-svg-wrap { position: relative; width: 100%; }
 .chart-svg-wrap svg { width: 100%; height: auto; display: block; overflow: visible; }
 .chart-facets { display: flex; flex-wrap: wrap; gap: 1.5rem; }
+.chart-facets > div { min-width: 0; }
 .facet-title { text-align: center; font-size: 0.78rem; color: var(--ink-muted); margin-bottom: 0.25rem; }
 
 .axis-label {
