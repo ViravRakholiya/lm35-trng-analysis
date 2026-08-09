@@ -52,6 +52,54 @@
         }
       }
     },
+    "vn_min_entropy": {
+      "min_entropy_per_bit": 0.9030319696690663,
+      "estimators": {
+        "Most Common Value": {
+          "hBitstring": 0.9972873134139342,
+          "mcvEstimateMode": 1250595.0,
+          "mcvEstimatePHat": 0.500126571799803,
+          "mcvEstimatePU": 0.5009410299572941,
+          "testCaseDesc": "Most Common Value"
+        },
+        "Collision Test (for bit strings only)": {
+          "hBitstring": 0.9082644490475035,
+          "testCaseDesc": "Collision Test (for bit strings only)"
+        },
+        "Markov Test (for bit strings only)": {
+          "hBitstring": 0.9987923964311085,
+          "testCaseDesc": "Markov Test (for bit strings only)"
+        },
+        "Compression Test (for bit strings only)": {
+          "hBitstring": 0.9030319696690663,
+          "testCaseDesc": "Compression Test (for bit strings only)"
+        },
+        "T-Tuple Test": {
+          "binTTupleRes": 0.9349235536347885,
+          "testCaseDesc": "T-Tuple Test"
+        },
+        "LRS Test": {
+          "binLrsRes": 0.9977238255576879,
+          "testCaseDesc": "LRS Test"
+        },
+        "Multi Most Common in Window Test": {
+          "hBitstring": 0.9983951176965007,
+          "testCaseDesc": "Multi Most Common in Window Test"
+        },
+        "Lag Prediction Test": {
+          "hBitstring": 0.9978454347347956,
+          "testCaseDesc": "Lag Prediction Test"
+        },
+        "Multi Markov Model with Counting Test (MultiMMC)": {
+          "hBitstring": 0.9981306266640599,
+          "testCaseDesc": "Multi Markov Model with Counting Test (MultiMMC)"
+        },
+        "LZ78Y Test": {
+          "hBitstring": 0.9986037658199237,
+          "testCaseDesc": "LZ78Y Test"
+        }
+      }
+    },
     "debias": {
       "input_bit_count": 10000000,
       "output_bit_count": 2500557,
@@ -1429,6 +1477,54 @@
         },
         "LZ78Y Test": {
           "hOriginal": 0.9988032767154671,
+          "testCaseDesc": "LZ78Y Test"
+        }
+      }
+    },
+    "vn_min_entropy": {
+      "min_entropy_per_bit": 0.8413636425011698,
+      "estimators": {
+        "Most Common Value": {
+          "hBitstring": 0.9972449838258969,
+          "mcvEstimateMode": 1249944.0,
+          "mcvEstimatePHat": 0.5001410460938635,
+          "mcvEstimatePU": 0.5009557281006367,
+          "testCaseDesc": "Most Common Value"
+        },
+        "Collision Test (for bit strings only)": {
+          "hBitstring": 0.9119881487871532,
+          "testCaseDesc": "Collision Test (for bit strings only)"
+        },
+        "Markov Test (for bit strings only)": {
+          "hBitstring": 0.9985877840743663,
+          "testCaseDesc": "Markov Test (for bit strings only)"
+        },
+        "Compression Test (for bit strings only)": {
+          "hBitstring": 0.8413636425011698,
+          "testCaseDesc": "Compression Test (for bit strings only)"
+        },
+        "T-Tuple Test": {
+          "binTTupleRes": 0.9307425630105075,
+          "testCaseDesc": "T-Tuple Test"
+        },
+        "LRS Test": {
+          "binLrsRes": 0.9772863340813235,
+          "testCaseDesc": "LRS Test"
+        },
+        "Multi Most Common in Window Test": {
+          "hBitstring": 0.9968284263959507,
+          "testCaseDesc": "Multi Most Common in Window Test"
+        },
+        "Lag Prediction Test": {
+          "hBitstring": 0.996459883874938,
+          "testCaseDesc": "Lag Prediction Test"
+        },
+        "Multi Markov Model with Counting Test (MultiMMC)": {
+          "hBitstring": 0.9963717803323965,
+          "testCaseDesc": "Multi Markov Model with Counting Test (MultiMMC)"
+        },
+        "LZ78Y Test": {
+          "hBitstring": 0.9972812721876853,
           "testCaseDesc": "LZ78Y Test"
         }
       }
@@ -2814,6 +2910,54 @@
         }
       }
     },
+    "vn_min_entropy": {
+      "min_entropy_per_bit": 0.9177935090921404,
+      "estimators": {
+        "Most Common Value": {
+          "hBitstring": 0.9971481859786644,
+          "mcvEstimateMode": 1250024.0,
+          "mcvEstimatePHat": 0.5001746576370202,
+          "mcvEstimatePU": 0.5009893409304248,
+          "testCaseDesc": "Most Common Value"
+        },
+        "Collision Test (for bit strings only)": {
+          "hBitstring": 0.9177935090921404,
+          "testCaseDesc": "Collision Test (for bit strings only)"
+        },
+        "Markov Test (for bit strings only)": {
+          "hBitstring": 0.9987392767369219,
+          "testCaseDesc": "Markov Test (for bit strings only)"
+        },
+        "Compression Test (for bit strings only)": {
+          "hBitstring": 0.9275711699423345,
+          "testCaseDesc": "Compression Test (for bit strings only)"
+        },
+        "T-Tuple Test": {
+          "binTTupleRes": 0.9307422882139552,
+          "testCaseDesc": "T-Tuple Test"
+        },
+        "LRS Test": {
+          "binLrsRes": 0.9853212089621101,
+          "testCaseDesc": "LRS Test"
+        },
+        "Multi Most Common in Window Test": {
+          "hBitstring": 0.9971291311449436,
+          "testCaseDesc": "Multi Most Common in Window Test"
+        },
+        "Lag Prediction Test": {
+          "hBitstring": 0.997350420588298,
+          "testCaseDesc": "Lag Prediction Test"
+        },
+        "Multi Markov Model with Counting Test (MultiMMC)": {
+          "hBitstring": 0.9977486358549642,
+          "testCaseDesc": "Multi Markov Model with Counting Test (MultiMMC)"
+        },
+        "LZ78Y Test": {
+          "hBitstring": 0.9974091860795772,
+          "testCaseDesc": "LZ78Y Test"
+        }
+      }
+    },
     "debias": {
       "input_bit_count": 10000000,
       "output_bit_count": 2499175,
@@ -4191,6 +4335,54 @@
         },
         "LZ78Y Test": {
           "hOriginal": 0.9966861136862784,
+          "testCaseDesc": "LZ78Y Test"
+        }
+      }
+    },
+    "vn_min_entropy": {
+      "min_entropy_per_bit": 0.8520670925747984,
+      "estimators": {
+        "Most Common Value": {
+          "hBitstring": 0.9960162965329034,
+          "mcvEstimateMode": 1251926.0,
+          "mcvEstimatePHat": 0.5005681704591345,
+          "mcvEstimatePU": 0.5013825543534438,
+          "testCaseDesc": "Most Common Value"
+        },
+        "Collision Test (for bit strings only)": {
+          "hBitstring": 0.9246454969095569,
+          "testCaseDesc": "Collision Test (for bit strings only)"
+        },
+        "Markov Test (for bit strings only)": {
+          "hBitstring": 0.9986226574074106,
+          "testCaseDesc": "Markov Test (for bit strings only)"
+        },
+        "Compression Test (for bit strings only)": {
+          "hBitstring": 0.8520670925747984,
+          "testCaseDesc": "Compression Test (for bit strings only)"
+        },
+        "T-Tuple Test": {
+          "binTTupleRes": 0.934939104570361,
+          "testCaseDesc": "T-Tuple Test"
+        },
+        "LRS Test": {
+          "binLrsRes": 0.9977120456629622,
+          "testCaseDesc": "LRS Test"
+        },
+        "Multi Most Common in Window Test": {
+          "hBitstring": 0.9979533037177314,
+          "testCaseDesc": "Multi Most Common in Window Test"
+        },
+        "Lag Prediction Test": {
+          "hBitstring": 0.9975167625514313,
+          "testCaseDesc": "Lag Prediction Test"
+        },
+        "Multi Markov Model with Counting Test (MultiMMC)": {
+          "hBitstring": 0.9976152363094181,
+          "testCaseDesc": "Multi Markov Model with Counting Test (MultiMMC)"
+        },
+        "LZ78Y Test": {
+          "hBitstring": 0.996550790532158,
           "testCaseDesc": "LZ78Y Test"
         }
       }
@@ -5576,6 +5768,54 @@
         }
       }
     },
+    "vn_min_entropy": {
+      "min_entropy_per_bit": 0.8699533602476639,
+      "estimators": {
+        "Most Common Value": {
+          "hBitstring": 0.9965184900141327,
+          "mcvEstimateMode": 1249877.0,
+          "mcvEstimatePHat": 0.5003931475424275,
+          "mcvEstimatePU": 0.5012080564693647,
+          "testCaseDesc": "Most Common Value"
+        },
+        "Collision Test (for bit strings only)": {
+          "hBitstring": 0.9192466256960932,
+          "testCaseDesc": "Collision Test (for bit strings only)"
+        },
+        "Markov Test (for bit strings only)": {
+          "hBitstring": 0.9989836732674524,
+          "testCaseDesc": "Markov Test (for bit strings only)"
+        },
+        "Compression Test (for bit strings only)": {
+          "hBitstring": 0.8699533602476639,
+          "testCaseDesc": "Compression Test (for bit strings only)"
+        },
+        "T-Tuple Test": {
+          "binTTupleRes": 0.9327363938297136,
+          "testCaseDesc": "T-Tuple Test"
+        },
+        "LRS Test": {
+          "binLrsRes": 0.9956624217797283,
+          "testCaseDesc": "LRS Test"
+        },
+        "Multi Most Common in Window Test": {
+          "hBitstring": 0.997903731014937,
+          "testCaseDesc": "Multi Most Common in Window Test"
+        },
+        "Lag Prediction Test": {
+          "hBitstring": 0.9988984148714187,
+          "testCaseDesc": "Lag Prediction Test"
+        },
+        "Multi Markov Model with Counting Test (MultiMMC)": {
+          "hBitstring": 0.9986266033584942,
+          "testCaseDesc": "Multi Markov Model with Counting Test (MultiMMC)"
+        },
+        "LZ78Y Test": {
+          "hBitstring": 0.9978945199369526,
+          "testCaseDesc": "LZ78Y Test"
+        }
+      }
+    },
     "debias": {
       "input_bit_count": 10000000,
       "output_bit_count": 2497790,
@@ -6953,6 +7193,54 @@
         },
         "LZ78Y Test": {
           "hOriginal": 0.9954458969106761,
+          "testCaseDesc": "LZ78Y Test"
+        }
+      }
+    },
+    "vn_min_entropy": {
+      "min_entropy_per_bit": 0.9202561095829296,
+      "estimators": {
+        "Most Common Value": {
+          "hBitstring": 0.9960820127145815,
+          "mcvEstimateMode": 1251668.0,
+          "mcvEstimatePHat": 0.5005452671729167,
+          "mcvEstimatePU": 0.5013597164038556,
+          "testCaseDesc": "Most Common Value"
+        },
+        "Collision Test (for bit strings only)": {
+          "hBitstring": 0.9659103780359227,
+          "testCaseDesc": "Collision Test (for bit strings only)"
+        },
+        "Markov Test (for bit strings only)": {
+          "hBitstring": 0.9986114668023934,
+          "testCaseDesc": "Markov Test (for bit strings only)"
+        },
+        "Compression Test (for bit strings only)": {
+          "hBitstring": 0.9202561095829296,
+          "testCaseDesc": "Compression Test (for bit strings only)"
+        },
+        "T-Tuple Test": {
+          "binTTupleRes": 0.9349253388749764,
+          "testCaseDesc": "T-Tuple Test"
+        },
+        "LRS Test": {
+          "binLrsRes": 0.9957222510917498,
+          "testCaseDesc": "LRS Test"
+        },
+        "Multi Most Common in Window Test": {
+          "hBitstring": 0.9973788725659034,
+          "testCaseDesc": "Multi Most Common in Window Test"
+        },
+        "Lag Prediction Test": {
+          "hBitstring": 0.9978373900541059,
+          "testCaseDesc": "Lag Prediction Test"
+        },
+        "Multi Markov Model with Counting Test (MultiMMC)": {
+          "hBitstring": 0.998141012588198,
+          "testCaseDesc": "Multi Markov Model with Counting Test (MultiMMC)"
+        },
+        "LZ78Y Test": {
+          "hBitstring": 0.9969286204626928,
           "testCaseDesc": "LZ78Y Test"
         }
       }
@@ -8338,6 +8626,54 @@
         }
       }
     },
+    "vn_min_entropy": {
+      "min_entropy_per_bit": 0.8564396786469896,
+      "estimators": {
+        "Most Common Value": {
+          "hBitstring": 0.9971613838397475,
+          "mcvEstimateMode": 1250406.0,
+          "mcvEstimatePHat": 0.5001702026551614,
+          "mcvEstimatePU": 0.5009847578707379,
+          "testCaseDesc": "Most Common Value"
+        },
+        "Collision Test (for bit strings only)": {
+          "hBitstring": 0.9174190335882169,
+          "testCaseDesc": "Collision Test (for bit strings only)"
+        },
+        "Markov Test (for bit strings only)": {
+          "hBitstring": 0.9978193259343946,
+          "testCaseDesc": "Markov Test (for bit strings only)"
+        },
+        "Compression Test (for bit strings only)": {
+          "hBitstring": 0.8564396786469896,
+          "testCaseDesc": "Compression Test (for bit strings only)"
+        },
+        "T-Tuple Test": {
+          "binTTupleRes": 0.9307692827531151,
+          "testCaseDesc": "T-Tuple Test"
+        },
+        "LRS Test": {
+          "binLrsRes": 0.9621594404296225,
+          "testCaseDesc": "LRS Test"
+        },
+        "Multi Most Common in Window Test": {
+          "hBitstring": 0.9974948653490289,
+          "testCaseDesc": "Multi Most Common in Window Test"
+        },
+        "Lag Prediction Test": {
+          "hBitstring": 0.9968210354133213,
+          "testCaseDesc": "Lag Prediction Test"
+        },
+        "Multi Markov Model with Counting Test (MultiMMC)": {
+          "hBitstring": 0.9980924231014928,
+          "testCaseDesc": "Multi Markov Model with Counting Test (MultiMMC)"
+        },
+        "LZ78Y Test": {
+          "hBitstring": 0.9969741989077279,
+          "testCaseDesc": "LZ78Y Test"
+        }
+      }
+    },
     "debias": {
       "input_bit_count": 10000000,
       "output_bit_count": 2499961,
@@ -9715,6 +10051,54 @@
         },
         "LZ78Y Test": {
           "hOriginal": 0.9989987575382064,
+          "testCaseDesc": "LZ78Y Test"
+        }
+      }
+    },
+    "vn_min_entropy": {
+      "min_entropy_per_bit": 0.8814996904239348,
+      "estimators": {
+        "Most Common Value": {
+          "hBitstring": 0.9975669990087642,
+          "mcvEstimateMode": 1249568.0,
+          "mcvEstimatePHat": 0.5000292118015678,
+          "mcvEstimatePU": 0.5008439252982068,
+          "testCaseDesc": "Most Common Value"
+        },
+        "Collision Test (for bit strings only)": {
+          "hBitstring": 0.9349039431322375,
+          "testCaseDesc": "Collision Test (for bit strings only)"
+        },
+        "Markov Test (for bit strings only)": {
+          "hBitstring": 0.9983747333466266,
+          "testCaseDesc": "Markov Test (for bit strings only)"
+        },
+        "Compression Test (for bit strings only)": {
+          "hBitstring": 0.8814996904239348,
+          "testCaseDesc": "Compression Test (for bit strings only)"
+        },
+        "T-Tuple Test": {
+          "binTTupleRes": 0.9267944699861866,
+          "testCaseDesc": "T-Tuple Test"
+        },
+        "LRS Test": {
+          "binLrsRes": 0.9977170574973954,
+          "testCaseDesc": "LRS Test"
+        },
+        "Multi Most Common in Window Test": {
+          "hBitstring": 0.998406958426271,
+          "testCaseDesc": "Multi Most Common in Window Test"
+        },
+        "Lag Prediction Test": {
+          "hBitstring": 0.9993449474616203,
+          "testCaseDesc": "Lag Prediction Test"
+        },
+        "Multi Markov Model with Counting Test (MultiMMC)": {
+          "hBitstring": 0.9977191595044645,
+          "testCaseDesc": "Multi Markov Model with Counting Test (MultiMMC)"
+        },
+        "LZ78Y Test": {
+          "hBitstring": 0.9966756647008604,
           "testCaseDesc": "LZ78Y Test"
         }
       }
@@ -11100,6 +11484,54 @@
         }
       }
     },
+    "vn_min_entropy": {
+      "min_entropy_per_bit": 0.887439699014024,
+      "estimators": {
+        "Most Common Value": {
+          "hBitstring": 0.9975660346884203,
+          "mcvEstimateMode": 1249756.0,
+          "mcvEstimatePHat": 0.5000296075321562,
+          "mcvEstimatePU": 0.5008442600703755,
+          "testCaseDesc": "Most Common Value"
+        },
+        "Collision Test (for bit strings only)": {
+          "hBitstring": 0.9116351805404246,
+          "testCaseDesc": "Collision Test (for bit strings only)"
+        },
+        "Markov Test (for bit strings only)": {
+          "hBitstring": 0.9990558646799479,
+          "testCaseDesc": "Markov Test (for bit strings only)"
+        },
+        "Compression Test (for bit strings only)": {
+          "hBitstring": 0.887439699014024,
+          "testCaseDesc": "Compression Test (for bit strings only)"
+        },
+        "T-Tuple Test": {
+          "binTTupleRes": 0.9327904741974155,
+          "testCaseDesc": "T-Tuple Test"
+        },
+        "LRS Test": {
+          "binLrsRes": 0.9977000587392661,
+          "testCaseDesc": "LRS Test"
+        },
+        "Multi Most Common in Window Test": {
+          "hBitstring": 0.9976080710177563,
+          "testCaseDesc": "Multi Most Common in Window Test"
+        },
+        "Lag Prediction Test": {
+          "hBitstring": 0.997069966626849,
+          "testCaseDesc": "Lag Prediction Test"
+        },
+        "Multi Markov Model with Counting Test (MultiMMC)": {
+          "hBitstring": 0.9982553963192525,
+          "testCaseDesc": "Multi Markov Model with Counting Test (MultiMMC)"
+        },
+        "LZ78Y Test": {
+          "hBitstring": 0.9979861778139586,
+          "testCaseDesc": "LZ78Y Test"
+        }
+      }
+    },
     "debias": {
       "input_bit_count": 10000000,
       "output_bit_count": 2499364,
@@ -12477,6 +12909,54 @@
         },
         "LZ78Y Test": {
           "hOriginal": 0.998548730070871,
+          "testCaseDesc": "LZ78Y Test"
+        }
+      }
+    },
+    "vn_min_entropy": {
+      "min_entropy_per_bit": 0.8962583447335474,
+      "estimators": {
+        "Most Common Value": {
+          "hBitstring": 0.997434370657256,
+          "mcvEstimateMode": 1250651.0,
+          "mcvEstimatePHat": 0.5000755720685635,
+          "mcvEstimatePU": 0.5008899704814881,
+          "testCaseDesc": "Most Common Value"
+        },
+        "Collision Test (for bit strings only)": {
+          "hBitstring": 0.9132574274401569,
+          "testCaseDesc": "Collision Test (for bit strings only)"
+        },
+        "Markov Test (for bit strings only)": {
+          "hBitstring": 0.9977533198262787,
+          "testCaseDesc": "Markov Test (for bit strings only)"
+        },
+        "Compression Test (for bit strings only)": {
+          "hBitstring": 0.8962583447335474,
+          "testCaseDesc": "Compression Test (for bit strings only)"
+        },
+        "T-Tuple Test": {
+          "binTTupleRes": 0.9288086940051619,
+          "testCaseDesc": "T-Tuple Test"
+        },
+        "LRS Test": {
+          "binLrsRes": 0.9897875323527394,
+          "testCaseDesc": "LRS Test"
+        },
+        "Multi Most Common in Window Test": {
+          "hBitstring": 0.9976261078421764,
+          "testCaseDesc": "Multi Most Common in Window Test"
+        },
+        "Lag Prediction Test": {
+          "hBitstring": 0.9971815985512467,
+          "testCaseDesc": "Lag Prediction Test"
+        },
+        "Multi Markov Model with Counting Test (MultiMMC)": {
+          "hBitstring": 0.9969967974934698,
+          "testCaseDesc": "Multi Markov Model with Counting Test (MultiMMC)"
+        },
+        "LZ78Y Test": {
+          "hBitstring": 0.995946574121672,
           "testCaseDesc": "LZ78Y Test"
         }
       }
@@ -13862,6 +14342,54 @@
         }
       }
     },
+    "vn_min_entropy": {
+      "min_entropy_per_bit": 0.864712338306739,
+      "estimators": {
+        "Most Common Value": {
+          "hBitstring": 0.9970712938352579,
+          "mcvEstimateMode": 1250721.0,
+          "mcvEstimatePHat": 0.5002015650083146,
+          "mcvEstimatePU": 0.501016043157675,
+          "testCaseDesc": "Most Common Value"
+        },
+        "Collision Test (for bit strings only)": {
+          "hBitstring": 0.9355871528352747,
+          "testCaseDesc": "Collision Test (for bit strings only)"
+        },
+        "Markov Test (for bit strings only)": {
+          "hBitstring": 0.9990801659338221,
+          "testCaseDesc": "Markov Test (for bit strings only)"
+        },
+        "Compression Test (for bit strings only)": {
+          "hBitstring": 0.864712338306739,
+          "testCaseDesc": "Compression Test (for bit strings only)"
+        },
+        "T-Tuple Test": {
+          "binTTupleRes": 0.9328272183151984,
+          "testCaseDesc": "T-Tuple Test"
+        },
+        "LRS Test": {
+          "binLrsRes": 0.9856578858636545,
+          "testCaseDesc": "LRS Test"
+        },
+        "Multi Most Common in Window Test": {
+          "hBitstring": 0.9963522276418322,
+          "testCaseDesc": "Multi Most Common in Window Test"
+        },
+        "Lag Prediction Test": {
+          "hBitstring": 0.9971766697820996,
+          "testCaseDesc": "Lag Prediction Test"
+        },
+        "Multi Markov Model with Counting Test (MultiMMC)": {
+          "hBitstring": 0.9994732612155666,
+          "testCaseDesc": "Multi Markov Model with Counting Test (MultiMMC)"
+        },
+        "LZ78Y Test": {
+          "hBitstring": 0.9999261025692139,
+          "testCaseDesc": "LZ78Y Test"
+        }
+      }
+    },
     "debias": {
       "input_bit_count": 10000000,
       "output_bit_count": 2500434,
@@ -15239,6 +15767,54 @@
         },
         "LZ78Y Test": {
           "hOriginal": 0.9971485185176856,
+          "testCaseDesc": "LZ78Y Test"
+        }
+      }
+    },
+    "vn_min_entropy": {
+      "min_entropy_per_bit": 0.8560284495885705,
+      "estimators": {
+        "Most Common Value": {
+          "hBitstring": 0.9970126603382604,
+          "mcvEstimateMode": 1251635.0,
+          "mcvEstimatePHat": 0.5002222081898905,
+          "mcvEstimatePU": 0.5010364056866841,
+          "testCaseDesc": "Most Common Value"
+        },
+        "Collision Test (for bit strings only)": {
+          "hBitstring": 0.92300356880247,
+          "testCaseDesc": "Collision Test (for bit strings only)"
+        },
+        "Markov Test (for bit strings only)": {
+          "hBitstring": 0.9988792302837025,
+          "testCaseDesc": "Markov Test (for bit strings only)"
+        },
+        "Compression Test (for bit strings only)": {
+          "hBitstring": 0.8560284495885705,
+          "testCaseDesc": "Compression Test (for bit strings only)"
+        },
+        "T-Tuple Test": {
+          "binTTupleRes": 0.9349785013329719,
+          "testCaseDesc": "T-Tuple Test"
+        },
+        "LRS Test": {
+          "binLrsRes": 0.9398266842396137,
+          "testCaseDesc": "LRS Test"
+        },
+        "Multi Most Common in Window Test": {
+          "hBitstring": 0.9972963156870865,
+          "testCaseDesc": "Multi Most Common in Window Test"
+        },
+        "Lag Prediction Test": {
+          "hBitstring": 0.9983245649029614,
+          "testCaseDesc": "Lag Prediction Test"
+        },
+        "Multi Markov Model with Counting Test (MultiMMC)": {
+          "hBitstring": 0.9971473059015674,
+          "testCaseDesc": "Multi Markov Model with Counting Test (MultiMMC)"
+        },
+        "LZ78Y Test": {
+          "hBitstring": 0.997877720625249,
           "testCaseDesc": "LZ78Y Test"
         }
       }
@@ -16624,6 +17200,54 @@
         }
       }
     },
+    "vn_min_entropy": {
+      "min_entropy_per_bit": 0.8823448553152633,
+      "estimators": {
+        "Most Common Value": {
+          "hBitstring": 0.9971563772576161,
+          "mcvEstimateMode": 1250111.0,
+          "mcvEstimatePHat": 0.5001718437857966,
+          "mcvEstimatePU": 0.5009864964403025,
+          "testCaseDesc": "Most Common Value"
+        },
+        "Collision Test (for bit strings only)": {
+          "hBitstring": 0.9583345668329057,
+          "testCaseDesc": "Collision Test (for bit strings only)"
+        },
+        "Markov Test (for bit strings only)": {
+          "hBitstring": 0.9982152966424518,
+          "testCaseDesc": "Markov Test (for bit strings only)"
+        },
+        "Compression Test (for bit strings only)": {
+          "hBitstring": 0.8823448553152633,
+          "testCaseDesc": "Compression Test (for bit strings only)"
+        },
+        "T-Tuple Test": {
+          "binTTupleRes": 0.9287550961326146,
+          "testCaseDesc": "T-Tuple Test"
+        },
+        "LRS Test": {
+          "binLrsRes": 0.9845422218752881,
+          "testCaseDesc": "LRS Test"
+        },
+        "Multi Most Common in Window Test": {
+          "hBitstring": 0.997256004424469,
+          "testCaseDesc": "Multi Most Common in Window Test"
+        },
+        "Lag Prediction Test": {
+          "hBitstring": 0.9979625498064274,
+          "testCaseDesc": "Lag Prediction Test"
+        },
+        "Multi Markov Model with Counting Test (MultiMMC)": {
+          "hBitstring": 0.9970584441882004,
+          "testCaseDesc": "Multi Markov Model with Counting Test (MultiMMC)"
+        },
+        "LZ78Y Test": {
+          "hBitstring": 0.9974599984336683,
+          "testCaseDesc": "LZ78Y Test"
+        }
+      }
+    },
     "debias": {
       "input_bit_count": 10000000,
       "output_bit_count": 2499363,
@@ -18001,6 +18625,54 @@
         },
         "LZ78Y Test": {
           "hOriginal": 0.998238607137259,
+          "testCaseDesc": "LZ78Y Test"
+        }
+      }
+    },
+    "vn_min_entropy": {
+      "min_entropy_per_bit": 0.8732126081322839,
+      "estimators": {
+        "Most Common Value": {
+          "hBitstring": 0.9968150423243521,
+          "mcvEstimateMode": 1250201.0,
+          "mcvEstimatePHat": 0.5002903218190353,
+          "mcvEstimatePU": 0.5011050415371351,
+          "testCaseDesc": "Most Common Value"
+        },
+        "Collision Test (for bit strings only)": {
+          "hBitstring": 0.9330055602124278,
+          "testCaseDesc": "Collision Test (for bit strings only)"
+        },
+        "Markov Test (for bit strings only)": {
+          "hBitstring": 0.9987824797232633,
+          "testCaseDesc": "Markov Test (for bit strings only)"
+        },
+        "Compression Test (for bit strings only)": {
+          "hBitstring": 0.8732126081322839,
+          "testCaseDesc": "Compression Test (for bit strings only)"
+        },
+        "T-Tuple Test": {
+          "binTTupleRes": 0.9307345935515865,
+          "testCaseDesc": "T-Tuple Test"
+        },
+        "LRS Test": {
+          "binLrsRes": 0.9955696928943779,
+          "testCaseDesc": "LRS Test"
+        },
+        "Multi Most Common in Window Test": {
+          "hBitstring": 0.9969123493012949,
+          "testCaseDesc": "Multi Most Common in Window Test"
+        },
+        "Lag Prediction Test": {
+          "hBitstring": 0.9975243297857396,
+          "testCaseDesc": "Lag Prediction Test"
+        },
+        "Multi Markov Model with Counting Test (MultiMMC)": {
+          "hBitstring": 0.9997351010155789,
+          "testCaseDesc": "Multi Markov Model with Counting Test (MultiMMC)"
+        },
+        "LZ78Y Test": {
+          "hBitstring": 0.9976372874059832,
           "testCaseDesc": "LZ78Y Test"
         }
       }
@@ -19386,6 +20058,54 @@
         }
       }
     },
+    "vn_min_entropy": {
+      "min_entropy_per_bit": 0.8841021218010474,
+      "estimators": {
+        "Most Common Value": {
+          "hBitstring": 0.9970350326655141,
+          "mcvEstimateMode": 1251568.0,
+          "mcvEstimatePHat": 0.5002144230580925,
+          "mcvEstimatePU": 0.5010286360172783,
+          "testCaseDesc": "Most Common Value"
+        },
+        "Collision Test (for bit strings only)": {
+          "hBitstring": 0.9309159487956935,
+          "testCaseDesc": "Collision Test (for bit strings only)"
+        },
+        "Markov Test (for bit strings only)": {
+          "hBitstring": 0.9990370638136015,
+          "testCaseDesc": "Markov Test (for bit strings only)"
+        },
+        "Compression Test (for bit strings only)": {
+          "hBitstring": 0.8841021218010474,
+          "testCaseDesc": "Compression Test (for bit strings only)"
+        },
+        "T-Tuple Test": {
+          "binTTupleRes": 0.9328831283304607,
+          "testCaseDesc": "T-Tuple Test"
+        },
+        "LRS Test": {
+          "binLrsRes": 0.9807417677497766,
+          "testCaseDesc": "LRS Test"
+        },
+        "Multi Most Common in Window Test": {
+          "hBitstring": 0.9998014448608811,
+          "testCaseDesc": "Multi Most Common in Window Test"
+        },
+        "Lag Prediction Test": {
+          "hBitstring": 0.9978483274949254,
+          "testCaseDesc": "Lag Prediction Test"
+        },
+        "Multi Markov Model with Counting Test (MultiMMC)": {
+          "hBitstring": 0.9988913761132829,
+          "testCaseDesc": "Multi Markov Model with Counting Test (MultiMMC)"
+        },
+        "LZ78Y Test": {
+          "hBitstring": 0.9979323827498848,
+          "testCaseDesc": "LZ78Y Test"
+        }
+      }
+    },
     "debias": {
       "input_bit_count": 10000000,
       "output_bit_count": 2502063,
@@ -20763,6 +21483,54 @@
         },
         "LZ78Y Test": {
           "hOriginal": 0.9987603206183588,
+          "testCaseDesc": "LZ78Y Test"
+        }
+      }
+    },
+    "vn_min_entropy": {
+      "min_entropy_per_bit": 0.8905298127929887,
+      "estimators": {
+        "Most Common Value": {
+          "hBitstring": 0.9970092228341783,
+          "mcvEstimateMode": 1250457.0,
+          "mcvEstimatePHat": 0.5002230179306416,
+          "mcvEstimatePU": 0.5010375995056776,
+          "testCaseDesc": "Most Common Value"
+        },
+        "Collision Test (for bit strings only)": {
+          "hBitstring": 0.9488440097025511,
+          "testCaseDesc": "Collision Test (for bit strings only)"
+        },
+        "Markov Test (for bit strings only)": {
+          "hBitstring": 0.9991343205243732,
+          "testCaseDesc": "Markov Test (for bit strings only)"
+        },
+        "Compression Test (for bit strings only)": {
+          "hBitstring": 0.8905298127929887,
+          "testCaseDesc": "Compression Test (for bit strings only)"
+        },
+        "T-Tuple Test": {
+          "binTTupleRes": 0.9268222553345357,
+          "testCaseDesc": "T-Tuple Test"
+        },
+        "LRS Test": {
+          "binLrsRes": 0.9975788768534027,
+          "testCaseDesc": "LRS Test"
+        },
+        "Multi Most Common in Window Test": {
+          "hBitstring": 0.9981344338463947,
+          "testCaseDesc": "Multi Most Common in Window Test"
+        },
+        "Lag Prediction Test": {
+          "hBitstring": 0.9987686076413699,
+          "testCaseDesc": "Lag Prediction Test"
+        },
+        "Multi Markov Model with Counting Test (MultiMMC)": {
+          "hBitstring": 0.9978560863526139,
+          "testCaseDesc": "Multi Markov Model with Counting Test (MultiMMC)"
+        },
+        "LZ78Y Test": {
+          "hBitstring": 0.9973991697424733,
           "testCaseDesc": "LZ78Y Test"
         }
       }
@@ -22148,6 +22916,54 @@
         }
       }
     },
+    "vn_min_entropy": {
+      "min_entropy_per_bit": 0.8808722520885256,
+      "estimators": {
+        "Most Common Value": {
+          "hBitstring": 0.9972679071945875,
+          "mcvEstimateMode": 1250751.0,
+          "mcvEstimatePHat": 0.5001333554592766,
+          "mcvEstimatePU": 0.5009477683438656,
+          "testCaseDesc": "Most Common Value"
+        },
+        "Collision Test (for bit strings only)": {
+          "hBitstring": 0.9267557216472238,
+          "testCaseDesc": "Collision Test (for bit strings only)"
+        },
+        "Markov Test (for bit strings only)": {
+          "hBitstring": 0.9987615188973996,
+          "testCaseDesc": "Markov Test (for bit strings only)"
+        },
+        "Compression Test (for bit strings only)": {
+          "hBitstring": 0.8808722520885256,
+          "testCaseDesc": "Compression Test (for bit strings only)"
+        },
+        "T-Tuple Test": {
+          "binTTupleRes": 0.9268578238742985,
+          "testCaseDesc": "T-Tuple Test"
+        },
+        "LRS Test": {
+          "binLrsRes": 0.9621838153536104,
+          "testCaseDesc": "LRS Test"
+        },
+        "Multi Most Common in Window Test": {
+          "hBitstring": 0.9967514606612358,
+          "testCaseDesc": "Multi Most Common in Window Test"
+        },
+        "Lag Prediction Test": {
+          "hBitstring": 0.9977902463210433,
+          "testCaseDesc": "Lag Prediction Test"
+        },
+        "Multi Markov Model with Counting Test (MultiMMC)": {
+          "hBitstring": 0.9963400247858505,
+          "testCaseDesc": "Multi Markov Model with Counting Test (MultiMMC)"
+        },
+        "LZ78Y Test": {
+          "hBitstring": 0.9979135103462955,
+          "testCaseDesc": "LZ78Y Test"
+        }
+      }
+    },
     "debias": {
       "input_bit_count": 10000000,
       "output_bit_count": 2500835,
@@ -23525,6 +24341,54 @@
         },
         "LZ78Y Test": {
           "hOriginal": 0.993680357775669,
+          "testCaseDesc": "LZ78Y Test"
+        }
+      }
+    },
+    "vn_min_entropy": {
+      "min_entropy_per_bit": 0.9226136279424068,
+      "estimators": {
+        "Most Common Value": {
+          "hBitstring": 0.9971846734220017,
+          "mcvEstimateMode": 1250138.0,
+          "mcvEstimatePHat": 0.5001620346105928,
+          "mcvEstimatePU": 0.500976670484825,
+          "testCaseDesc": "Most Common Value"
+        },
+        "Collision Test (for bit strings only)": {
+          "hBitstring": 0.942080941987586,
+          "testCaseDesc": "Collision Test (for bit strings only)"
+        },
+        "Markov Test (for bit strings only)": {
+          "hBitstring": 0.9989391153558317,
+          "testCaseDesc": "Markov Test (for bit strings only)"
+        },
+        "Compression Test (for bit strings only)": {
+          "hBitstring": 0.9226136279424068,
+          "testCaseDesc": "Compression Test (for bit strings only)"
+        },
+        "T-Tuple Test": {
+          "binTTupleRes": 0.926810819443729,
+          "testCaseDesc": "T-Tuple Test"
+        },
+        "LRS Test": {
+          "binLrsRes": 0.997613897634213,
+          "testCaseDesc": "LRS Test"
+        },
+        "Multi Most Common in Window Test": {
+          "hBitstring": 0.9989168244162905,
+          "testCaseDesc": "Multi Most Common in Window Test"
+        },
+        "Lag Prediction Test": {
+          "hBitstring": 0.9973235137638342,
+          "testCaseDesc": "Lag Prediction Test"
+        },
+        "Multi Markov Model with Counting Test (MultiMMC)": {
+          "hBitstring": 0.9985621526741545,
+          "testCaseDesc": "Multi Markov Model with Counting Test (MultiMMC)"
+        },
+        "LZ78Y Test": {
+          "hBitstring": 0.9981383897665741,
           "testCaseDesc": "LZ78Y Test"
         }
       }
@@ -24910,6 +25774,54 @@
         }
       }
     },
+    "vn_min_entropy": {
+      "min_entropy_per_bit": 0.8913010076392208,
+      "estimators": {
+        "Most Common Value": {
+          "hBitstring": 0.996920106956122,
+          "mcvEstimateMode": 1249876.0,
+          "mcvEstimatePHat": 0.5002537538763506,
+          "mcvEstimatePU": 0.5010685497643388,
+          "testCaseDesc": "Most Common Value"
+        },
+        "Collision Test (for bit strings only)": {
+          "hBitstring": 0.935653378784651,
+          "testCaseDesc": "Collision Test (for bit strings only)"
+        },
+        "Markov Test (for bit strings only)": {
+          "hBitstring": 0.9991424667216953,
+          "testCaseDesc": "Markov Test (for bit strings only)"
+        },
+        "Compression Test (for bit strings only)": {
+          "hBitstring": 0.8913010076392208,
+          "testCaseDesc": "Compression Test (for bit strings only)"
+        },
+        "T-Tuple Test": {
+          "binTTupleRes": 0.9369974356708717,
+          "testCaseDesc": "T-Tuple Test"
+        },
+        "LRS Test": {
+          "binLrsRes": 0.9967452283994221,
+          "testCaseDesc": "LRS Test"
+        },
+        "Multi Most Common in Window Test": {
+          "hBitstring": 0.9974819740917434,
+          "testCaseDesc": "Multi Most Common in Window Test"
+        },
+        "Lag Prediction Test": {
+          "hBitstring": 0.997171926090978,
+          "testCaseDesc": "Lag Prediction Test"
+        },
+        "Multi Markov Model with Counting Test (MultiMMC)": {
+          "hBitstring": 0.998290953480684,
+          "testCaseDesc": "Multi Markov Model with Counting Test (MultiMMC)"
+        },
+        "LZ78Y Test": {
+          "hBitstring": 0.997924761289134,
+          "testCaseDesc": "LZ78Y Test"
+        }
+      }
+    },
     "debias": {
       "input_bit_count": 10000000,
       "output_bit_count": 2498484,
@@ -26287,6 +27199,54 @@
         },
         "LZ78Y Test": {
           "hOriginal": 0.9984487110180854,
+          "testCaseDesc": "LZ78Y Test"
+        }
+      }
+    },
+    "vn_min_entropy": {
+      "min_entropy_per_bit": 0.8878570191283791,
+      "estimators": {
+        "Most Common Value": {
+          "hBitstring": 0.9970983525525225,
+          "mcvEstimateMode": 1249859.0,
+          "mcvEstimatePHat": 0.5001918952568055,
+          "mcvEstimatePU": 0.5010066463524324,
+          "testCaseDesc": "Most Common Value"
+        },
+        "Collision Test (for bit strings only)": {
+          "hBitstring": 0.9622115875225523,
+          "testCaseDesc": "Collision Test (for bit strings only)"
+        },
+        "Markov Test (for bit strings only)": {
+          "hBitstring": 0.9985204007524949,
+          "testCaseDesc": "Markov Test (for bit strings only)"
+        },
+        "Compression Test (for bit strings only)": {
+          "hBitstring": 0.8878570191283791,
+          "testCaseDesc": "Compression Test (for bit strings only)"
+        },
+        "T-Tuple Test": {
+          "binTTupleRes": 0.9327696913212218,
+          "testCaseDesc": "T-Tuple Test"
+        },
+        "LRS Test": {
+          "binLrsRes": 0.9950982847169786,
+          "testCaseDesc": "LRS Test"
+        },
+        "Multi Most Common in Window Test": {
+          "hBitstring": 0.9967831518953498,
+          "testCaseDesc": "Multi Most Common in Window Test"
+        },
+        "Lag Prediction Test": {
+          "hBitstring": 0.9973202076495951,
+          "testCaseDesc": "Lag Prediction Test"
+        },
+        "Multi Markov Model with Counting Test (MultiMMC)": {
+          "hBitstring": 0.9980839982953126,
+          "testCaseDesc": "Multi Markov Model with Counting Test (MultiMMC)"
+        },
+        "LZ78Y Test": {
+          "hBitstring": 0.9967589942156105,
           "testCaseDesc": "LZ78Y Test"
         }
       }
@@ -27672,6 +28632,54 @@
         }
       }
     },
+    "vn_min_entropy": {
+      "min_entropy_per_bit": 0.8570466504788458,
+      "estimators": {
+        "Most Common Value": {
+          "hBitstring": 0.9975104480029846,
+          "mcvEstimateMode": 1250098.0,
+          "mcvEstimatePHat": 0.5000490009604188,
+          "mcvEstimatePU": 0.5008635578484187,
+          "testCaseDesc": "Most Common Value"
+        },
+        "Collision Test (for bit strings only)": {
+          "hBitstring": 0.9187950781269257,
+          "testCaseDesc": "Collision Test (for bit strings only)"
+        },
+        "Markov Test (for bit strings only)": {
+          "hBitstring": 0.9984195988169726,
+          "testCaseDesc": "Markov Test (for bit strings only)"
+        },
+        "Compression Test (for bit strings only)": {
+          "hBitstring": 0.8570466504788458,
+          "testCaseDesc": "Compression Test (for bit strings only)"
+        },
+        "T-Tuple Test": {
+          "binTTupleRes": 0.9328106339086033,
+          "testCaseDesc": "T-Tuple Test"
+        },
+        "LRS Test": {
+          "binLrsRes": 0.9967313299099025,
+          "testCaseDesc": "LRS Test"
+        },
+        "Multi Most Common in Window Test": {
+          "hBitstring": 0.9970179260998012,
+          "testCaseDesc": "Multi Most Common in Window Test"
+        },
+        "Lag Prediction Test": {
+          "hBitstring": 0.9965112701960652,
+          "testCaseDesc": "Lag Prediction Test"
+        },
+        "Multi Markov Model with Counting Test (MultiMMC)": {
+          "hBitstring": 0.9979010921376879,
+          "testCaseDesc": "Multi Markov Model with Counting Test (MultiMMC)"
+        },
+        "LZ78Y Test": {
+          "hBitstring": 0.9968486543270537,
+          "testCaseDesc": "LZ78Y Test"
+        }
+      }
+    },
     "debias": {
       "input_bit_count": 10000000,
       "output_bit_count": 2499951,
@@ -28867,6 +29875,54 @@
         },
         "LZ78Y Test": {
           "hOriginal": 0.9964690706686591,
+          "testCaseDesc": "LZ78Y Test"
+        }
+      }
+    },
+    "vn_min_entropy": {
+      "min_entropy_per_bit": 0.8343307989585448,
+      "estimators": {
+        "Most Common Value": {
+          "hBitstring": 0.9969558614745895,
+          "mcvEstimateMode": 1249865.0,
+          "mcvEstimatePHat": 0.5002413424886053,
+          "mcvEstimatePU": 0.5010561318643604,
+          "testCaseDesc": "Most Common Value"
+        },
+        "Collision Test (for bit strings only)": {
+          "hBitstring": 0.939563522701591,
+          "testCaseDesc": "Collision Test (for bit strings only)"
+        },
+        "Markov Test (for bit strings only)": {
+          "hBitstring": 0.9988733629700659,
+          "testCaseDesc": "Markov Test (for bit strings only)"
+        },
+        "Compression Test (for bit strings only)": {
+          "hBitstring": 0.8343307989585448,
+          "testCaseDesc": "Compression Test (for bit strings only)"
+        },
+        "T-Tuple Test": {
+          "binTTupleRes": 0.9307199236813224,
+          "testCaseDesc": "T-Tuple Test"
+        },
+        "LRS Test": {
+          "binLrsRes": 0.994655733662097,
+          "testCaseDesc": "LRS Test"
+        },
+        "Multi Most Common in Window Test": {
+          "hBitstring": 0.9982188570139972,
+          "testCaseDesc": "Multi Most Common in Window Test"
+        },
+        "Lag Prediction Test": {
+          "hBitstring": 0.997643433335504,
+          "testCaseDesc": "Lag Prediction Test"
+        },
+        "Multi Markov Model with Counting Test (MultiMMC)": {
+          "hBitstring": 0.9979438086814123,
+          "testCaseDesc": "Multi Markov Model with Counting Test (MultiMMC)"
+        },
+        "LZ78Y Test": {
+          "hBitstring": 0.9978279113226178,
           "testCaseDesc": "LZ78Y Test"
         }
       }
@@ -30252,6 +31308,54 @@
         }
       }
     },
+    "vn_min_entropy": {
+      "min_entropy_per_bit": 0.9001108601966771,
+      "estimators": {
+        "Most Common Value": {
+          "hBitstring": 0.9974859580816955,
+          "mcvEstimateMode": 1250921.0,
+          "mcvEstimatePHat": 0.5000577641169306,
+          "mcvEstimatePU": 0.5008720601395271,
+          "testCaseDesc": "Most Common Value"
+        },
+        "Collision Test (for bit strings only)": {
+          "hBitstring": 0.9241921616306982,
+          "testCaseDesc": "Collision Test (for bit strings only)"
+        },
+        "Markov Test (for bit strings only)": {
+          "hBitstring": 0.9998237549085217,
+          "testCaseDesc": "Markov Test (for bit strings only)"
+        },
+        "Compression Test (for bit strings only)": {
+          "hBitstring": 0.9001108601966771,
+          "testCaseDesc": "Compression Test (for bit strings only)"
+        },
+        "T-Tuple Test": {
+          "binTTupleRes": 0.9268824659719165,
+          "testCaseDesc": "T-Tuple Test"
+        },
+        "LRS Test": {
+          "binLrsRes": 0.9856898431392938,
+          "testCaseDesc": "LRS Test"
+        },
+        "Multi Most Common in Window Test": {
+          "hBitstring": 0.9978964783655888,
+          "testCaseDesc": "Multi Most Common in Window Test"
+        },
+        "Lag Prediction Test": {
+          "hBitstring": 0.9980335673219588,
+          "testCaseDesc": "Lag Prediction Test"
+        },
+        "Multi Markov Model with Counting Test (MultiMMC)": {
+          "hBitstring": 0.9996580432650417,
+          "testCaseDesc": "Multi Markov Model with Counting Test (MultiMMC)"
+        },
+        "LZ78Y Test": {
+          "hBitstring": 0.9985750460935919,
+          "testCaseDesc": "LZ78Y Test"
+        }
+      }
+    },
     "debias": {
       "input_bit_count": 10000000,
       "output_bit_count": 2501553,
@@ -31629,6 +32733,54 @@
         },
         "LZ78Y Test": {
           "hOriginal": 0.9973930253512405,
+          "testCaseDesc": "LZ78Y Test"
+        }
+      }
+    },
+    "vn_min_entropy": {
+      "min_entropy_per_bit": 0.8864836654110043,
+      "estimators": {
+        "Most Common Value": {
+          "hBitstring": 0.9966057334639866,
+          "mcvEstimateMode": 1251234.0,
+          "mcvEstimatePHat": 0.5003633053952751,
+          "mcvEstimatePU": 0.5011777480558864,
+          "testCaseDesc": "Most Common Value"
+        },
+        "Collision Test (for bit strings only)": {
+          "hBitstring": 0.9053905335846116,
+          "testCaseDesc": "Collision Test (for bit strings only)"
+        },
+        "Markov Test (for bit strings only)": {
+          "hBitstring": 0.9967955863590905,
+          "testCaseDesc": "Markov Test (for bit strings only)"
+        },
+        "Compression Test (for bit strings only)": {
+          "hBitstring": 0.8864836654110043,
+          "testCaseDesc": "Compression Test (for bit strings only)"
+        },
+        "T-Tuple Test": {
+          "binTTupleRes": 0.9349267807725086,
+          "testCaseDesc": "T-Tuple Test"
+        },
+        "LRS Test": {
+          "binLrsRes": 0.9808797730247334,
+          "testCaseDesc": "LRS Test"
+        },
+        "Multi Most Common in Window Test": {
+          "hBitstring": 0.9972890600483023,
+          "testCaseDesc": "Multi Most Common in Window Test"
+        },
+        "Lag Prediction Test": {
+          "hBitstring": 0.9990891613603446,
+          "testCaseDesc": "Lag Prediction Test"
+        },
+        "Multi Markov Model with Counting Test (MultiMMC)": {
+          "hBitstring": 0.9973184658989712,
+          "testCaseDesc": "Multi Markov Model with Counting Test (MultiMMC)"
+        },
+        "LZ78Y Test": {
+          "hBitstring": 0.9967674641124359,
           "testCaseDesc": "LZ78Y Test"
         }
       }
@@ -33014,6 +34166,54 @@
         }
       }
     },
+    "vn_min_entropy": {
+      "min_entropy_per_bit": 0.8874492585361362,
+      "estimators": {
+        "Most Common Value": {
+          "hBitstring": 0.9970513151865885,
+          "mcvEstimateMode": 1251268.0,
+          "mcvEstimatePHat": 0.500208675462484,
+          "mcvEstimatePU": 0.5010229813480257,
+          "testCaseDesc": "Most Common Value"
+        },
+        "Collision Test (for bit strings only)": {
+          "hBitstring": 0.9524277039996133,
+          "testCaseDesc": "Collision Test (for bit strings only)"
+        },
+        "Markov Test (for bit strings only)": {
+          "hBitstring": 0.9991892536157423,
+          "testCaseDesc": "Markov Test (for bit strings only)"
+        },
+        "Compression Test (for bit strings only)": {
+          "hBitstring": 0.8874492585361362,
+          "testCaseDesc": "Compression Test (for bit strings only)"
+        },
+        "T-Tuple Test": {
+          "binTTupleRes": 0.9308218392422781,
+          "testCaseDesc": "T-Tuple Test"
+        },
+        "LRS Test": {
+          "binLrsRes": 0.994004654071252,
+          "testCaseDesc": "LRS Test"
+        },
+        "Multi Most Common in Window Test": {
+          "hBitstring": 0.9967456750954219,
+          "testCaseDesc": "Multi Most Common in Window Test"
+        },
+        "Lag Prediction Test": {
+          "hBitstring": 0.9960783778015351,
+          "testCaseDesc": "Lag Prediction Test"
+        },
+        "Multi Markov Model with Counting Test (MultiMMC)": {
+          "hBitstring": 0.9984171807831956,
+          "testCaseDesc": "Multi Markov Model with Counting Test (MultiMMC)"
+        },
+        "LZ78Y Test": {
+          "hBitstring": 0.9985479602948398,
+          "testCaseDesc": "LZ78Y Test"
+        }
+      }
+    },
     "debias": {
       "input_bit_count": 10000000,
       "output_bit_count": 2501492,
@@ -34391,6 +35591,54 @@
         },
         "LZ78Y Test": {
           "hOriginal": 0.9982155523345085,
+          "testCaseDesc": "LZ78Y Test"
+        }
+      }
+    },
+    "vn_min_entropy": {
+      "min_entropy_per_bit": 0.8697499978742339,
+      "estimators": {
+        "Most Common Value": {
+          "hBitstring": 0.9971006692730735,
+          "mcvEstimateMode": 1250702.0,
+          "mcvEstimatePHat": 0.5001913657837979,
+          "mcvEstimatePU": 0.5010058418224181,
+          "testCaseDesc": "Most Common Value"
+        },
+        "Collision Test (for bit strings only)": {
+          "hBitstring": 0.919580709478273,
+          "testCaseDesc": "Collision Test (for bit strings only)"
+        },
+        "Markov Test (for bit strings only)": {
+          "hBitstring": 0.9994069377991639,
+          "testCaseDesc": "Markov Test (for bit strings only)"
+        },
+        "Compression Test (for bit strings only)": {
+          "hBitstring": 0.8697499978742339,
+          "testCaseDesc": "Compression Test (for bit strings only)"
+        },
+        "T-Tuple Test": {
+          "binTTupleRes": 0.9287923194913121,
+          "testCaseDesc": "T-Tuple Test"
+        },
+        "LRS Test": {
+          "binLrsRes": 0.9923002290365205,
+          "testCaseDesc": "LRS Test"
+        },
+        "Multi Most Common in Window Test": {
+          "hBitstring": 0.9974997317537502,
+          "testCaseDesc": "Multi Most Common in Window Test"
+        },
+        "Lag Prediction Test": {
+          "hBitstring": 0.9978488483255525,
+          "testCaseDesc": "Lag Prediction Test"
+        },
+        "Multi Markov Model with Counting Test (MultiMMC)": {
+          "hBitstring": 0.9991670277196617,
+          "testCaseDesc": "Multi Markov Model with Counting Test (MultiMMC)"
+        },
+        "LZ78Y Test": {
+          "hBitstring": 0.9984654216080255,
           "testCaseDesc": "LZ78Y Test"
         }
       }
@@ -35776,6 +37024,54 @@
         }
       }
     },
+    "vn_min_entropy": {
+      "min_entropy_per_bit": 0.9201281214418043,
+      "estimators": {
+        "Most Common Value": {
+          "hBitstring": 0.9963136976877454,
+          "mcvEstimateMode": 1251937.0,
+          "mcvEstimatePHat": 0.5004649121264113,
+          "mcvEstimatePU": 0.5012792086162243,
+          "testCaseDesc": "Most Common Value"
+        },
+        "Collision Test (for bit strings only)": {
+          "hBitstring": 0.9201281214418043,
+          "testCaseDesc": "Collision Test (for bit strings only)"
+        },
+        "Markov Test (for bit strings only)": {
+          "hBitstring": 0.9991716246005492,
+          "testCaseDesc": "Markov Test (for bit strings only)"
+        },
+        "Compression Test (for bit strings only)": {
+          "hBitstring": 0.928501737740743,
+          "testCaseDesc": "Compression Test (for bit strings only)"
+        },
+        "T-Tuple Test": {
+          "binTTupleRes": 0.9249782538641496,
+          "testCaseDesc": "T-Tuple Test"
+        },
+        "LRS Test": {
+          "binLrsRes": 0.9975512788588405,
+          "testCaseDesc": "LRS Test"
+        },
+        "Multi Most Common in Window Test": {
+          "hBitstring": 0.998164292719312,
+          "testCaseDesc": "Multi Most Common in Window Test"
+        },
+        "Lag Prediction Test": {
+          "hBitstring": 0.9978256679062735,
+          "testCaseDesc": "Lag Prediction Test"
+        },
+        "Multi Markov Model with Counting Test (MultiMMC)": {
+          "hBitstring": 0.9978308501924671,
+          "testCaseDesc": "Multi Markov Model with Counting Test (MultiMMC)"
+        },
+        "LZ78Y Test": {
+          "hBitstring": 0.9970668826830271,
+          "testCaseDesc": "LZ78Y Test"
+        }
+      }
+    },
     "debias": {
       "input_bit_count": 10000000,
       "output_bit_count": 2501548,
@@ -37153,6 +38449,54 @@
         },
         "LZ78Y Test": {
           "hOriginal": 0.9949512589368709,
+          "testCaseDesc": "LZ78Y Test"
+        }
+      }
+    },
+    "vn_min_entropy": {
+      "min_entropy_per_bit": 0.8697936886238589,
+      "estimators": {
+        "Most Common Value": {
+          "hBitstring": 0.9969275221512608,
+          "mcvEstimateMode": 1251340.0,
+          "mcvEstimatePHat": 0.500251656958185,
+          "mcvEstimatePU": 0.5010659743680003,
+          "testCaseDesc": "Most Common Value"
+        },
+        "Collision Test (for bit strings only)": {
+          "hBitstring": 0.9339678823391734,
+          "testCaseDesc": "Collision Test (for bit strings only)"
+        },
+        "Markov Test (for bit strings only)": {
+          "hBitstring": 0.9985605800322752,
+          "testCaseDesc": "Markov Test (for bit strings only)"
+        },
+        "Compression Test (for bit strings only)": {
+          "hBitstring": 0.8697936886238589,
+          "testCaseDesc": "Compression Test (for bit strings only)"
+        },
+        "T-Tuple Test": {
+          "binTTupleRes": 0.9328610981810593,
+          "testCaseDesc": "T-Tuple Test"
+        },
+        "LRS Test": {
+          "binLrsRes": 0.995924627514871,
+          "testCaseDesc": "LRS Test"
+        },
+        "Multi Most Common in Window Test": {
+          "hBitstring": 0.9981763558622769,
+          "testCaseDesc": "Multi Most Common in Window Test"
+        },
+        "Lag Prediction Test": {
+          "hBitstring": 0.9588780328332209,
+          "testCaseDesc": "Lag Prediction Test"
+        },
+        "Multi Markov Model with Counting Test (MultiMMC)": {
+          "hBitstring": 0.9977622711077019,
+          "testCaseDesc": "Multi Markov Model with Counting Test (MultiMMC)"
+        },
+        "LZ78Y Test": {
+          "hBitstring": 0.9981302864676069,
           "testCaseDesc": "LZ78Y Test"
         }
       }
@@ -38538,6 +39882,54 @@
         }
       }
     },
+    "vn_min_entropy": {
+      "min_entropy_per_bit": 0.8850710328272835,
+      "estimators": {
+        "Most Common Value": {
+          "hBitstring": 0.9962687356714127,
+          "mcvEstimateMode": 1251366.0,
+          "mcvEstimatePHat": 0.5004803365955693,
+          "mcvEstimatePU": 0.5012948313740073,
+          "testCaseDesc": "Most Common Value"
+        },
+        "Collision Test (for bit strings only)": {
+          "hBitstring": 0.9148436141127801,
+          "testCaseDesc": "Collision Test (for bit strings only)"
+        },
+        "Markov Test (for bit strings only)": {
+          "hBitstring": 0.9984491861789916,
+          "testCaseDesc": "Markov Test (for bit strings only)"
+        },
+        "Compression Test (for bit strings only)": {
+          "hBitstring": 0.8850710328272835,
+          "testCaseDesc": "Compression Test (for bit strings only)"
+        },
+        "T-Tuple Test": {
+          "binTTupleRes": 0.937060842963527,
+          "testCaseDesc": "T-Tuple Test"
+        },
+        "LRS Test": {
+          "binLrsRes": 0.997648248544728,
+          "testCaseDesc": "LRS Test"
+        },
+        "Multi Most Common in Window Test": {
+          "hBitstring": 0.9978193947391426,
+          "testCaseDesc": "Multi Most Common in Window Test"
+        },
+        "Lag Prediction Test": {
+          "hBitstring": 1.0,
+          "testCaseDesc": "Lag Prediction Test"
+        },
+        "Multi Markov Model with Counting Test (MultiMMC)": {
+          "hBitstring": 0.997443254878961,
+          "testCaseDesc": "Multi Markov Model with Counting Test (MultiMMC)"
+        },
+        "LZ78Y Test": {
+          "hBitstring": 0.9981478473016527,
+          "testCaseDesc": "LZ78Y Test"
+        }
+      }
+    },
     "debias": {
       "input_bit_count": 10000000,
       "output_bit_count": 2500330,
@@ -39915,6 +41307,54 @@
         },
         "LZ78Y Test": {
           "hOriginal": 0.9981412031075916,
+          "testCaseDesc": "LZ78Y Test"
+        }
+      }
+    },
+    "vn_min_entropy": {
+      "min_entropy_per_bit": 0.9224915164968971,
+      "estimators": {
+        "Most Common Value": {
+          "hBitstring": 0.9962593135642114,
+          "mcvEstimateMode": 1252113.0,
+          "mcvEstimatePHat": 0.5004838506598236,
+          "mcvEstimatePU": 0.5012981052946422,
+          "testCaseDesc": "Most Common Value"
+        },
+        "Collision Test (for bit strings only)": {
+          "hBitstring": 0.9224915164968971,
+          "testCaseDesc": "Collision Test (for bit strings only)"
+        },
+        "Markov Test (for bit strings only)": {
+          "hBitstring": 0.9964826087935047,
+          "testCaseDesc": "Markov Test (for bit strings only)"
+        },
+        "Compression Test (for bit strings only)": {
+          "hBitstring": 0.9456774214801834,
+          "testCaseDesc": "Compression Test (for bit strings only)"
+        },
+        "T-Tuple Test": {
+          "binTTupleRes": 0.93287427577563,
+          "testCaseDesc": "T-Tuple Test"
+        },
+        "LRS Test": {
+          "binLrsRes": 0.9976647187812595,
+          "testCaseDesc": "LRS Test"
+        },
+        "Multi Most Common in Window Test": {
+          "hBitstring": 0.998052056096053,
+          "testCaseDesc": "Multi Most Common in Window Test"
+        },
+        "Lag Prediction Test": {
+          "hBitstring": 0.9987778720340252,
+          "testCaseDesc": "Lag Prediction Test"
+        },
+        "Multi Markov Model with Counting Test (MultiMMC)": {
+          "hBitstring": 0.9973525454222563,
+          "testCaseDesc": "Multi Markov Model with Counting Test (MultiMMC)"
+        },
+        "LZ78Y Test": {
+          "hBitstring": 0.9961828003751171,
           "testCaseDesc": "LZ78Y Test"
         }
       }
@@ -41300,6 +42740,54 @@
         }
       }
     },
+    "vn_min_entropy": {
+      "min_entropy_per_bit": 0.8749025144910393,
+      "estimators": {
+        "Most Common Value": {
+          "hBitstring": 0.9971972495016118,
+          "mcvEstimateMode": 1250052.0,
+          "mcvEstimatePHat": 0.5001576431311607,
+          "mcvEstimatePU": 0.5009723034530877,
+          "testCaseDesc": "Most Common Value"
+        },
+        "Collision Test (for bit strings only)": {
+          "hBitstring": 0.9278591188249852,
+          "testCaseDesc": "Collision Test (for bit strings only)"
+        },
+        "Markov Test (for bit strings only)": {
+          "hBitstring": 0.9982706896138709,
+          "testCaseDesc": "Markov Test (for bit strings only)"
+        },
+        "Compression Test (for bit strings only)": {
+          "hBitstring": 0.8749025144910393,
+          "testCaseDesc": "Compression Test (for bit strings only)"
+        },
+        "T-Tuple Test": {
+          "binTTupleRes": 0.9348809371179281,
+          "testCaseDesc": "T-Tuple Test"
+        },
+        "LRS Test": {
+          "binLrsRes": 0.9853253376688728,
+          "testCaseDesc": "LRS Test"
+        },
+        "Multi Most Common in Window Test": {
+          "hBitstring": 0.9960402284472977,
+          "testCaseDesc": "Multi Most Common in Window Test"
+        },
+        "Lag Prediction Test": {
+          "hBitstring": 0.998743796902921,
+          "testCaseDesc": "Lag Prediction Test"
+        },
+        "Multi Markov Model with Counting Test (MultiMMC)": {
+          "hBitstring": 0.9969299552742158,
+          "testCaseDesc": "Multi Markov Model with Counting Test (MultiMMC)"
+        },
+        "LZ78Y Test": {
+          "hBitstring": 0.9972588845136191,
+          "testCaseDesc": "LZ78Y Test"
+        }
+      }
+    },
     "debias": {
       "input_bit_count": 10000000,
       "output_bit_count": 2499316,
@@ -42677,6 +44165,54 @@
         },
         "LZ78Y Test": {
           "hOriginal": 0.9989621389061745,
+          "testCaseDesc": "LZ78Y Test"
+        }
+      }
+    },
+    "vn_min_entropy": {
+      "min_entropy_per_bit": 0.8940224162133666,
+      "estimators": {
+        "Most Common Value": {
+          "hBitstring": 0.9965274537210476,
+          "mcvEstimateMode": 1250044.0,
+          "mcvEstimatePHat": 0.5003900903832813,
+          "mcvEstimatePU": 0.5012049423890932,
+          "testCaseDesc": "Most Common Value"
+        },
+        "Collision Test (for bit strings only)": {
+          "hBitstring": 0.9603289620789698,
+          "testCaseDesc": "Collision Test (for bit strings only)"
+        },
+        "Markov Test (for bit strings only)": {
+          "hBitstring": 0.9991964481681915,
+          "testCaseDesc": "Markov Test (for bit strings only)"
+        },
+        "Compression Test (for bit strings only)": {
+          "hBitstring": 0.8940224162133666,
+          "testCaseDesc": "Compression Test (for bit strings only)"
+        },
+        "T-Tuple Test": {
+          "binTTupleRes": 0.9348404987381905,
+          "testCaseDesc": "T-Tuple Test"
+        },
+        "LRS Test": {
+          "binLrsRes": 0.9962268857009687,
+          "testCaseDesc": "LRS Test"
+        },
+        "Multi Most Common in Window Test": {
+          "hBitstring": 0.9977752648349091,
+          "testCaseDesc": "Multi Most Common in Window Test"
+        },
+        "Lag Prediction Test": {
+          "hBitstring": 0.9969624883608715,
+          "testCaseDesc": "Lag Prediction Test"
+        },
+        "Multi Markov Model with Counting Test (MultiMMC)": {
+          "hBitstring": 0.9970714111670246,
+          "testCaseDesc": "Multi Markov Model with Counting Test (MultiMMC)"
+        },
+        "LZ78Y Test": {
+          "hBitstring": 0.998174361899168,
           "testCaseDesc": "LZ78Y Test"
         }
       }
@@ -44062,6 +45598,54 @@
         }
       }
     },
+    "vn_min_entropy": {
+      "min_entropy_per_bit": 0.8723464592321156,
+      "estimators": {
+        "Most Common Value": {
+          "hBitstring": 0.9975610242986811,
+          "mcvEstimateMode": 1249364.0,
+          "mcvEstimatePHat": 0.5000312178316254,
+          "mcvEstimatePU": 0.500845999474219,
+          "testCaseDesc": "Most Common Value"
+        },
+        "Collision Test (for bit strings only)": {
+          "hBitstring": 0.9401982348841046,
+          "testCaseDesc": "Collision Test (for bit strings only)"
+        },
+        "Markov Test (for bit strings only)": {
+          "hBitstring": 0.9993499022389419,
+          "testCaseDesc": "Markov Test (for bit strings only)"
+        },
+        "Compression Test (for bit strings only)": {
+          "hBitstring": 0.8723464592321156,
+          "testCaseDesc": "Compression Test (for bit strings only)"
+        },
+        "T-Tuple Test": {
+          "binTTupleRes": 0.9267801101085693,
+          "testCaseDesc": "T-Tuple Test"
+        },
+        "LRS Test": {
+          "binLrsRes": 0.9397289870485113,
+          "testCaseDesc": "LRS Test"
+        },
+        "Multi Most Common in Window Test": {
+          "hBitstring": 0.9967639868294221,
+          "testCaseDesc": "Multi Most Common in Window Test"
+        },
+        "Lag Prediction Test": {
+          "hBitstring": 0.9991234270204172,
+          "testCaseDesc": "Lag Prediction Test"
+        },
+        "Multi Markov Model with Counting Test (MultiMMC)": {
+          "hBitstring": 0.9983544134456082,
+          "testCaseDesc": "Multi Markov Model with Counting Test (MultiMMC)"
+        },
+        "LZ78Y Test": {
+          "hBitstring": 0.9979270993151227,
+          "testCaseDesc": "LZ78Y Test"
+        }
+      }
+    },
     "debias": {
       "input_bit_count": 10000000,
       "output_bit_count": 2498572,
@@ -45439,6 +47023,54 @@
         },
         "LZ78Y Test": {
           "hOriginal": 0.993844977180001,
+          "testCaseDesc": "LZ78Y Test"
+        }
+      }
+    },
+    "vn_min_entropy": {
+      "min_entropy_per_bit": 0.8769944169932687,
+      "estimators": {
+        "Most Common Value": {
+          "hBitstring": 0.9975439451999802,
+          "mcvEstimateMode": 1250713.0,
+          "mcvEstimatePHat": 0.5000375813896958,
+          "mcvEstimatePU": 0.5008519286890907,
+          "testCaseDesc": "Most Common Value"
+        },
+        "Collision Test (for bit strings only)": {
+          "hBitstring": 0.9353047758277108,
+          "testCaseDesc": "Collision Test (for bit strings only)"
+        },
+        "Markov Test (for bit strings only)": {
+          "hBitstring": 0.9992968241644378,
+          "testCaseDesc": "Markov Test (for bit strings only)"
+        },
+        "Compression Test (for bit strings only)": {
+          "hBitstring": 0.8769944169932687,
+          "testCaseDesc": "Compression Test (for bit strings only)"
+        },
+        "T-Tuple Test": {
+          "binTTupleRes": 0.9370920141237356,
+          "testCaseDesc": "T-Tuple Test"
+        },
+        "LRS Test": {
+          "binLrsRes": 0.9184261206504516,
+          "testCaseDesc": "LRS Test"
+        },
+        "Multi Most Common in Window Test": {
+          "hBitstring": 0.9968410012851026,
+          "testCaseDesc": "Multi Most Common in Window Test"
+        },
+        "Lag Prediction Test": {
+          "hBitstring": 0.998128511915349,
+          "testCaseDesc": "Lag Prediction Test"
+        },
+        "Multi Markov Model with Counting Test (MultiMMC)": {
+          "hBitstring": 0.9979251819559244,
+          "testCaseDesc": "Multi Markov Model with Counting Test (MultiMMC)"
+        },
+        "LZ78Y Test": {
+          "hBitstring": 0.9977518207551341,
           "testCaseDesc": "LZ78Y Test"
         }
       }
@@ -46824,6 +48456,54 @@
         }
       }
     },
+    "vn_min_entropy": {
+      "min_entropy_per_bit": 0.8737433713555512,
+      "estimators": {
+        "Most Common Value": {
+          "hBitstring": 0.9971945482477412,
+          "mcvEstimateMode": 1250192.0,
+          "mcvEstimatePHat": 0.5001586259512056,
+          "mcvEstimatePU": 0.5009732414577265,
+          "testCaseDesc": "Most Common Value"
+        },
+        "Collision Test (for bit strings only)": {
+          "hBitstring": 0.9257533966920601,
+          "testCaseDesc": "Collision Test (for bit strings only)"
+        },
+        "Markov Test (for bit strings only)": {
+          "hBitstring": 0.9989136990893602,
+          "testCaseDesc": "Markov Test (for bit strings only)"
+        },
+        "Compression Test (for bit strings only)": {
+          "hBitstring": 0.8737433713555512,
+          "testCaseDesc": "Compression Test (for bit strings only)"
+        },
+        "T-Tuple Test": {
+          "binTTupleRes": 0.9348903825794601,
+          "testCaseDesc": "T-Tuple Test"
+        },
+        "LRS Test": {
+          "binLrsRes": 0.962149118941425,
+          "testCaseDesc": "LRS Test"
+        },
+        "Multi Most Common in Window Test": {
+          "hBitstring": 0.9979971898548179,
+          "testCaseDesc": "Multi Most Common in Window Test"
+        },
+        "Lag Prediction Test": {
+          "hBitstring": 0.9968080691626325,
+          "testCaseDesc": "Lag Prediction Test"
+        },
+        "Multi Markov Model with Counting Test (MultiMMC)": {
+          "hBitstring": 0.9975794006436369,
+          "testCaseDesc": "Multi Markov Model with Counting Test (MultiMMC)"
+        },
+        "LZ78Y Test": {
+          "hBitstring": 0.9988343461166623,
+          "testCaseDesc": "LZ78Y Test"
+        }
+      }
+    },
     "debias": {
       "input_bit_count": 10000000,
       "output_bit_count": 2499591,
@@ -48201,6 +49881,54 @@
         },
         "LZ78Y Test": {
           "hOriginal": 0.9989321526876623,
+          "testCaseDesc": "LZ78Y Test"
+        }
+      }
+    },
+    "vn_min_entropy": {
+      "min_entropy_per_bit": 0.8598962678265291,
+      "estimators": {
+        "Most Common Value": {
+          "hBitstring": 0.9972763034861922,
+          "mcvEstimateMode": 1249618.0,
+          "mcvEstimatePHat": 0.5001300735696109,
+          "mcvEstimatePU": 0.5009448529035382,
+          "testCaseDesc": "Most Common Value"
+        },
+        "Collision Test (for bit strings only)": {
+          "hBitstring": 0.951605633369476,
+          "testCaseDesc": "Collision Test (for bit strings only)"
+        },
+        "Markov Test (for bit strings only)": {
+          "hBitstring": 0.9981718650529817,
+          "testCaseDesc": "Markov Test (for bit strings only)"
+        },
+        "Compression Test (for bit strings only)": {
+          "hBitstring": 0.8598962678265291,
+          "testCaseDesc": "Compression Test (for bit strings only)"
+        },
+        "T-Tuple Test": {
+          "binTTupleRes": 0.9287284048304346,
+          "testCaseDesc": "T-Tuple Test"
+        },
+        "LRS Test": {
+          "binLrsRes": 0.9892747449271809,
+          "testCaseDesc": "LRS Test"
+        },
+        "Multi Most Common in Window Test": {
+          "hBitstring": 0.9989260885432419,
+          "testCaseDesc": "Multi Most Common in Window Test"
+        },
+        "Lag Prediction Test": {
+          "hBitstring": 0.9970394566639927,
+          "testCaseDesc": "Lag Prediction Test"
+        },
+        "Multi Markov Model with Counting Test (MultiMMC)": {
+          "hBitstring": 0.9992544229769007,
+          "testCaseDesc": "Multi Markov Model with Counting Test (MultiMMC)"
+        },
+        "LZ78Y Test": {
+          "hBitstring": 0.9973690833350748,
           "testCaseDesc": "LZ78Y Test"
         }
       }
@@ -49586,6 +51314,54 @@
         }
       }
     },
+    "vn_min_entropy": {
+      "min_entropy_per_bit": 0.8849273904008564,
+      "estimators": {
+        "Most Common Value": {
+          "hBitstring": 0.9972564979695242,
+          "mcvEstimateMode": 1250846.0,
+          "mcvEstimatePHat": 0.5001373447873955,
+          "mcvEstimatePU": 0.5009517299908329,
+          "testCaseDesc": "Most Common Value"
+        },
+        "Collision Test (for bit strings only)": {
+          "hBitstring": 0.9209905327870975,
+          "testCaseDesc": "Collision Test (for bit strings only)"
+        },
+        "Markov Test (for bit strings only)": {
+          "hBitstring": 0.9995735520619254,
+          "testCaseDesc": "Markov Test (for bit strings only)"
+        },
+        "Compression Test (for bit strings only)": {
+          "hBitstring": 0.8849273904008564,
+          "testCaseDesc": "Compression Test (for bit strings only)"
+        },
+        "T-Tuple Test": {
+          "binTTupleRes": 0.9328468201593858,
+          "testCaseDesc": "T-Tuple Test"
+        },
+        "LRS Test": {
+          "binLrsRes": 0.9707744969412723,
+          "testCaseDesc": "LRS Test"
+        },
+        "Multi Most Common in Window Test": {
+          "hBitstring": 0.9974551108946457,
+          "testCaseDesc": "Multi Most Common in Window Test"
+        },
+        "Lag Prediction Test": {
+          "hBitstring": 0.9972881639504391,
+          "testCaseDesc": "Lag Prediction Test"
+        },
+        "Multi Markov Model with Counting Test (MultiMMC)": {
+          "hBitstring": 0.9995936354973782,
+          "testCaseDesc": "Multi Markov Model with Counting Test (MultiMMC)"
+        },
+        "LZ78Y Test": {
+          "hBitstring": 0.9988354938278619,
+          "testCaseDesc": "LZ78Y Test"
+        }
+      }
+    },
     "debias": {
       "input_bit_count": 10000000,
       "output_bit_count": 2501005,
@@ -50963,6 +52739,54 @@
         },
         "LZ78Y Test": {
           "hOriginal": 0.9991285160845587,
+          "testCaseDesc": "LZ78Y Test"
+        }
+      }
+    },
+    "vn_min_entropy": {
+      "min_entropy_per_bit": 0.8712525994906825,
+      "estimators": {
+        "Most Common Value": {
+          "hBitstring": 0.9961473784556297,
+          "mcvEstimateMode": 1251235.0,
+          "mcvEstimatePHat": 0.5005224296740055,
+          "mcvEstimatePU": 0.5013370012727542,
+          "testCaseDesc": "Most Common Value"
+        },
+        "Collision Test (for bit strings only)": {
+          "hBitstring": 0.9149056112340954,
+          "testCaseDesc": "Collision Test (for bit strings only)"
+        },
+        "Markov Test (for bit strings only)": {
+          "hBitstring": 0.9971961405691363,
+          "testCaseDesc": "Markov Test (for bit strings only)"
+        },
+        "Compression Test (for bit strings only)": {
+          "hBitstring": 0.8712525994906825,
+          "testCaseDesc": "Compression Test (for bit strings only)"
+        },
+        "T-Tuple Test": {
+          "binTTupleRes": 0.9328074402680927,
+          "testCaseDesc": "T-Tuple Test"
+        },
+        "LRS Test": {
+          "binLrsRes": 0.9954835851301012,
+          "testCaseDesc": "LRS Test"
+        },
+        "Multi Most Common in Window Test": {
+          "hBitstring": 0.9968226307770239,
+          "testCaseDesc": "Multi Most Common in Window Test"
+        },
+        "Lag Prediction Test": {
+          "hBitstring": 0.9972419535934804,
+          "testCaseDesc": "Lag Prediction Test"
+        },
+        "Multi Markov Model with Counting Test (MultiMMC)": {
+          "hBitstring": 0.9976607722165207,
+          "testCaseDesc": "Multi Markov Model with Counting Test (MultiMMC)"
+        },
+        "LZ78Y Test": {
+          "hBitstring": 0.996921716273597,
           "testCaseDesc": "LZ78Y Test"
         }
       }
@@ -52348,6 +54172,54 @@
         }
       }
     },
+    "vn_min_entropy": {
+      "min_entropy_per_bit": 0.8969944903622181,
+      "estimators": {
+        "Most Common Value": {
+          "hBitstring": 0.996259695671988,
+          "mcvEstimateMode": 1251456.0,
+          "mcvEstimatePHat": 0.5004835044595188,
+          "mcvEstimatePU": 0.5012979725223836,
+          "testCaseDesc": "Most Common Value"
+        },
+        "Collision Test (for bit strings only)": {
+          "hBitstring": 0.9296435132100357,
+          "testCaseDesc": "Collision Test (for bit strings only)"
+        },
+        "Markov Test (for bit strings only)": {
+          "hBitstring": 0.9974555276740997,
+          "testCaseDesc": "Markov Test (for bit strings only)"
+        },
+        "Compression Test (for bit strings only)": {
+          "hBitstring": 0.8969944903622181,
+          "testCaseDesc": "Compression Test (for bit strings only)"
+        },
+        "T-Tuple Test": {
+          "binTTupleRes": 0.9349213906976572,
+          "testCaseDesc": "T-Tuple Test"
+        },
+        "LRS Test": {
+          "binLrsRes": 0.9939731186734208,
+          "testCaseDesc": "LRS Test"
+        },
+        "Multi Most Common in Window Test": {
+          "hBitstring": 0.9962924340274869,
+          "testCaseDesc": "Multi Most Common in Window Test"
+        },
+        "Lag Prediction Test": {
+          "hBitstring": 0.9981605730576715,
+          "testCaseDesc": "Lag Prediction Test"
+        },
+        "Multi Markov Model with Counting Test (MultiMMC)": {
+          "hBitstring": 0.9979663964911181,
+          "testCaseDesc": "Multi Markov Model with Counting Test (MultiMMC)"
+        },
+        "LZ78Y Test": {
+          "hBitstring": 0.9972239184012244,
+          "testCaseDesc": "LZ78Y Test"
+        }
+      }
+    },
     "debias": {
       "input_bit_count": 10000000,
       "output_bit_count": 2500494,
@@ -53725,6 +55597,54 @@
         },
         "LZ78Y Test": {
           "hOriginal": 0.9967149016870018,
+          "testCaseDesc": "LZ78Y Test"
+        }
+      }
+    },
+    "vn_min_entropy": {
+      "min_entropy_per_bit": 0.8953433594532219,
+      "estimators": {
+        "Most Common Value": {
+          "hBitstring": 0.9973844450824727,
+          "mcvEstimateMode": 1249342.0,
+          "mcvEstimatePHat": 0.5000924657616497,
+          "mcvEstimatePU": 0.5009073044652288,
+          "testCaseDesc": "Most Common Value"
+        },
+        "Collision Test (for bit strings only)": {
+          "hBitstring": 0.9106505420279518,
+          "testCaseDesc": "Collision Test (for bit strings only)"
+        },
+        "Markov Test (for bit strings only)": {
+          "hBitstring": 0.9988743827652876,
+          "testCaseDesc": "Markov Test (for bit strings only)"
+        },
+        "Compression Test (for bit strings only)": {
+          "hBitstring": 0.8953433594532219,
+          "testCaseDesc": "Compression Test (for bit strings only)"
+        },
+        "T-Tuple Test": {
+          "binTTupleRes": 0.9348433510100556,
+          "testCaseDesc": "T-Tuple Test"
+        },
+        "LRS Test": {
+          "binLrsRes": 0.9976104618909213,
+          "testCaseDesc": "LRS Test"
+        },
+        "Multi Most Common in Window Test": {
+          "hBitstring": 0.9957315148616923,
+          "testCaseDesc": "Multi Most Common in Window Test"
+        },
+        "Lag Prediction Test": {
+          "hBitstring": 0.9969953981864969,
+          "testCaseDesc": "Lag Prediction Test"
+        },
+        "Multi Markov Model with Counting Test (MultiMMC)": {
+          "hBitstring": 0.9957328714270121,
+          "testCaseDesc": "Multi Markov Model with Counting Test (MultiMMC)"
+        },
+        "LZ78Y Test": {
+          "hBitstring": 0.9977574444357385,
           "testCaseDesc": "LZ78Y Test"
         }
       }
@@ -55110,6 +57030,54 @@
         }
       }
     },
+    "vn_min_entropy": {
+      "min_entropy_per_bit": 0.8557258378132572,
+      "estimators": {
+        "Most Common Value": {
+          "hBitstring": 0.9971103039402204,
+          "mcvEstimateMode": 1250581.0,
+          "mcvEstimatePHat": 0.5001879833070824,
+          "mcvEstimatePU": 0.5010024959951506,
+          "testCaseDesc": "Most Common Value"
+        },
+        "Collision Test (for bit strings only)": {
+          "hBitstring": 1.0,
+          "testCaseDesc": "Collision Test (for bit strings only)"
+        },
+        "Markov Test (for bit strings only)": {
+          "hBitstring": 0.9978825688833451,
+          "testCaseDesc": "Markov Test (for bit strings only)"
+        },
+        "Compression Test (for bit strings only)": {
+          "hBitstring": 0.8557258378132572,
+          "testCaseDesc": "Compression Test (for bit strings only)"
+        },
+        "T-Tuple Test": {
+          "binTTupleRes": 0.9349120516737537,
+          "testCaseDesc": "T-Tuple Test"
+        },
+        "LRS Test": {
+          "binLrsRes": 0.9899680930586875,
+          "testCaseDesc": "LRS Test"
+        },
+        "Multi Most Common in Window Test": {
+          "hBitstring": 0.9976372931225548,
+          "testCaseDesc": "Multi Most Common in Window Test"
+        },
+        "Lag Prediction Test": {
+          "hBitstring": 0.9978574030086662,
+          "testCaseDesc": "Lag Prediction Test"
+        },
+        "Multi Markov Model with Counting Test (MultiMMC)": {
+          "hBitstring": 0.9969421576827405,
+          "testCaseDesc": "Multi Markov Model with Counting Test (MultiMMC)"
+        },
+        "LZ78Y Test": {
+          "hBitstring": 0.9975347752313505,
+          "testCaseDesc": "LZ78Y Test"
+        }
+      }
+    },
     "debias": {
       "input_bit_count": 10000000,
       "output_bit_count": 2500222,
@@ -56487,6 +58455,54 @@
         },
         "LZ78Y Test": {
           "hOriginal": 0.99842046481894,
+          "testCaseDesc": "LZ78Y Test"
+        }
+      }
+    },
+    "vn_min_entropy": {
+      "min_entropy_per_bit": 0.8987536807593378,
+      "estimators": {
+        "Most Common Value": {
+          "hBitstring": 0.9974329494935817,
+          "mcvEstimateMode": 1249374.0,
+          "mcvEstimatePHat": 0.5000756493233588,
+          "mcvEstimatePU": 0.5008904638962163,
+          "testCaseDesc": "Most Common Value"
+        },
+        "Collision Test (for bit strings only)": {
+          "hBitstring": 0.9354865915364066,
+          "testCaseDesc": "Collision Test (for bit strings only)"
+        },
+        "Markov Test (for bit strings only)": {
+          "hBitstring": 0.9997600063725598,
+          "testCaseDesc": "Markov Test (for bit strings only)"
+        },
+        "Compression Test (for bit strings only)": {
+          "hBitstring": 0.8987536807593378,
+          "testCaseDesc": "Compression Test (for bit strings only)"
+        },
+        "T-Tuple Test": {
+          "binTTupleRes": 0.9348484367525145,
+          "testCaseDesc": "T-Tuple Test"
+        },
+        "LRS Test": {
+          "binLrsRes": 0.9973752613170205,
+          "testCaseDesc": "LRS Test"
+        },
+        "Multi Most Common in Window Test": {
+          "hBitstring": 0.9968329629209108,
+          "testCaseDesc": "Multi Most Common in Window Test"
+        },
+        "Lag Prediction Test": {
+          "hBitstring": 0.9954105306554408,
+          "testCaseDesc": "Lag Prediction Test"
+        },
+        "Multi Markov Model with Counting Test (MultiMMC)": {
+          "hBitstring": 0.9982171042294289,
+          "testCaseDesc": "Multi Markov Model with Counting Test (MultiMMC)"
+        },
+        "LZ78Y Test": {
+          "hBitstring": 0.998513001479503,
           "testCaseDesc": "LZ78Y Test"
         }
       }
@@ -57872,6 +59888,54 @@
         }
       }
     },
+    "vn_min_entropy": {
+      "min_entropy_per_bit": 0.8782990311428555,
+      "estimators": {
+        "Most Common Value": {
+          "hBitstring": 0.9972446429280805,
+          "mcvEstimateMode": 1251043.0,
+          "mcvEstimatePHat": 0.5001415219930774,
+          "mcvEstimatePU": 0.5009558464726621,
+          "testCaseDesc": "Most Common Value"
+        },
+        "Collision Test (for bit strings only)": {
+          "hBitstring": 0.9331641808414257,
+          "testCaseDesc": "Collision Test (for bit strings only)"
+        },
+        "Markov Test (for bit strings only)": {
+          "hBitstring": 0.9997462557753178,
+          "testCaseDesc": "Markov Test (for bit strings only)"
+        },
+        "Compression Test (for bit strings only)": {
+          "hBitstring": 0.8782990311428555,
+          "testCaseDesc": "Compression Test (for bit strings only)"
+        },
+        "T-Tuple Test": {
+          "binTTupleRes": 0.934951735476408,
+          "testCaseDesc": "T-Tuple Test"
+        },
+        "LRS Test": {
+          "binLrsRes": 0.9954228996702463,
+          "testCaseDesc": "LRS Test"
+        },
+        "Multi Most Common in Window Test": {
+          "hBitstring": 0.997933849601148,
+          "testCaseDesc": "Multi Most Common in Window Test"
+        },
+        "Lag Prediction Test": {
+          "hBitstring": 0.9984108249338908,
+          "testCaseDesc": "Lag Prediction Test"
+        },
+        "Multi Markov Model with Counting Test (MultiMMC)": {
+          "hBitstring": 0.9985081933684326,
+          "testCaseDesc": "Multi Markov Model with Counting Test (MultiMMC)"
+        },
+        "LZ78Y Test": {
+          "hBitstring": 0.9981331546061842,
+          "testCaseDesc": "LZ78Y Test"
+        }
+      }
+    },
     "debias": {
       "input_bit_count": 10000000,
       "output_bit_count": 2501378,
@@ -59249,6 +61313,54 @@
         },
         "LZ78Y Test": {
           "hOriginal": 0.9971344080816561,
+          "testCaseDesc": "LZ78Y Test"
+        }
+      }
+    },
+    "vn_min_entropy": {
+      "min_entropy_per_bit": 0.8456170466363487,
+      "estimators": {
+        "Most Common Value": {
+          "hBitstring": 0.9963194441762951,
+          "mcvEstimateMode": 1251929.0,
+          "mcvEstimatePHat": 0.5004629144743522,
+          "mcvEstimatePU": 0.5012772119437371,
+          "testCaseDesc": "Most Common Value"
+        },
+        "Collision Test (for bit strings only)": {
+          "hBitstring": 0.9287771650103873,
+          "testCaseDesc": "Collision Test (for bit strings only)"
+        },
+        "Markov Test (for bit strings only)": {
+          "hBitstring": 0.9983566190445992,
+          "testCaseDesc": "Markov Test (for bit strings only)"
+        },
+        "Compression Test (for bit strings only)": {
+          "hBitstring": 0.8456170466363487,
+          "testCaseDesc": "Compression Test (for bit strings only)"
+        },
+        "T-Tuple Test": {
+          "binTTupleRes": 0.9308235551076558,
+          "testCaseDesc": "T-Tuple Test"
+        },
+        "LRS Test": {
+          "binLrsRes": 0.9976210740458046,
+          "testCaseDesc": "LRS Test"
+        },
+        "Multi Most Common in Window Test": {
+          "hBitstring": 0.9979592483866169,
+          "testCaseDesc": "Multi Most Common in Window Test"
+        },
+        "Lag Prediction Test": {
+          "hBitstring": 0.999236046625062,
+          "testCaseDesc": "Lag Prediction Test"
+        },
+        "Multi Markov Model with Counting Test (MultiMMC)": {
+          "hBitstring": 0.9970110616377572,
+          "testCaseDesc": "Multi Markov Model with Counting Test (MultiMMC)"
+        },
+        "LZ78Y Test": {
+          "hBitstring": 0.997459460125581,
           "testCaseDesc": "LZ78Y Test"
         }
       }
@@ -60634,6 +62746,54 @@
         }
       }
     },
+    "vn_min_entropy": {
+      "min_entropy_per_bit": 0.8792286374034634,
+      "estimators": {
+        "Most Common Value": {
+          "hBitstring": 0.9972711658917277,
+          "mcvEstimateMode": 1251518.0,
+          "mcvEstimatePHat": 0.5001324742554367,
+          "mcvEstimatePU": 0.5009466368259978,
+          "testCaseDesc": "Most Common Value"
+        },
+        "Collision Test (for bit strings only)": {
+          "hBitstring": 0.9395770182681195,
+          "testCaseDesc": "Collision Test (for bit strings only)"
+        },
+        "Markov Test (for bit strings only)": {
+          "hBitstring": 0.9985705922393772,
+          "testCaseDesc": "Markov Test (for bit strings only)"
+        },
+        "Compression Test (for bit strings only)": {
+          "hBitstring": 0.8792286374034634,
+          "testCaseDesc": "Compression Test (for bit strings only)"
+        },
+        "T-Tuple Test": {
+          "binTTupleRes": 0.9308520677450166,
+          "testCaseDesc": "T-Tuple Test"
+        },
+        "LRS Test": {
+          "binLrsRes": 0.9939319513441249,
+          "testCaseDesc": "LRS Test"
+        },
+        "Multi Most Common in Window Test": {
+          "hBitstring": 0.9976273777962182,
+          "testCaseDesc": "Multi Most Common in Window Test"
+        },
+        "Lag Prediction Test": {
+          "hBitstring": 0.9980867964663843,
+          "testCaseDesc": "Lag Prediction Test"
+        },
+        "Multi Markov Model with Counting Test (MultiMMC)": {
+          "hBitstring": 0.9980344022845609,
+          "testCaseDesc": "Multi Markov Model with Counting Test (MultiMMC)"
+        },
+        "LZ78Y Test": {
+          "hBitstring": 0.99684021153299,
+          "testCaseDesc": "LZ78Y Test"
+        }
+      }
+    },
     "debias": {
       "input_bit_count": 10000000,
       "output_bit_count": 2502373,
@@ -62011,6 +64171,54 @@
         },
         "LZ78Y Test": {
           "hOriginal": 0.9980864522526975,
+          "testCaseDesc": "LZ78Y Test"
+        }
+      }
+    },
+    "vn_min_entropy": {
+      "min_entropy_per_bit": 0.8453597299472215,
+      "estimators": {
+        "Most Common Value": {
+          "hBitstring": 0.9965655802096085,
+          "mcvEstimateMode": 1250706.0,
+          "mcvEstimatePHat": 0.5003770713418979,
+          "mcvEstimatePU": 0.5011916970867517,
+          "testCaseDesc": "Most Common Value"
+        },
+        "Collision Test (for bit strings only)": {
+          "hBitstring": 0.9196433462298714,
+          "testCaseDesc": "Collision Test (for bit strings only)"
+        },
+        "Markov Test (for bit strings only)": {
+          "hBitstring": 0.9993164116992478,
+          "testCaseDesc": "Markov Test (for bit strings only)"
+        },
+        "Compression Test (for bit strings only)": {
+          "hBitstring": 0.8453597299472215,
+          "testCaseDesc": "Compression Test (for bit strings only)"
+        },
+        "T-Tuple Test": {
+          "binTTupleRes": 0.9307543784261169,
+          "testCaseDesc": "T-Tuple Test"
+        },
+        "LRS Test": {
+          "binLrsRes": 0.9707312435297383,
+          "testCaseDesc": "LRS Test"
+        },
+        "Multi Most Common in Window Test": {
+          "hBitstring": 0.997850770182887,
+          "testCaseDesc": "Multi Most Common in Window Test"
+        },
+        "Lag Prediction Test": {
+          "hBitstring": 0.9967296957453231,
+          "testCaseDesc": "Lag Prediction Test"
+        },
+        "Multi Markov Model with Counting Test (MultiMMC)": {
+          "hBitstring": 0.9981983620377081,
+          "testCaseDesc": "Multi Markov Model with Counting Test (MultiMMC)"
+        },
+        "LZ78Y Test": {
+          "hBitstring": 0.9984341542785501,
           "testCaseDesc": "LZ78Y Test"
         }
       }
@@ -63396,6 +65604,54 @@
         }
       }
     },
+    "vn_min_entropy": {
+      "min_entropy_per_bit": 0.8652607866537411,
+      "estimators": {
+        "Most Common Value": {
+          "hBitstring": 0.9974155714862059,
+          "mcvEstimateMode": 1249825.0,
+          "mcvEstimatePHat": 0.500081824842022,
+          "mcvEstimatePU": 0.5008964974170607,
+          "testCaseDesc": "Most Common Value"
+        },
+        "Collision Test (for bit strings only)": {
+          "hBitstring": 0.9241604307850991,
+          "testCaseDesc": "Collision Test (for bit strings only)"
+        },
+        "Markov Test (for bit strings only)": {
+          "hBitstring": 0.9989533835839077,
+          "testCaseDesc": "Markov Test (for bit strings only)"
+        },
+        "Compression Test (for bit strings only)": {
+          "hBitstring": 0.8652607866537411,
+          "testCaseDesc": "Compression Test (for bit strings only)"
+        },
+        "T-Tuple Test": {
+          "binTTupleRes": 0.9348783609017048,
+          "testCaseDesc": "T-Tuple Test"
+        },
+        "LRS Test": {
+          "binLrsRes": 0.9621393539559363,
+          "testCaseDesc": "LRS Test"
+        },
+        "Multi Most Common in Window Test": {
+          "hBitstring": 0.9978944664298685,
+          "testCaseDesc": "Multi Most Common in Window Test"
+        },
+        "Lag Prediction Test": {
+          "hBitstring": 0.9970232184184721,
+          "testCaseDesc": "Lag Prediction Test"
+        },
+        "Multi Markov Model with Counting Test (MultiMMC)": {
+          "hBitstring": 0.9982709353926263,
+          "testCaseDesc": "Multi Markov Model with Counting Test (MultiMMC)"
+        },
+        "LZ78Y Test": {
+          "hBitstring": 0.9982023223263886,
+          "testCaseDesc": "LZ78Y Test"
+        }
+      }
+    },
     "debias": {
       "input_bit_count": 10000000,
       "output_bit_count": 2499241,
@@ -64777,6 +67033,54 @@
         }
       }
     },
+    "vn_min_entropy": {
+      "min_entropy_per_bit": 0.8460744980899365,
+      "estimators": {
+        "Most Common Value": {
+          "hBitstring": 0.9959853611315603,
+          "mcvEstimateMode": 1250231.0,
+          "mcvEstimatePHat": 0.5005783614733182,
+          "mcvEstimatePU": 0.5013933055076384,
+          "testCaseDesc": "Most Common Value"
+        },
+        "Collision Test (for bit strings only)": {
+          "hBitstring": 0.9252719989052945,
+          "testCaseDesc": "Collision Test (for bit strings only)"
+        },
+        "Markov Test (for bit strings only)": {
+          "hBitstring": 0.9971503597829159,
+          "testCaseDesc": "Markov Test (for bit strings only)"
+        },
+        "Compression Test (for bit strings only)": {
+          "hBitstring": 0.8460744980899365,
+          "testCaseDesc": "Compression Test (for bit strings only)"
+        },
+        "T-Tuple Test": {
+          "binTTupleRes": 0.9248417428589816,
+          "testCaseDesc": "T-Tuple Test"
+        },
+        "LRS Test": {
+          "binLrsRes": 0.9923539503585772,
+          "testCaseDesc": "LRS Test"
+        },
+        "Multi Most Common in Window Test": {
+          "hBitstring": 0.998095743137458,
+          "testCaseDesc": "Multi Most Common in Window Test"
+        },
+        "Lag Prediction Test": {
+          "hBitstring": 0.9970162514172255,
+          "testCaseDesc": "Lag Prediction Test"
+        },
+        "Multi Markov Model with Counting Test (MultiMMC)": {
+          "hBitstring": 0.9957042821926845,
+          "testCaseDesc": "Multi Markov Model with Counting Test (MultiMMC)"
+        },
+        "LZ78Y Test": {
+          "hBitstring": 0.9966588858741895,
+          "testCaseDesc": "LZ78Y Test"
+        }
+      }
+    },
     "debias": {
       "input_bit_count": 10000000,
       "output_bit_count": 2497573,
@@ -65972,6 +68276,54 @@
         },
         "LZ78Y Test": {
           "hOriginal": 0.9952773558401674,
+          "testCaseDesc": "LZ78Y Test"
+        }
+      }
+    },
+    "vn_min_entropy": {
+      "min_entropy_per_bit": 0.8738117124028282,
+      "estimators": {
+        "Most Common Value": {
+          "hBitstring": 0.9963643028997933,
+          "mcvEstimateMode": 1251591.0,
+          "mcvEstimatePHat": 0.5004472309467022,
+          "mcvEstimatePU": 0.5012616256239563,
+          "testCaseDesc": "Most Common Value"
+        },
+        "Collision Test (for bit strings only)": {
+          "hBitstring": 0.9503128179622791,
+          "testCaseDesc": "Collision Test (for bit strings only)"
+        },
+        "Markov Test (for bit strings only)": {
+          "hBitstring": 0.9983462803254299,
+          "testCaseDesc": "Markov Test (for bit strings only)"
+        },
+        "Compression Test (for bit strings only)": {
+          "hBitstring": 0.8738117124028282,
+          "testCaseDesc": "Compression Test (for bit strings only)"
+        },
+        "T-Tuple Test": {
+          "binTTupleRes": 0.937081956831414,
+          "testCaseDesc": "T-Tuple Test"
+        },
+        "LRS Test": {
+          "binLrsRes": 0.9895756723924993,
+          "testCaseDesc": "LRS Test"
+        },
+        "Multi Most Common in Window Test": {
+          "hBitstring": 0.9955329965083678,
+          "testCaseDesc": "Multi Most Common in Window Test"
+        },
+        "Lag Prediction Test": {
+          "hBitstring": 0.9988769950784313,
+          "testCaseDesc": "Lag Prediction Test"
+        },
+        "Multi Markov Model with Counting Test (MultiMMC)": {
+          "hBitstring": 0.9957933316736504,
+          "testCaseDesc": "Multi Markov Model with Counting Test (MultiMMC)"
+        },
+        "LZ78Y Test": {
+          "hBitstring": 0.9979089422122183,
           "testCaseDesc": "LZ78Y Test"
         }
       }
@@ -67357,6 +69709,54 @@
         }
       }
     },
+    "vn_min_entropy": {
+      "min_entropy_per_bit": 0.8732065598582501,
+      "estimators": {
+        "Most Common Value": {
+          "hBitstring": 0.9967757194965142,
+          "mcvEstimateMode": 1250846.0,
+          "mcvEstimatePHat": 0.5003041791941432,
+          "mcvEstimatePU": 0.501118700096473,
+          "testCaseDesc": "Most Common Value"
+        },
+        "Collision Test (for bit strings only)": {
+          "hBitstring": 0.9354953159952915,
+          "testCaseDesc": "Collision Test (for bit strings only)"
+        },
+        "Markov Test (for bit strings only)": {
+          "hBitstring": 0.9991514939779589,
+          "testCaseDesc": "Markov Test (for bit strings only)"
+        },
+        "Compression Test (for bit strings only)": {
+          "hBitstring": 0.8732065598582501,
+          "testCaseDesc": "Compression Test (for bit strings only)"
+        },
+        "T-Tuple Test": {
+          "binTTupleRes": 0.9328181882818832,
+          "testCaseDesc": "T-Tuple Test"
+        },
+        "LRS Test": {
+          "binLrsRes": 0.9968345431196237,
+          "testCaseDesc": "LRS Test"
+        },
+        "Multi Most Common in Window Test": {
+          "hBitstring": 0.9982855371609349,
+          "testCaseDesc": "Multi Most Common in Window Test"
+        },
+        "Lag Prediction Test": {
+          "hBitstring": 0.9588512675770001,
+          "testCaseDesc": "Lag Prediction Test"
+        },
+        "Multi Markov Model with Counting Test (MultiMMC)": {
+          "hBitstring": 0.9972490623352221,
+          "testCaseDesc": "Multi Markov Model with Counting Test (MultiMMC)"
+        },
+        "LZ78Y Test": {
+          "hBitstring": 0.9981426175102606,
+          "testCaseDesc": "LZ78Y Test"
+        }
+      }
+    },
     "debias": {
       "input_bit_count": 10000000,
       "output_bit_count": 2500171,
@@ -68734,6 +71134,54 @@
         },
         "LZ78Y Test": {
           "hOriginal": 0.9947523012963304,
+          "testCaseDesc": "LZ78Y Test"
+        }
+      }
+    },
+    "vn_min_entropy": {
+      "min_entropy_per_bit": 0.9218871655144929,
+      "estimators": {
+        "Most Common Value": {
+          "hBitstring": 0.9967707099887126,
+          "mcvEstimateMode": 1249551.0,
+          "mcvEstimatePHat": 0.5003054962091243,
+          "mcvEstimatePU": 0.50112044014709,
+          "testCaseDesc": "Most Common Value"
+        },
+        "Collision Test (for bit strings only)": {
+          "hBitstring": 0.9218871655144929,
+          "testCaseDesc": "Collision Test (for bit strings only)"
+        },
+        "Markov Test (for bit strings only)": {
+          "hBitstring": 0.9984497443699968,
+          "testCaseDesc": "Markov Test (for bit strings only)"
+        },
+        "Compression Test (for bit strings only)": {
+          "hBitstring": 0.9318728478884685,
+          "testCaseDesc": "Compression Test (for bit strings only)"
+        },
+        "T-Tuple Test": {
+          "binTTupleRes": 0.9369662299758766,
+          "testCaseDesc": "T-Tuple Test"
+        },
+        "LRS Test": {
+          "binLrsRes": 0.9924933948584103,
+          "testCaseDesc": "LRS Test"
+        },
+        "Multi Most Common in Window Test": {
+          "hBitstring": 0.9977802191993177,
+          "testCaseDesc": "Multi Most Common in Window Test"
+        },
+        "Lag Prediction Test": {
+          "hBitstring": 0.9967332471493009,
+          "testCaseDesc": "Lag Prediction Test"
+        },
+        "Multi Markov Model with Counting Test (MultiMMC)": {
+          "hBitstring": 0.9964376186103153,
+          "testCaseDesc": "Multi Markov Model with Counting Test (MultiMMC)"
+        },
+        "LZ78Y Test": {
+          "hBitstring": 0.9986375499976609,
           "testCaseDesc": "LZ78Y Test"
         }
       }
@@ -70119,6 +72567,54 @@
         }
       }
     },
+    "vn_min_entropy": {
+      "min_entropy_per_bit": 0.8644655170764279,
+      "estimators": {
+        "Most Common Value": {
+          "hBitstring": 0.9974393557637018,
+          "mcvEstimateMode": 1249948.0,
+          "mcvEstimatePHat": 0.500073613898304,
+          "mcvEstimatePU": 0.5008882397030244,
+          "testCaseDesc": "Most Common Value"
+        },
+        "Collision Test (for bit strings only)": {
+          "hBitstring": 0.9320026693355918,
+          "testCaseDesc": "Collision Test (for bit strings only)"
+        },
+        "Markov Test (for bit strings only)": {
+          "hBitstring": 0.999628492852334,
+          "testCaseDesc": "Markov Test (for bit strings only)"
+        },
+        "Compression Test (for bit strings only)": {
+          "hBitstring": 0.8644655170764279,
+          "testCaseDesc": "Compression Test (for bit strings only)"
+        },
+        "T-Tuple Test": {
+          "binTTupleRes": 0.9348882188023087,
+          "testCaseDesc": "T-Tuple Test"
+        },
+        "LRS Test": {
+          "binLrsRes": 0.9925142880717914,
+          "testCaseDesc": "LRS Test"
+        },
+        "Multi Most Common in Window Test": {
+          "hBitstring": 0.9973742142275268,
+          "testCaseDesc": "Multi Most Common in Window Test"
+        },
+        "Lag Prediction Test": {
+          "hBitstring": 0.9982191155091591,
+          "testCaseDesc": "Lag Prediction Test"
+        },
+        "Multi Markov Model with Counting Test (MultiMMC)": {
+          "hBitstring": 0.9974197652203944,
+          "testCaseDesc": "Multi Markov Model with Counting Test (MultiMMC)"
+        },
+        "LZ78Y Test": {
+          "hBitstring": 0.9987541837297892,
+          "testCaseDesc": "LZ78Y Test"
+        }
+      }
+    },
     "debias": {
       "input_bit_count": 10000000,
       "output_bit_count": 2499528,
@@ -71500,6 +73996,54 @@
         }
       }
     },
+    "vn_min_entropy": {
+      "min_entropy_per_bit": 0.910044252848929,
+      "estimators": {
+        "Most Common Value": {
+          "hBitstring": 0.9971127046441169,
+          "mcvEstimateMode": 1250650.0,
+          "mcvEstimatePHat": 0.5001871727476479,
+          "mcvEstimatePU": 0.501001662307081,
+          "testCaseDesc": "Most Common Value"
+        },
+        "Collision Test (for bit strings only)": {
+          "hBitstring": 0.9141210187673685,
+          "testCaseDesc": "Collision Test (for bit strings only)"
+        },
+        "Markov Test (for bit strings only)": {
+          "hBitstring": 0.9988436885253305,
+          "testCaseDesc": "Markov Test (for bit strings only)"
+        },
+        "Compression Test (for bit strings only)": {
+          "hBitstring": 0.910044252848929,
+          "testCaseDesc": "Compression Test (for bit strings only)"
+        },
+        "T-Tuple Test": {
+          "binTTupleRes": 0.9328248149774934,
+          "testCaseDesc": "T-Tuple Test"
+        },
+        "LRS Test": {
+          "binLrsRes": 0.9843591562455275,
+          "testCaseDesc": "LRS Test"
+        },
+        "Multi Most Common in Window Test": {
+          "hBitstring": 0.9993815870266863,
+          "testCaseDesc": "Multi Most Common in Window Test"
+        },
+        "Lag Prediction Test": {
+          "hBitstring": 0.9974979926406177,
+          "testCaseDesc": "Lag Prediction Test"
+        },
+        "Multi Markov Model with Counting Test (MultiMMC)": {
+          "hBitstring": 0.9977600934881995,
+          "testCaseDesc": "Multi Markov Model with Counting Test (MultiMMC)"
+        },
+        "LZ78Y Test": {
+          "hBitstring": 0.9977399236407585,
+          "testCaseDesc": "LZ78Y Test"
+        }
+      }
+    },
     "debias": {
       "input_bit_count": 10000000,
       "output_bit_count": 2500364,
@@ -72877,6 +75421,54 @@
         },
         "LZ78Y Test": {
           "hOriginal": 0.9990895872942146,
+          "testCaseDesc": "LZ78Y Test"
+        }
+      }
+    },
+    "vn_min_entropy": {
+      "min_entropy_per_bit": 0.8776680555355796,
+      "estimators": {
+        "Most Common Value": {
+          "hBitstring": 0.9955424622972405,
+          "mcvEstimateMode": 1252155.0,
+          "mcvEstimatePHat": 0.5007328109347788,
+          "mcvEstimatePU": 0.5015472539127348,
+          "testCaseDesc": "Most Common Value"
+        },
+        "Collision Test (for bit strings only)": {
+          "hBitstring": 0.9270443855385789,
+          "testCaseDesc": "Collision Test (for bit strings only)"
+        },
+        "Markov Test (for bit strings only)": {
+          "hBitstring": 0.9975871308481857,
+          "testCaseDesc": "Markov Test (for bit strings only)"
+        },
+        "Compression Test (for bit strings only)": {
+          "hBitstring": 0.8776680555355796,
+          "testCaseDesc": "Compression Test (for bit strings only)"
+        },
+        "T-Tuple Test": {
+          "binTTupleRes": 0.9328344622526707,
+          "testCaseDesc": "T-Tuple Test"
+        },
+        "LRS Test": {
+          "binLrsRes": 0.9972494457450783,
+          "testCaseDesc": "LRS Test"
+        },
+        "Multi Most Common in Window Test": {
+          "hBitstring": 0.9970656398722254,
+          "testCaseDesc": "Multi Most Common in Window Test"
+        },
+        "Lag Prediction Test": {
+          "hBitstring": 0.9984700629555541,
+          "testCaseDesc": "Lag Prediction Test"
+        },
+        "Multi Markov Model with Counting Test (MultiMMC)": {
+          "hBitstring": 0.9961326828987948,
+          "testCaseDesc": "Multi Markov Model with Counting Test (MultiMMC)"
+        },
+        "LZ78Y Test": {
+          "hBitstring": 0.996019319858445,
           "testCaseDesc": "LZ78Y Test"
         }
       }
