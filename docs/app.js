@@ -437,11 +437,16 @@ function renderBarChart(rows, field, containerId, yLabel, opts = {}) {
   const x = pointScale(bars.map((b) => b.sensor), [0, plotW]);
   const y = linearScale([yMin, yMax], [plotH, 0]);
 
+  // Y-axis labels are collected and appended after the bars (see below) so
+  // they always paint on top — a bar for the first/last category sits flush
+  // against the plot edge and would otherwise be drawn over its own axis
+  // labels, since SVG paints in document order.
+  const yLabels = [];
   tickValues.forEach((t) => {
     g.appendChild(svgEl("line", { class: "gridline", x1: 0, x2: plotW, y1: y(t), y2: y(t) }));
     const label = svgEl("text", { class: "axis-label", x: -8, y: y(t) + 3, "text-anchor": "end" });
     label.textContent = formatTick(t);
-    g.appendChild(label);
+    yLabels.push(label);
   });
   g.appendChild(svgEl("line", { class: "baseline", x1: 0, x2: plotW, y1: y(yMin), y2: y(yMin) }));
 
@@ -482,6 +487,8 @@ function renderBarChart(rows, field, containerId, yLabel, opts = {}) {
     hit.addEventListener("pointerleave", () => { rect.removeAttribute("opacity"); hideTooltip(); });
     g.appendChild(hit);
   });
+
+  yLabels.forEach((label) => g.appendChild(label));
 
   container.appendChild(svg);
   container.appendChild(buildLegend(uniqueSorted(rows, "Variant"), "bar"));
@@ -792,11 +799,13 @@ function renderRawVsProcessedChart(rows) {
   const x = pointScale(sensors, [0, plotW]);
   const y = linearScale([0, yMax], [plotH, 0]);
 
+  // Collected and appended after the bars — see the note in renderBarChart.
+  const yLabels = [];
   niceTicks(yMax, 5).forEach((t) => {
     g.appendChild(svgEl("line", { class: "gridline", x1: 0, x2: plotW, y1: y(t), y2: y(t) }));
     const label = svgEl("text", { class: "axis-label", x: -8, y: y(t) + 3, "text-anchor": "end" });
     label.textContent = t.toFixed(3);
-    g.appendChild(label);
+    yLabels.push(label);
   });
   g.appendChild(svgEl("line", { class: "baseline", x1: 0, x2: plotW, y1: y(0), y2: y(0) }));
 
@@ -817,6 +826,8 @@ function renderRawVsProcessedChart(rows) {
     label.textContent = s;
     g.appendChild(label);
   });
+
+  yLabels.forEach((label) => g.appendChild(label));
 
   container.appendChild(svg);
   const legend = document.createElement("div");
@@ -966,11 +977,15 @@ function renderBoxPlot(rows) {
   const x = pointScale(groups.map((gr) => gr.variant), [0, plotW]);
   const y = linearScale(yDomain, [plotH, 0]);
 
+  // Collected and appended after the boxes/whiskers — see the note in
+  // renderBarChart (the first/last category's box sits flush against the
+  // plot edge and would otherwise render over its own axis labels).
+  const yLabels = [];
   niceTicks(yDomain[1], 5).filter((t) => t >= yDomain[0] && t <= yDomain[1]).forEach((t) => {
     g.appendChild(svgEl("line", { class: "gridline", x1: 0, x2: plotW, y1: y(t), y2: y(t) }));
     const label = svgEl("text", { class: "axis-label", x: -8, y: y(t) + 3, "text-anchor": "end" });
     label.textContent = t.toFixed(3);
-    g.appendChild(label);
+    yLabels.push(label);
   });
   g.appendChild(svgEl("line", { class: "baseline", x1: 0, x2: plotW, y1: plotH, y2: plotH }));
 
@@ -1015,6 +1030,8 @@ function renderBoxPlot(rows) {
     label.textContent = `Variant ${gr.variant}`;
     g.appendChild(label);
   });
+
+  yLabels.forEach((label) => g.appendChild(label));
 
   container.appendChild(svg);
 }
@@ -1076,11 +1093,13 @@ function renderAyyadaChart(allRows) {
   const x = pointScale(variants, [0, plotW]);
   const y = linearScale([0, yMax], [plotH, 0]);
 
+  // Collected and appended after the bars — see the note in renderBarChart.
+  const yLabels = [];
   niceTicks(yMax, 5).forEach((t) => {
     g.appendChild(svgEl("line", { class: "gridline", x1: 0, x2: plotW, y1: y(t), y2: y(t) }));
     const label = svgEl("text", { class: "axis-label", x: -8, y: y(t) + 3, "text-anchor": "end" });
     label.textContent = t.toFixed(3);
-    g.appendChild(label);
+    yLabels.push(label);
   });
   g.appendChild(svgEl("line", { class: "baseline", x1: 0, x2: plotW, y1: y(0), y2: y(0) }));
 
@@ -1122,6 +1141,8 @@ function renderAyyadaChart(allRows) {
     hit.addEventListener("pointerleave", hideTooltip);
     g.appendChild(hit);
   });
+
+  yLabels.forEach((label) => g.appendChild(label));
 
   container.appendChild(svg);
 
