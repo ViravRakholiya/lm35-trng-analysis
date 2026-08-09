@@ -584,17 +584,20 @@ function renderDetail() {
   const d = state.details.find((x) => keyOf(x) === state.detailKey);
   const statsEl = document.getElementById("detail-stats");
   const estEl = document.getElementById("estimator-table");
+  const estVnEl = document.getElementById("estimator-table-vn");
   const subEl = document.getElementById("subtest-table");
 
   if (!d) {
     statsEl.innerHTML = '<div class="empty-state">No detailed record for this selection.</div>';
     estEl.innerHTML = "";
+    estVnEl.innerHTML = "";
     subEl.innerHTML = "";
     return;
   }
 
   statsEl.innerHTML = [
-    ["Min-entropy (bits/bit)", d.min_entropy.min_entropy_per_bit.toFixed(4)],
+    ["Raw min-entropy (bits/bit)", d.min_entropy.min_entropy_per_bit.toFixed(4)],
+    ["VN min-entropy (bits/bit)", d.vn_min_entropy ? d.vn_min_entropy.min_entropy_per_bit.toFixed(4) : "—"],
     ["VN retention rate", d.debias.retention_rate.toFixed(4)],
     ["SP 800-22 pass rate", d.sp800_22.pass_rate.toFixed(4)],
   ].map(([label, value]) => `<div class="stat-tile"><div class="stat-label">${escapeHtml(label)}</div><div class="stat-value">${escapeHtml(value)}</div></div>`).join("");
@@ -606,6 +609,20 @@ function renderDetail() {
     `<tbody>${estRows.map(([name, vals]) =>
       `<tr><td class="text-cell">${escapeHtml(name)}</td>${estCols.map((c) => `<td>${vals[c] != null ? formatCell(vals[c]) : "—"}</td>`).join("")}</tr>`
     ).join("")}</tbody>`;
+
+  if (d.vn_min_entropy) {
+    // Conditioned-mode (-c) output uses different field names than the raw
+    // (-i) estimator table (hBitstring vs hOriginal, bin-prefixed tuple/LRS).
+    const vnEstCols = ["hBitstring", "mcvEstimateMode", "mcvEstimatePHat", "mcvEstimatePU", "binTTupleRes", "binLrsRes"];
+    const vnEstRows = Object.entries(d.vn_min_entropy.estimators);
+    estVnEl.innerHTML =
+      `<thead><tr><th>Estimator</th>${vnEstCols.map((c) => `<th>${escapeHtml(c)}</th>`).join("")}</tr></thead>` +
+      `<tbody>${vnEstRows.map(([name, vals]) =>
+        `<tr><td class="text-cell">${escapeHtml(name)}</td>${vnEstCols.map((c) => `<td>${vals[c] != null ? formatCell(vals[c]) : "—"}</td>`).join("")}</tr>`
+      ).join("")}</tbody>`;
+  } else {
+    estVnEl.innerHTML = '<caption class="empty-state">Not yet computed for this record — re-run the pipeline.</caption>';
+  }
 
   let subRows = d.sp800_22.sub_tests;
   if (state.subtestSearch) {
@@ -849,13 +866,6 @@ const HEATMAP_CONDITIONS = [
   { temp: "40", voltage: "3.3" }, { temp: "40", voltage: "5" },
 ];
 
-// Fixed (non-adaptive — same value always maps to the same color, never
-// re-ranged per render) but zoomed into where SP 800-22 pass rates actually
-// live, since a literal 0-100% scale makes every real-world value land in
-// the same dark few percent and become visually indistinguishable. Values
-// below the floor still clamp to the lightest step, not off-scale.
-const HEATMAP_COLOR_DOMAIN = [0.85, 1.0];
-
 function renderHeatmap(rows) {
   const container = document.getElementById("chart-heatmap");
   container.innerHTML = "";
@@ -889,6 +899,21 @@ function renderHeatmap(rows) {
   const seqLow = cssVar("--seq-100", "#cde2fb");
   const seqHigh = cssVar("--seq-700", "#0d366b");
 
+  // Zoom the color domain to where the current data actually sits (with a
+  // small pad) rather than the full fixed 0-100% range — real SP 800-22 pass
+  // rates cluster in the high 90s, so a literal 0-100% scale makes every
+  // cell the same dark shade. This is a single self-contained chart (not
+  // compared bar-height-style against another chart), so — unlike the
+  // retention/pass-rate bar charts — auto-ranging here doesn't create a
+  // misleading cross-chart comparison; the legend shows the real domain used,
+  // and every cell also carries its exact value as text, so color is never
+  // the only way to read it.
+  const observedRates = rows.map((r) => r["SP 800-22 Pass Rate"]).filter((v) => v != null && !Number.isNaN(v));
+  const rawMin = Math.min(...observedRates), rawMax = Math.max(...observedRates);
+  const pad = Math.max((rawMax - rawMin) * 0.1, 0.002);
+  const domainLo = Math.max(0, rawMin - pad);
+  const domainHi = Math.min(1, rawMax + pad);
+
   sensors.forEach((sensor, si) => {
     const sensorRows = bySensorAll[sensor];
     const variant = sensorRows[0].Variant;
@@ -903,7 +928,6 @@ function renderHeatmap(rows) {
     HEATMAP_CONDITIONS.forEach((c, ci) => {
       const cellX = labelW + ci * cellW;
       const match = sensorRows.find((r) => String(r["Temp (C)"]) === c.temp && String(r["Voltage (V)"]) === c.voltage);
-      const [domainLo, domainHi] = HEATMAP_COLOR_DOMAIN;
       const t = match ? (match["SP 800-22 Pass Rate"] - domainLo) / (domainHi - domainLo) : 0;
       const rect = svgEl("rect", {
         class: "heatmap-cell" + (match ? "" : " no-data"),
@@ -911,6 +935,19 @@ function renderHeatmap(rows) {
         fill: match ? interpolateColor(seqLow, seqHigh, t) : "url(#hatch-pattern)",
       });
       svg.appendChild(rect);
+
+      if (match) {
+        // Text lives inside the colored fill, so pick white/ink by the
+        // fill's luminance rather than a fixed color, so it always clears
+        // contrast — this is what actually solves "can't tell cells apart",
+        // independent of how distinguishable the colors themselves are.
+        const cellLabel = svgEl("text", {
+          x: cellX + cellW / 2, y: rowY + cellH / 2 + 3, "text-anchor": "middle",
+          fill: t > 0.55 ? "#ffffff" : "#0b0b0b", "font-size": "10px", "font-family": "var(--font-sans)",
+        });
+        cellLabel.textContent = `${(match["SP 800-22 Pass Rate"] * 100).toFixed(1)}%`;
+        svg.appendChild(cellLabel);
+      }
 
       const hit = svgEl("rect", { class: "hit-target", x: cellX, y: rowY, width: cellW, height: cellH });
       hit.addEventListener("pointerenter", (e) => {
@@ -931,7 +968,7 @@ function renderHeatmap(rows) {
   const legendWrap = document.createElement("div");
   legendWrap.className = "heatmap-legend";
   legendWrap.innerHTML =
-    `<span>${Math.round(HEATMAP_COLOR_DOMAIN[0] * 100)}% or below</span><span class="heatmap-ramp"></span><span>${Math.round(HEATMAP_COLOR_DOMAIN[1] * 100)}%</span>` +
+    `<span>${(domainLo * 100).toFixed(1)}% or below</span><span class="heatmap-ramp"></span><span>${(domainHi * 100).toFixed(1)}%</span>` +
     '<span style="margin-left:1rem;display:inline-flex;align-items:center;gap:0.4rem;">' +
     '<span class="legend-swatch-hatch"></span>No data</span>';
   container.appendChild(legendWrap);

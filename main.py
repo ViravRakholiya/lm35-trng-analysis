@@ -35,6 +35,9 @@ def process_one(reading: data_loader.SensorReading) -> PipelineResult:
 
     min_entropy = nist_90b.estimate_min_entropy(lsb_bits, bits_per_symbol=LSB_BITS)
     debias = von_neumann.von_neumann_debias(lsb_bits)
+    # Von Neumann always outputs individual bits regardless of LSB_BITS, so
+    # the conditioned-mode assessment is always bits_per_symbol=1.
+    vn_min_entropy = nist_90b.estimate_conditioned_min_entropy(debias.output_bits, bits_per_symbol=1)
 
     sts_params = _choose_sts_params(debias.output_bit_count)
     if sts_params is None:
@@ -56,6 +59,7 @@ def process_one(reading: data_loader.SensorReading) -> PipelineResult:
         min_entropy=min_entropy,
         debias=debias,
         sp800_22_results=sp800_22_results,
+        vn_min_entropy=vn_min_entropy,
     )
 
 

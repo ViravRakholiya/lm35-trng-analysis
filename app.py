@@ -174,12 +174,13 @@ if selected_path is not None and str(selected_path) in st.session_state.results:
     r = st.session_state.results[str(selected_path)]
     st.markdown(f"##### Detail: {r.sensor_id} ({r.variant}) — {r.temperature_c}°C @ {r.voltage_v}V")
 
-    m1, m2, m3 = st.columns(3)
-    m1.metric("Min-Entropy (bits/bit)", f"{r.min_entropy.min_entropy_per_bit:.4f}")
-    m2.metric("VN Retention Rate", f"{r.debias.retention_rate:.4f}")
-    m3.metric("SP 800-22 Pass Rate", f"{r.sp800_22_pass_rate:.4f}")
+    m1, m2, m3, m4 = st.columns(4)
+    m1.metric("Raw Min-Entropy (bits/bit)", f"{r.min_entropy.min_entropy_per_bit:.4f}")
+    m2.metric("VN Min-Entropy (bits/bit)", f"{r.vn_min_entropy.min_entropy_per_bit:.4f}" if r.vn_min_entropy else "—")
+    m3.metric("VN Retention Rate", f"{r.debias.retention_rate:.4f}")
+    m4.metric("SP 800-22 Pass Rate", f"{r.sp800_22_pass_rate:.4f}")
 
-    with st.expander("SP 800-90B estimator breakdown"):
+    with st.expander("SP 800-90B estimator breakdown (raw)"):
         est_df = pd.DataFrame(
             [
                 {"Estimator": name, **{k: v for k, v in tc.items() if k != "testCaseDesc"}}
@@ -187,6 +188,16 @@ if selected_path is not None and str(selected_path) in st.session_state.results:
             ]
         )
         st.dataframe(est_df, width="stretch")
+
+    if r.vn_min_entropy:
+        with st.expander("SP 800-90B estimator breakdown (VN-processed)"):
+            vn_est_df = pd.DataFrame(
+                [
+                    {"Estimator": name, **{k: v for k, v in tc.items() if k != "testCaseDesc"}}
+                    for name, tc in r.vn_min_entropy.estimator_results.items()
+                ]
+            )
+            st.dataframe(vn_est_df, width="stretch")
 
     with st.expander("SP 800-22 sub-test results"):
         sub_df = pd.DataFrame(

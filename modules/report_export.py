@@ -1,10 +1,11 @@
 """Formats pipeline results as LaTeX tables for the thesis Results chapter and appendix.
 
-RQ4 note: SP 800-90B min-entropy is only estimated on the raw (pre-debiasing)
-bitstream by design (see modules/nist_90b.py), so "before/after" for Von
-Neumann is reported as raw min-entropy + retention rate + post-debiasing bias
-(proportion of ones, which should sit near 0.5) rather than a second min-entropy
-estimate. SP 800-22 pass rate (RQ5) is the actual post-processing randomness signal.
+RQ4 note: min-entropy is estimated on both the raw (pre-debiasing) bitstream
+(SP 800-90B initial estimate, -i) and the Von Neumann-processed bitstream
+(SP 800-90B conditioned estimate, -c — see modules/nist_90b.py). VN retention
+rate and post-debiasing bias (proportion of ones, which should sit near 0.5)
+are reported alongside both, since they explain *why* the entropy changed the
+way it did. SP 800-22 pass rate (RQ5) is a separate randomness-quality signal.
 """
 
 import json
@@ -27,6 +28,9 @@ class PipelineResult:
     min_entropy: MinEntropyResult
     debias: DebiasResult
     sp800_22_results: list[TestResult]
+    vn_min_entropy: MinEntropyResult | None = None
+    """Conditioned-mode (post-Von Neumann) min-entropy — None for results
+    computed before this field existed; re-run the pipeline to populate it."""
 
     @property
     def sp800_22_pass_rate(self) -> float:
@@ -68,7 +72,7 @@ def min_entropy_table(results: list[PipelineResult], out_path: Path) -> str:
 
 
 def von_neumann_table(results: list[PipelineResult], out_path: Path) -> str:
-    """RQ4: retention rate + raw entropy + post-debiasing bias check."""
+    """RQ4: min-entropy before and after Von Neumann debiasing, plus retention rate and bias check."""
     df = pd.DataFrame(
         [
             {
@@ -77,6 +81,7 @@ def von_neumann_table(results: list[PipelineResult], out_path: Path) -> str:
                 "Temp (C)": r.temperature_c,
                 "Voltage (V)": r.voltage_v,
                 "Raw Min-Entropy (bits/bit)": r.min_entropy.min_entropy_per_bit,
+                "VN Min-Entropy (bits/bit)": r.vn_min_entropy.min_entropy_per_bit if r.vn_min_entropy else None,
                 "VN Retention Rate": r.debias.retention_rate,
                 "Post-VN One Fraction": r.post_debias_one_fraction,
             }
@@ -86,7 +91,7 @@ def von_neumann_table(results: list[PipelineResult], out_path: Path) -> str:
     return _write_latex(
         df,
         out_path,
-        "Von Neumann debiasing retention rate and post-debiasing bias, alongside raw min-entropy.",
+        "Min-entropy before and after Von Neumann debiasing, with retention rate and post-debiasing bias.",
         "tab:von-neumann",
     )
 
@@ -141,6 +146,7 @@ def _build_summary_dataframe(results: list[PipelineResult]) -> pd.DataFrame:
                 "Temp (C)": r.temperature_c,
                 "Voltage (V)": r.voltage_v,
                 "Min-Entropy (bits/bit)": r.min_entropy.min_entropy_per_bit,
+                "VN Min-Entropy (bits/bit)": r.vn_min_entropy.min_entropy_per_bit if r.vn_min_entropy else None,
                 "VN Input Bits": r.debias.input_bit_count,
                 "VN Output Bits": r.debias.output_bit_count,
                 "VN Retention Rate": r.debias.retention_rate,
@@ -199,6 +205,14 @@ def _result_to_detail_record(r: PipelineResult) -> dict:
             "min_entropy_per_bit": r.min_entropy.min_entropy_per_bit,
             "estimators": r.min_entropy.estimator_results,
         },
+        "vn_min_entropy": (
+            {
+                "min_entropy_per_bit": r.vn_min_entropy.min_entropy_per_bit,
+                "estimators": r.vn_min_entropy.estimator_results,
+            }
+            if r.vn_min_entropy
+            else None
+        ),
         "debias": {
             "input_bit_count": r.debias.input_bit_count,
             "output_bit_count": r.debias.output_bit_count,
