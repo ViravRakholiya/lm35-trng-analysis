@@ -91,14 +91,21 @@ def von_neumann_table(results: list[PipelineResult], out_path: Path) -> str:
     )
 
 
+AYYADA_TEMPERATURE_C = 24
+"""Ayyada's thesis states the climate chamber "was typically maintained at
+approximately 24C during the measurements" for the entire TRNG dataset — his
+numbers are single-temperature. Comparing them against our 0C/40C rows would
+be misleading, so the reference column is only populated on our 24C rows."""
+
+
 def sp800_22_table(
     results: list[PipelineResult], ayyada_reference: dict[str, float] | None, out_path: Path
 ) -> str:
     """RQ5: SP 800-22 pass rates per sensor x condition, vs Ayyada's MCP3008 numbers.
 
-    ayyada_reference maps variant ("A", "B", "C") to his published pass rate,
-    since only summary-level published numbers (not granular per-sensor/condition
-    data) are available for the baseline comparison.
+    ayyada_reference maps variant ("A", "B", "C") to his mean pass rate (see
+    reference/ayyada_thesis_results.csv), shown only on our 24C rows since
+    that's the only temperature his thesis tested (see AYYADA_TEMPERATURE_C).
     """
     ayyada_reference = ayyada_reference or {}
     df = pd.DataFrame(
@@ -109,7 +116,9 @@ def sp800_22_table(
                 "Temp (C)": r.temperature_c,
                 "Voltage (V)": r.voltage_v,
                 "SP 800-22 Pass Rate": r.sp800_22_pass_rate,
-                "Ayyada Pass Rate (MCP3008)": ayyada_reference.get(r.variant),
+                "Ayyada Pass Rate (MCP3008, 24C only)": (
+                    ayyada_reference.get(r.variant) if r.temperature_c == AYYADA_TEMPERATURE_C else None
+                ),
             }
             for r in results
         ]
@@ -117,7 +126,8 @@ def sp800_22_table(
     return _write_latex(
         df,
         out_path,
-        "SP 800-22 pass rates per sensor and test condition, compared against Ayyada's published MCP3008 baseline.",
+        "SP 800-22 pass rates per sensor and test condition, compared against Ayyada's "
+        "published MCP3008 baseline (24C only, the only temperature in his thesis).",
         "tab:sp800-22",
     )
 

@@ -1033,11 +1033,23 @@ const AYYADA_REFERENCE = {
   A: { raw: 0.2090 }, B: { raw: 0.2680 }, C: { raw: 0.4538 },
 };
 
-function renderAyyadaChart(rows) {
+// His thesis states the climate chamber "was typically maintained at
+// approximately 24C during the measurements" for the entire TRNG dataset —
+// his numbers are single-temperature. Comparing them against our 0C/40C
+// rows would be misleading, so this chart always restricts to our 24C rows
+// regardless of the global temperature filter above.
+const AYYADA_TEMPERATURE_C = "24";
+
+function renderAyyadaChart(allRows) {
   const container = document.getElementById("chart-ayyada");
   container.innerHTML = "";
+
+  const rows = allRows.filter((r) => String(r["Temp (C)"]) === AYYADA_TEMPERATURE_C);
   if (!rows.length) {
-    container.innerHTML = '<div class="empty-state">No data for the current filters.</div>';
+    container.innerHTML =
+      '<div class="empty-state">No 24°C data in the current filter — Ayyada\'s thesis only tested at ' +
+      '24°C, so this comparison isn\'t meaningful for other temperatures. Clear the temperature filter ' +
+      'or select 24°C to see it.</div>';
     return;
   }
 
