@@ -14,9 +14,11 @@ STS_STREAM_LENGTH_CANDIDATES = [1_000_000, 100_000, 10_000]
 STS_MIN_STREAMS = 10
 STS_MAX_STREAMS = 100
 
-# Only summary-level published numbers are available for Ayyada's MCP3008
-# baseline (see thesis memory); fill in exact figures once transcribed.
-AYYADA_SP800_22_REFERENCE: dict[str, float] = {}
+# Mean SP 800-22 pass rate per variant (post-Von Neumann, matching what this
+# pipeline measures), extracted from Ayyada's thesis Tables 6.5-6.7. See
+# reference/ayyada_thesis_results.csv for the full per-sensor/voltage
+# breakdown and reference/README.md for provenance/methodology notes.
+AYYADA_SP800_22_REFERENCE: dict[str, float] = {"A": 0.9379, "B": 0.9690, "C": 0.9459}
 
 
 def _choose_sts_params(available_bits: int) -> tuple[int, int] | None:

@@ -1020,14 +1020,17 @@ function renderBoxPlot(rows) {
 }
 
 /* ---------------------------------------------------------------------
-   Head-to-head vs Ayyada's MCP3008 results, per variant. Fill in
-   AYYADA_REFERENCE once his per-variant numbers are transcribed — only
-   his overall summary range is published, not a per-variant breakdown,
-   so this renders a "pending" placeholder until then.
+   Head-to-head vs Ayyada's MCP3008 results, per variant. Raw (pre-VN)
+   min-entropy, matching what this dashboard's own entropy chart measures
+   (SP 800-90B is only run on the raw bitstream here — see the RQ4 note in
+   the raw-vs-processed chart above). Mean across his 3 sensors x 2 voltages
+   per variant, extracted from Table 6.1 of his thesis — see
+   reference/ayyada_thesis_results.csv for the full per-sensor breakdown and
+   reference/README.md for provenance/methodology notes.
    --------------------------------------------------------------------- */
 
 const AYYADA_REFERENCE = {
-  // A: { raw: 0.0 }, B: { raw: 0.0 }, C: { raw: 0.0 },
+  A: { raw: 0.2090 }, B: { raw: 0.2680 }, C: { raw: 0.4538 },
 };
 
 function renderAyyadaChart(rows) {
