@@ -838,6 +838,13 @@ const HEATMAP_CONDITIONS = [
   { temp: "40", voltage: "3.3" }, { temp: "40", voltage: "5" },
 ];
 
+// Fixed (non-adaptive — same value always maps to the same color, never
+// re-ranged per render) but zoomed into where SP 800-22 pass rates actually
+// live, since a literal 0-100% scale makes every real-world value land in
+// the same dark few percent and become visually indistinguishable. Values
+// below the floor still clamp to the lightest step, not off-scale.
+const HEATMAP_COLOR_DOMAIN = [0.85, 1.0];
+
 function renderHeatmap(rows) {
   const container = document.getElementById("chart-heatmap");
   container.innerHTML = "";
@@ -885,10 +892,12 @@ function renderHeatmap(rows) {
     HEATMAP_CONDITIONS.forEach((c, ci) => {
       const cellX = labelW + ci * cellW;
       const match = sensorRows.find((r) => String(r["Temp (C)"]) === c.temp && String(r["Voltage (V)"]) === c.voltage);
+      const [domainLo, domainHi] = HEATMAP_COLOR_DOMAIN;
+      const t = match ? (match["SP 800-22 Pass Rate"] - domainLo) / (domainHi - domainLo) : 0;
       const rect = svgEl("rect", {
         class: "heatmap-cell" + (match ? "" : " no-data"),
         x: cellX, y: rowY, width: cellW, height: cellH,
-        fill: match ? interpolateColor(seqLow, seqHigh, match["SP 800-22 Pass Rate"]) : "url(#hatch-pattern)",
+        fill: match ? interpolateColor(seqLow, seqHigh, t) : "url(#hatch-pattern)",
       });
       svg.appendChild(rect);
 
@@ -911,7 +920,7 @@ function renderHeatmap(rows) {
   const legendWrap = document.createElement("div");
   legendWrap.className = "heatmap-legend";
   legendWrap.innerHTML =
-    '<span>0%</span><span class="heatmap-ramp"></span><span>100%</span>' +
+    `<span>${Math.round(HEATMAP_COLOR_DOMAIN[0] * 100)}% or below</span><span class="heatmap-ramp"></span><span>${Math.round(HEATMAP_COLOR_DOMAIN[1] * 100)}%</span>` +
     '<span style="margin-left:1rem;display:inline-flex;align-items:center;gap:0.4rem;">' +
     '<span class="legend-swatch-hatch"></span>No data</span>';
   container.appendChild(legendWrap);
