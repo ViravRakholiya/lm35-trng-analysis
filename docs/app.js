@@ -1011,7 +1011,13 @@ function renderBoxPlot(rows) {
   const g = svgEl("g", { transform: `translate(${margin.left},${margin.top})` });
   svg.appendChild(g);
 
-  const x = pointScale(groups.map((gr) => gr.variant), [0, plotW]);
+  // Inset the first/last box from the plot edges — otherwise the first
+  // category sits flush against x=0, right where the y-axis labels live, so
+  // a box spanning a labeled gridline value visually crowds its own label
+  // (the halo below keeps it legible either way, but this gives real
+  // separation instead of relying on the halo alone).
+  const edgePad = 40;
+  const x = pointScale(groups.map((gr) => gr.variant), [edgePad, plotW - edgePad]);
   const y = linearScale(yDomain, [plotH, 0]);
 
   // Collected and appended after the boxes/whiskers — see the note in

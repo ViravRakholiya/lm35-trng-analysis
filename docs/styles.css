@@ -250,7 +250,19 @@ main {
 .chart-facets { display: flex; flex-wrap: wrap; gap: 1.5rem; }
 .facet-title { text-align: center; font-size: 0.78rem; color: var(--ink-muted); margin-bottom: 0.25rem; }
 
-.axis-label { fill: var(--ink-muted); font-size: 11px; font-family: var(--font-sans); }
+.axis-label {
+  fill: var(--ink-muted);
+  font-size: 11px;
+  font-family: var(--font-sans);
+  /* A halo, not just top z-order: a y-axis label can land directly over a
+     data mark (e.g. a box-plot box spanning that value) — gray text on a
+     tinted fill loses contrast even when it's the topmost element. The
+     halo keeps it legible against any background it happens to cross. */
+  paint-order: stroke fill;
+  stroke: var(--surface);
+  stroke-width: 3px;
+  stroke-linejoin: round;
+}
 .gridline { stroke: var(--gridline); stroke-width: 1; }
 .baseline { stroke: var(--baseline); stroke-width: 1; }
 .mark-line { fill: none; stroke-width: 2; stroke-linejoin: round; stroke-linecap: round; }
