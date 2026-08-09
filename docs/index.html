@@ -79,6 +79,56 @@
     <div class="chart-svg-wrap" id="chart-passrate"></div>
   </section>
 
+  <section class="chart-card">
+    <div class="card-head">
+      <div>
+        <h2>Min-entropy vs. temperature, by voltage</h2>
+        <p class="card-sub">Mean min-entropy across selected sensors at each temperature, one line per voltage</p>
+      </div>
+    </div>
+    <div class="chart-svg-wrap" id="chart-tempvoltage"></div>
+  </section>
+
+  <section class="chart-card">
+    <div class="card-head">
+      <div>
+        <h2>Raw vs. Von Neumann-processed entropy</h2>
+        <p class="card-sub">RQ4 — min-entropy before and after debiasing, per sensor</p>
+      </div>
+    </div>
+    <div class="chart-svg-wrap" id="chart-raw-vs-processed"></div>
+  </section>
+
+  <section class="chart-card">
+    <div class="card-head">
+      <div>
+        <h2>SP 800-22 pass rate heatmap</h2>
+        <p class="card-sub">Every sensor × every test condition, fixed 0–100% color scale</p>
+      </div>
+    </div>
+    <div class="chart-svg-wrap heatmap-scroll" id="chart-heatmap"></div>
+  </section>
+
+  <section class="chart-card">
+    <div class="card-head">
+      <div>
+        <h2>Min-entropy distribution by group</h2>
+        <p class="card-sub">Spread across all sensors and conditions within each variant, not just the mean</p>
+      </div>
+    </div>
+    <div class="chart-svg-wrap" id="chart-boxplot"></div>
+  </section>
+
+  <section class="chart-card">
+    <div class="card-head">
+      <div>
+        <h2>ADS1115 (this study) vs. MCP3008 (Ayyada) — min-entropy by variant</h2>
+        <p class="card-sub">The core 16-bit vs. 10-bit ADC comparison, per matched sensor variant</p>
+      </div>
+    </div>
+    <div class="chart-svg-wrap" id="chart-ayyada"></div>
+  </section>
+
   <section class="table-card">
     <div class="card-head">
       <div>

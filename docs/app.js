@@ -94,13 +94,25 @@ function uniqueSorted(rows, key) {
    Render orchestration
    --------------------------------------------------------------------- */
 
+const PERCENT_AXIS_OPTS = {
+  domain: [0, 1],
+  tickValues: [0, 0.25, 0.5, 0.75, 1],
+  formatTick: (t) => `${Math.round(t * 100)}%`,
+  formatValue: (v) => `${(v * 100).toFixed(2)}%`,
+};
+
 function renderAll() {
   renderFilterPills();
   const rows = filteredRows();
   renderStatTiles(rows);
   renderEntropyChart(rows);
-  renderBarChart(rows, "VN Retention Rate", "chart-retention", "Mean VN Retention Rate", [0, null]);
-  renderBarChart(rows, "SP 800-22 Pass Rate", "chart-passrate", "Mean SP 800-22 Pass Rate", [0, 1]);
+  renderBarChart(rows, "VN Retention Rate", "chart-retention", "Mean VN Retention Rate", PERCENT_AXIS_OPTS);
+  renderBarChart(rows, "SP 800-22 Pass Rate", "chart-passrate", "Mean SP 800-22 Pass Rate", PERCENT_AXIS_OPTS);
+  renderTempVoltageChart(rows);
+  renderRawVsProcessedChart(rows);
+  renderHeatmap(rows);
+  renderBoxPlot(rows);
+  renderAyyadaChart(rows);
   renderTable(rows);
   renderDetailSelect();
 }
@@ -225,7 +237,10 @@ function linearScale(domain, range) {
 function pointScale(domainValues, range) {
   const [r0, r1] = range;
   const n = domainValues.length;
-  const step = n > 1 ? (r1 - r0) / (n - 1) : 0;
+  // For a single category there's no "distance between points" to derive a
+  // step from — fall back to the full range so bar/box width calculations
+  // downstream (which read x.step) don't collapse to zero and vanish.
+  const step = n > 1 ? (r1 - r0) / (n - 1) : (r1 - r0);
   const scale = (v) => {
     const i = domainValues.indexOf(v);
     return n > 1 ? r0 + i * step : (r0 + r1) / 2;
@@ -382,7 +397,7 @@ function buildLegend(variants, markType = "line") {
    Bar chart — mean of a field per sensor, colored by variant
    --------------------------------------------------------------------- */
 
-function renderBarChart(rows, field, containerId, yLabel, yDomainOverride) {
+function renderBarChart(rows, field, containerId, yLabel, opts = {}) {
   const container = document.getElementById(containerId);
   container.innerHTML = "";
 
@@ -405,9 +420,15 @@ function renderBarChart(rows, field, containerId, yLabel, yDomainOverride) {
   const plotW = width - margin.left - margin.right;
   const plotH = height - margin.top - margin.bottom;
 
+  // Fixed domain by default (opts.domain), never auto-ranged — so bar heights
+  // stay honestly comparable across charts with very different value ranges
+  // (e.g. ~25% retention vs ~98% pass rate both filling the same axis).
   const dataMax = Math.max(...bars.map((b) => b.value));
-  const yMax = yDomainOverride && yDomainOverride[1] != null ? yDomainOverride[1] : Math.max(...niceTicks(dataMax, 4));
-  const yMin = yDomainOverride && yDomainOverride[0] != null ? yDomainOverride[0] : 0;
+  const yMax = opts.domain ? opts.domain[1] : Math.max(...niceTicks(dataMax, 4));
+  const yMin = opts.domain ? opts.domain[0] : 0;
+  const tickValues = opts.tickValues || niceTicks(yMax, 5).filter((t) => t >= yMin && t <= yMax);
+  const formatTick = opts.formatTick || ((t) => t.toFixed(2));
+  const formatValue = opts.formatValue || ((v) => v.toFixed(4));
 
   const svg = svgEl("svg", { viewBox: `0 0 ${width} ${height}` });
   const g = svgEl("g", { transform: `translate(${margin.left},${margin.top})` });
@@ -416,11 +437,10 @@ function renderBarChart(rows, field, containerId, yLabel, yDomainOverride) {
   const x = pointScale(bars.map((b) => b.sensor), [0, plotW]);
   const y = linearScale([yMin, yMax], [plotH, 0]);
 
-  niceTicks(yMax, 5).forEach((t) => {
-    if (t < yMin || t > yMax) return;
+  tickValues.forEach((t) => {
     g.appendChild(svgEl("line", { class: "gridline", x1: 0, x2: plotW, y1: y(t), y2: y(t) }));
     const label = svgEl("text", { class: "axis-label", x: -8, y: y(t) + 3, "text-anchor": "end" });
-    label.textContent = t.toFixed(2);
+    label.textContent = formatTick(t);
     g.appendChild(label);
   });
   g.appendChild(svgEl("line", { class: "baseline", x1: 0, x2: plotW, y1: y(yMin), y2: y(yMin) }));
@@ -456,7 +476,7 @@ function renderBarChart(rows, field, containerId, yLabel, yDomainOverride) {
       rect.setAttribute("opacity", "0.85");
       showTooltip(e.clientX, e.clientY,
         `<div class="tt-title">${escapeHtml(b.sensor)} (${escapeHtml(b.variant)})</div>` +
-        `<div class="tt-row"><span class="tt-key" style="background:${color}"></span>${escapeHtml(yLabel)}<span class="tt-value">${b.value.toFixed(4)}</span></div>`);
+        `<div class="tt-row"><span class="tt-key" style="background:${color}"></span>${escapeHtml(yLabel)}<span class="tt-value">${formatValue(b.value)}</span></div>`);
     });
     hit.addEventListener("pointermove", (e) => showTooltip(e.clientX, e.clientY, document.getElementById("tooltip").innerHTML));
     hit.addEventListener("pointerleave", () => { rect.removeAttribute("opacity"); hideTooltip(); });
@@ -592,4 +612,512 @@ function renderDetail() {
       `<td>${t.num_passed}/${t.num_total}</td>` +
       `<td><span class="badge ${t.passed ? "pass" : "fail"}">${t.passed ? "Pass" : "Fail"}</span></td></tr>`
     ).join("")}</tbody>`;
+}
+
+/* ---------------------------------------------------------------------
+   Shared helpers: css var reads, color interpolation, percentiles
+   --------------------------------------------------------------------- */
+
+function cssVar(name, fallback) {
+  const v = getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+  return v || fallback;
+}
+
+function hexToRgb(hex) {
+  const h = hex.replace("#", "");
+  return [parseInt(h.slice(0, 2), 16), parseInt(h.slice(2, 4), 16), parseInt(h.slice(4, 6), 16)];
+}
+
+function interpolateColor(hexA, hexB, t) {
+  const tt = Math.max(0, Math.min(1, t));
+  const a = hexToRgb(hexA), b = hexToRgb(hexB);
+  const c = a.map((v, i) => Math.round(v + (b[i] - v) * tt));
+  return `rgb(${c[0]}, ${c[1]}, ${c[2]})`;
+}
+
+function percentile(sortedValues, p) {
+  const n = sortedValues.length;
+  if (n === 0) return NaN;
+  if (n === 1) return sortedValues[0];
+  const idx = p * (n - 1);
+  const lo = Math.floor(idx), hi = Math.ceil(idx);
+  if (lo === hi) return sortedValues[lo];
+  return sortedValues[lo] + (sortedValues[hi] - sortedValues[lo]) * (idx - lo);
+}
+
+function ensureHatchPattern(svg) {
+  const defs = svgEl("defs", {});
+  const pattern = svgEl("pattern", {
+    id: "hatch-pattern", width: 6, height: 6, patternTransform: "rotate(45)", patternUnits: "userSpaceOnUse",
+  });
+  pattern.appendChild(svgEl("rect", { width: 6, height: 6, fill: "var(--page)" }));
+  pattern.appendChild(svgEl("line", { x1: 0, y1: 0, x2: 0, y2: 6, stroke: "var(--border-strong)", "stroke-width": 2 }));
+  defs.appendChild(pattern);
+  svg.appendChild(defs);
+}
+
+/* ---------------------------------------------------------------------
+   Temperature/voltage trend — one line per voltage, mean entropy across
+   whichever sensors are in view
+   --------------------------------------------------------------------- */
+
+function renderTempVoltageChart(rows) {
+  const container = document.getElementById("chart-tempvoltage");
+  container.innerHTML = "";
+  if (!rows.length) {
+    container.innerHTML = '<div class="empty-state">No data for the current filters.</div>';
+    return;
+  }
+
+  const temps = uniqueSorted(rows, "Temp (C)");
+  const voltages = uniqueSorted(rows, "Voltage (V)");
+  const voltColorSlots = ["var(--series-volt-1)", "var(--series-volt-2)", "var(--series-a)", "var(--series-b)"];
+  const voltColor = {};
+  voltages.forEach((v, i) => { voltColor[v] = voltColorSlots[i % voltColorSlots.length]; });
+
+  const values = rows.map((r) => r["Min-Entropy (bits/bit)"]);
+  const yMin = Math.min(...values), yMax = Math.max(...values);
+  const yPad = (yMax - yMin) * 0.15 || 0.01;
+  const yDomain = [yMin - yPad, yMax + yPad];
+
+  const width = 620, height = 300;
+  const margin = { top: 12, right: 16, bottom: 36, left: 52 };
+  const plotW = width - margin.left - margin.right;
+  const plotH = height - margin.top - margin.bottom;
+
+  const svg = svgEl("svg", { viewBox: `0 0 ${width} ${height}` });
+  const g = svgEl("g", { transform: `translate(${margin.left},${margin.top})` });
+  svg.appendChild(g);
+
+  const x = pointScale(temps, [0, plotW]);
+  const y = linearScale(yDomain, [plotH, 0]);
+
+  niceTicks(yDomain[1], 5).filter((t) => t >= yDomain[0] && t <= yDomain[1]).forEach((t) => {
+    g.appendChild(svgEl("line", { class: "gridline", x1: 0, x2: plotW, y1: y(t), y2: y(t) }));
+    const label = svgEl("text", { class: "axis-label", x: -8, y: y(t) + 3, "text-anchor": "end" });
+    label.textContent = t.toFixed(3);
+    g.appendChild(label);
+  });
+  g.appendChild(svgEl("line", { class: "baseline", x1: 0, x2: plotW, y1: plotH, y2: plotH }));
+  temps.forEach((t) => {
+    const label = svgEl("text", { class: "axis-label", x: x(t), y: plotH + 20, "text-anchor": "middle" });
+    label.textContent = `${t}°C`;
+    g.appendChild(label);
+  });
+
+  voltages.forEach((voltage) => {
+    const voltRows = rows.filter((r) => String(r["Voltage (V)"]) === voltage);
+    const pts = temps
+      .filter((t) => voltRows.some((r) => String(r["Temp (C)"]) === t))
+      .map((t) => ({ temp: t, value: mean(voltRows.filter((r) => String(r["Temp (C)"]) === t), "Min-Entropy (bits/bit)") }));
+    if (!pts.length) return;
+    const color = voltColor[voltage];
+    const d = pts.map((p, i) => `${i === 0 ? "M" : "L"} ${x(p.temp)} ${y(p.value)}`).join(" ");
+    g.appendChild(svgEl("path", { class: "mark-line", d, stroke: color }));
+    pts.forEach((p) => {
+      const cx = x(p.temp), cy = y(p.value);
+      g.appendChild(svgEl("circle", { class: "mark-dot", cx, cy, r: 4, fill: color }));
+      const hit = svgEl("circle", { class: "hit-target", cx, cy, r: 12 });
+      hit.addEventListener("pointerenter", (e) => {
+        showTooltip(e.clientX, e.clientY,
+          `<div class="tt-title">${escapeHtml(voltage)}V — ${escapeHtml(p.temp)}°C</div>` +
+          `<div class="tt-row"><span class="tt-key" style="background:${color}"></span>Mean min-entropy<span class="tt-value">${p.value.toFixed(4)}</span></div>`);
+      });
+      hit.addEventListener("pointermove", (e) => showTooltip(e.clientX, e.clientY, document.getElementById("tooltip").innerHTML));
+      hit.addEventListener("pointerleave", hideTooltip);
+      g.appendChild(hit);
+    });
+  });
+
+  container.appendChild(svg);
+
+  const legend = document.createElement("div");
+  legend.className = "legend";
+  voltages.forEach((v) => {
+    const item = document.createElement("div");
+    item.className = "legend-item";
+    item.innerHTML = `<span class="legend-swatch" style="background:${voltColor[v]}"></span>${escapeHtml(v)} V`;
+    legend.appendChild(item);
+  });
+  container.appendChild(legend);
+}
+
+/* ---------------------------------------------------------------------
+   Raw vs Von Neumann-processed entropy — RQ4. SP 800-90B only runs on the
+   raw bitstream by design (see modules/nist_90b.py / report_export.py's
+   RQ4 note), so this chart is data-ready but shows an explanatory empty
+   state until a conditioned-mode assessment is added to the pipeline.
+   --------------------------------------------------------------------- */
+
+const PROCESSED_ENTROPY_FIELD = "VN Min-Entropy (bits/bit)";
+
+function renderRawVsProcessedChart(rows) {
+  const container = document.getElementById("chart-raw-vs-processed");
+  container.innerHTML = "";
+  if (!rows.length) {
+    container.innerHTML = '<div class="empty-state">No data for the current filters.</div>';
+    return;
+  }
+
+  const hasProcessed = rows.some((r) => r[PROCESSED_ENTROPY_FIELD] != null && !Number.isNaN(r[PROCESSED_ENTROPY_FIELD]));
+  if (!hasProcessed) {
+    container.innerHTML =
+      '<div class="pending-note">Post-debiasing min-entropy isn’t computed by this pipeline yet — ' +
+      'SP 800-90B intentionally runs only on the <strong>raw</strong> bitstream by design (see the RQ4 note in ' +
+      '<code>modules/report_export.py</code>), since that’s what min-entropy estimation is meant to characterize. ' +
+      'To populate this chart: extend <code>modules/nist_90b.py</code> with a conditioned-mode ' +
+      '(<code>ea_non_iid -c</code>) run on the Von Neumann output, store it as a ' +
+      '<code>' + escapeHtml(PROCESSED_ENTROPY_FIELD) + '</code> column in summary.csv, and re-run the pipeline — ' +
+      'this chart will render automatically once that column exists. Until then, see the min-entropy chart above ' +
+      'and the retention/pass-rate figures for what Von Neumann debiasing does to the bitstream.</div>';
+    return;
+  }
+
+  const bySensor = groupBy(rows, "Sensor");
+  const sensors = Object.keys(bySensor).sort();
+  const width = Math.max(560, sensors.length * 80);
+  const height = 300;
+  const margin = { top: 12, right: 16, bottom: 40, left: 52 };
+  const plotW = width - margin.left - margin.right;
+  const plotH = height - margin.top - margin.bottom;
+
+  const rawVals = sensors.map((s) => mean(bySensor[s], "Min-Entropy (bits/bit)"));
+  const procVals = sensors.map((s) => mean(bySensor[s], PROCESSED_ENTROPY_FIELD));
+  const yMax = Math.max(...niceTicks(Math.max(...rawVals, ...procVals), 4));
+
+  const svg = svgEl("svg", { viewBox: `0 0 ${width} ${height}` });
+  const g = svgEl("g", { transform: `translate(${margin.left},${margin.top})` });
+  svg.appendChild(g);
+
+  const x = pointScale(sensors, [0, plotW]);
+  const y = linearScale([0, yMax], [plotH, 0]);
+
+  niceTicks(yMax, 5).forEach((t) => {
+    g.appendChild(svgEl("line", { class: "gridline", x1: 0, x2: plotW, y1: y(t), y2: y(t) }));
+    const label = svgEl("text", { class: "axis-label", x: -8, y: y(t) + 3, "text-anchor": "end" });
+    label.textContent = t.toFixed(3);
+    g.appendChild(label);
+  });
+  g.appendChild(svgEl("line", { class: "baseline", x1: 0, x2: plotW, y1: y(0), y2: y(0) }));
+
+  const pairWidth = Math.min(40, x.step * 0.7);
+  const barW = pairWidth / 2 - 1;
+  sensors.forEach((s, i) => {
+    const cx = x(s);
+    [
+      { value: rawVals[i], color: "var(--series-volt-1)", offset: -barW / 2 - 1 },
+      { value: procVals[i], color: "var(--series-volt-2)", offset: barW / 2 + 1 },
+    ].forEach((bar) => {
+      const barH = Math.max(0, y(0) - y(bar.value));
+      g.appendChild(svgEl("rect", {
+        class: "mark-bar", x: cx + bar.offset - barW / 2, y: y(bar.value), width: barW, height: barH, rx: 3, fill: bar.color,
+      }));
+    });
+    const label = svgEl("text", { class: "axis-label", x: cx, y: plotH + 20, "text-anchor": "middle" });
+    label.textContent = s;
+    g.appendChild(label);
+  });
+
+  container.appendChild(svg);
+  const legend = document.createElement("div");
+  legend.className = "legend";
+  legend.innerHTML =
+    '<div class="legend-item"><span class="legend-swatch-rect" style="background:var(--series-volt-1)"></span>Raw</div>' +
+    '<div class="legend-item"><span class="legend-swatch-rect" style="background:var(--series-volt-2)"></span>VN-processed</div>';
+  container.appendChild(legend);
+}
+
+/* ---------------------------------------------------------------------
+   SP 800-22 pass rate heatmap — every sensor x every standard condition,
+   fixed 0-1 color scale (sequential, single hue, light -> dark)
+   --------------------------------------------------------------------- */
+
+const HEATMAP_CONDITIONS = [
+  { temp: "0", voltage: "3.3" }, { temp: "0", voltage: "5" },
+  { temp: "24", voltage: "3.3" }, { temp: "24", voltage: "5" },
+  { temp: "40", voltage: "3.3" }, { temp: "40", voltage: "5" },
+];
+
+function renderHeatmap(rows) {
+  const container = document.getElementById("chart-heatmap");
+  container.innerHTML = "";
+  if (!rows.length) {
+    container.innerHTML = '<div class="empty-state">No data for the current filters.</div>';
+    return;
+  }
+
+  const bySensorAll = groupBy(rows, "Sensor");
+  const sensors = Object.keys(bySensorAll).sort((a, b) => {
+    const va = String(bySensorAll[a][0].Variant), vb = String(bySensorAll[b][0].Variant);
+    return va.localeCompare(vb) || a.localeCompare(b, undefined, { numeric: true });
+  });
+
+  const cellW = 76, cellH = 26, labelW = 56, headerH = 46;
+  const width = labelW + HEATMAP_CONDITIONS.length * cellW;
+  const height = headerH + sensors.length * cellH;
+
+  const svg = svgEl("svg", { viewBox: `0 0 ${width} ${height}` });
+  ensureHatchPattern(svg);
+
+  HEATMAP_CONDITIONS.forEach((c, ci) => {
+    const tempLabel = svgEl("text", { class: "heatmap-label", x: labelW + ci * cellW + cellW / 2, y: headerH - 26, "text-anchor": "middle" });
+    tempLabel.textContent = `${c.temp}°C`;
+    svg.appendChild(tempLabel);
+    const voltLabel = svgEl("text", { class: "heatmap-label", x: labelW + ci * cellW + cellW / 2, y: headerH - 10, "text-anchor": "middle" });
+    voltLabel.textContent = `${c.voltage}V`;
+    svg.appendChild(voltLabel);
+  });
+
+  const seqLow = cssVar("--seq-100", "#cde2fb");
+  const seqHigh = cssVar("--seq-700", "#0d366b");
+
+  sensors.forEach((sensor, si) => {
+    const sensorRows = bySensorAll[sensor];
+    const variant = sensorRows[0].Variant;
+    const rowY = headerH + si * cellH;
+
+    const rowLabel = svgEl("text", {
+      class: "heatmap-label", x: labelW - 8, y: rowY + cellH / 2 + 3, "text-anchor": "end", fill: VARIANT_COLOR[variant] || "var(--ink-muted)",
+    });
+    rowLabel.textContent = sensor;
+    svg.appendChild(rowLabel);
+
+    HEATMAP_CONDITIONS.forEach((c, ci) => {
+      const cellX = labelW + ci * cellW;
+      const match = sensorRows.find((r) => String(r["Temp (C)"]) === c.temp && String(r["Voltage (V)"]) === c.voltage);
+      const rect = svgEl("rect", {
+        class: "heatmap-cell" + (match ? "" : " no-data"),
+        x: cellX, y: rowY, width: cellW, height: cellH,
+        fill: match ? interpolateColor(seqLow, seqHigh, match["SP 800-22 Pass Rate"]) : "url(#hatch-pattern)",
+      });
+      svg.appendChild(rect);
+
+      const hit = svgEl("rect", { class: "hit-target", x: cellX, y: rowY, width: cellW, height: cellH });
+      hit.addEventListener("pointerenter", (e) => {
+        showTooltip(e.clientX, e.clientY,
+          `<div class="tt-title">${escapeHtml(sensor)} — ${c.temp}°C / ${c.voltage}V</div>` +
+          (match
+            ? `<div class="tt-row">SP 800-22 pass rate<span class="tt-value">${(match["SP 800-22 Pass Rate"] * 100).toFixed(2)}%</span></div>`
+            : '<div class="tt-row">No data recorded yet</div>'));
+      });
+      hit.addEventListener("pointermove", (e) => showTooltip(e.clientX, e.clientY, document.getElementById("tooltip").innerHTML));
+      hit.addEventListener("pointerleave", hideTooltip);
+      svg.appendChild(hit);
+    });
+  });
+
+  container.appendChild(svg);
+
+  const legendWrap = document.createElement("div");
+  legendWrap.className = "heatmap-legend";
+  legendWrap.innerHTML =
+    '<span>0%</span><span class="heatmap-ramp"></span><span>100%</span>' +
+    '<span style="margin-left:1rem;display:inline-flex;align-items:center;gap:0.4rem;">' +
+    '<span class="legend-swatch-hatch"></span>No data</span>';
+  container.appendChild(legendWrap);
+}
+
+/* ---------------------------------------------------------------------
+   Box plot — min-entropy distribution per variant group
+   --------------------------------------------------------------------- */
+
+function renderBoxPlot(rows) {
+  const container = document.getElementById("chart-boxplot");
+  container.innerHTML = "";
+  if (!rows.length) {
+    container.innerHTML = '<div class="empty-state">No data for the current filters.</div>';
+    return;
+  }
+
+  const variants = uniqueSorted(rows, "Variant");
+  const groups = variants.map((v) => {
+    const vals = rows.filter((r) => String(r.Variant) === v).map((r) => r["Min-Entropy (bits/bit)"]).sort((a, b) => a - b);
+    return {
+      variant: v, values: vals,
+      min: vals[0], max: vals[vals.length - 1],
+      q1: percentile(vals, 0.25), median: percentile(vals, 0.5), q3: percentile(vals, 0.75),
+    };
+  });
+
+  const allVals = rows.map((r) => r["Min-Entropy (bits/bit)"]);
+  const yMin = Math.min(...allVals), yMax = Math.max(...allVals);
+  const yPad = (yMax - yMin) * 0.12 || 0.01;
+  const yDomain = [yMin - yPad, yMax + yPad];
+
+  const width = Math.max(420, groups.length * 180);
+  const height = 320;
+  const margin = { top: 12, right: 16, bottom: 36, left: 52 };
+  const plotW = width - margin.left - margin.right;
+  const plotH = height - margin.top - margin.bottom;
+
+  const svg = svgEl("svg", { viewBox: `0 0 ${width} ${height}` });
+  const g = svgEl("g", { transform: `translate(${margin.left},${margin.top})` });
+  svg.appendChild(g);
+
+  const x = pointScale(groups.map((gr) => gr.variant), [0, plotW]);
+  const y = linearScale(yDomain, [plotH, 0]);
+
+  niceTicks(yDomain[1], 5).filter((t) => t >= yDomain[0] && t <= yDomain[1]).forEach((t) => {
+    g.appendChild(svgEl("line", { class: "gridline", x1: 0, x2: plotW, y1: y(t), y2: y(t) }));
+    const label = svgEl("text", { class: "axis-label", x: -8, y: y(t) + 3, "text-anchor": "end" });
+    label.textContent = t.toFixed(3);
+    g.appendChild(label);
+  });
+  g.appendChild(svgEl("line", { class: "baseline", x1: 0, x2: plotW, y1: plotH, y2: plotH }));
+
+  const boxWidth = Math.min(64, x.step * 0.4);
+
+  groups.forEach((gr) => {
+    const cx = x(gr.variant);
+    const color = VARIANT_COLOR[gr.variant] || "var(--ink-muted)";
+
+    g.appendChild(svgEl("line", { class: "box-whisker", x1: cx, x2: cx, y1: y(gr.min), y2: y(gr.max) }));
+    [gr.min, gr.max].forEach((v) => {
+      g.appendChild(svgEl("line", { class: "box-cap", x1: cx - boxWidth / 4, x2: cx + boxWidth / 4, y1: y(v), y2: y(v) }));
+    });
+
+    g.appendChild(svgEl("rect", {
+      class: "box-rect", x: cx - boxWidth / 2, y: y(gr.q3), width: boxWidth, height: Math.max(1, y(gr.q1) - y(gr.q3)),
+      fill: color, "fill-opacity": 0.18, stroke: color, rx: 3,
+    }));
+
+    g.appendChild(svgEl("line", {
+      class: "box-median", x1: cx - boxWidth / 2, x2: cx + boxWidth / 2, y1: y(gr.median), y2: y(gr.median), stroke: color,
+    }));
+
+    gr.values.forEach((v, i) => {
+      const jitter = (((i % 9) - 4) / 4) * (boxWidth * 0.32);
+      g.appendChild(svgEl("circle", { class: "box-jitter", cx: cx + jitter, cy: y(v), r: 2.5, fill: color }));
+    });
+
+    const hit = svgEl("rect", { class: "hit-target", x: cx - Math.max(boxWidth, 40) / 2, y: 0, width: Math.max(boxWidth, 40), height: plotH });
+    hit.addEventListener("pointerenter", (e) => {
+      showTooltip(e.clientX, e.clientY,
+        `<div class="tt-title">Variant ${escapeHtml(gr.variant)} (n=${gr.values.length})</div>` +
+        `<div class="tt-row">Median<span class="tt-value">${gr.median.toFixed(4)}</span></div>` +
+        `<div class="tt-row">Q1 – Q3<span class="tt-value">${gr.q1.toFixed(4)} – ${gr.q3.toFixed(4)}</span></div>` +
+        `<div class="tt-row">Min – Max<span class="tt-value">${gr.min.toFixed(4)} – ${gr.max.toFixed(4)}</span></div>`);
+    });
+    hit.addEventListener("pointermove", (e) => showTooltip(e.clientX, e.clientY, document.getElementById("tooltip").innerHTML));
+    hit.addEventListener("pointerleave", hideTooltip);
+    g.appendChild(hit);
+
+    const label = svgEl("text", { class: "axis-label", x: cx, y: plotH + 20, "text-anchor": "middle" });
+    label.textContent = `Variant ${gr.variant}`;
+    g.appendChild(label);
+  });
+
+  container.appendChild(svg);
+}
+
+/* ---------------------------------------------------------------------
+   Head-to-head vs Ayyada's MCP3008 results, per variant. Fill in
+   AYYADA_REFERENCE once his per-variant numbers are transcribed — only
+   his overall summary range is published, not a per-variant breakdown,
+   so this renders a "pending" placeholder until then.
+   --------------------------------------------------------------------- */
+
+const AYYADA_REFERENCE = {
+  // A: { raw: 0.0 }, B: { raw: 0.0 }, C: { raw: 0.0 },
+};
+
+function renderAyyadaChart(rows) {
+  const container = document.getElementById("chart-ayyada");
+  container.innerHTML = "";
+  if (!rows.length) {
+    container.innerHTML = '<div class="empty-state">No data for the current filters.</div>';
+    return;
+  }
+
+  const variants = uniqueSorted(rows, "Variant");
+  const ours = variants.map((v) => ({
+    variant: v,
+    value: mean(rows.filter((r) => String(r.Variant) === v), "Min-Entropy (bits/bit)"),
+  }));
+  const hasAyyada = variants.some((v) => AYYADA_REFERENCE[v] && AYYADA_REFERENCE[v].raw != null);
+
+  const width = Math.max(420, variants.length * 200);
+  const height = 300;
+  const margin = { top: 12, right: 16, bottom: 40, left: 52 };
+  const plotW = width - margin.left - margin.right;
+  const plotH = height - margin.top - margin.bottom;
+
+  const dataMax = Math.max(...ours.map((o) => o.value), ...variants.map((v) => (AYYADA_REFERENCE[v]?.raw) || 0));
+  const yMax = Math.max(...niceTicks(dataMax, 4));
+
+  const svg = svgEl("svg", { viewBox: `0 0 ${width} ${height}` });
+  const g = svgEl("g", { transform: `translate(${margin.left},${margin.top})` });
+  svg.appendChild(g);
+
+  const x = pointScale(variants, [0, plotW]);
+  const y = linearScale([0, yMax], [plotH, 0]);
+
+  niceTicks(yMax, 5).forEach((t) => {
+    g.appendChild(svgEl("line", { class: "gridline", x1: 0, x2: plotW, y1: y(t), y2: y(t) }));
+    const label = svgEl("text", { class: "axis-label", x: -8, y: y(t) + 3, "text-anchor": "end" });
+    label.textContent = t.toFixed(3);
+    g.appendChild(label);
+  });
+  g.appendChild(svgEl("line", { class: "baseline", x1: 0, x2: plotW, y1: y(0), y2: y(0) }));
+
+  const pairW = Math.min(70, x.step * 0.6);
+  const barW = pairW / 2 - 2;
+
+  variants.forEach((v) => {
+    const cx = x(v);
+    const ourValue = ours.find((o) => o.variant === v).value;
+    const ayyadaValue = AYYADA_REFERENCE[v]?.raw;
+    const color = VARIANT_COLOR[v] || "var(--ink-muted)";
+
+    const ourH = Math.max(0, y(0) - y(ourValue));
+    g.appendChild(svgEl("rect", { class: "mark-bar", x: cx - barW - 1, y: y(ourValue), width: barW, height: ourH, rx: 3, fill: color }));
+
+    if (ayyadaValue != null) {
+      const ayyH = Math.max(0, y(0) - y(ayyadaValue));
+      g.appendChild(svgEl("rect", {
+        class: "mark-bar", x: cx + 1, y: y(ayyadaValue), width: barW, height: ayyH, rx: 3, fill: color, "fill-opacity": 0.45,
+      }));
+    } else {
+      g.appendChild(svgEl("rect", { class: "mark-bar pending", x: cx + 1, y: margin.top, width: barW, height: plotH - margin.top, rx: 3 }));
+    }
+
+    const label = svgEl("text", { class: "axis-label", x: cx, y: plotH + 20, "text-anchor": "middle" });
+    label.textContent = `Variant ${v}`;
+    g.appendChild(label);
+
+    const hit = svgEl("rect", { class: "hit-target", x: cx - pairW / 2, y: 0, width: pairW, height: plotH });
+    hit.addEventListener("pointerenter", (e) => {
+      showTooltip(e.clientX, e.clientY,
+        `<div class="tt-title">Variant ${escapeHtml(v)}</div>` +
+        `<div class="tt-row"><span class="tt-key" style="background:${color}"></span>This study (ADS1115)<span class="tt-value">${ourValue.toFixed(4)}</span></div>` +
+        (ayyadaValue != null
+          ? `<div class="tt-row"><span class="tt-key" style="background:${color};opacity:.45"></span>Ayyada (MCP3008)<span class="tt-value">${ayyadaValue.toFixed(4)}</span></div>`
+          : '<div class="tt-row">Ayyada (MCP3008)<span class="tt-value">pending</span></div>'));
+    });
+    hit.addEventListener("pointermove", (e) => showTooltip(e.clientX, e.clientY, document.getElementById("tooltip").innerHTML));
+    hit.addEventListener("pointerleave", hideTooltip);
+    g.appendChild(hit);
+  });
+
+  container.appendChild(svg);
+
+  const legend = document.createElement("div");
+  legend.className = "legend";
+  legend.innerHTML =
+    '<div class="legend-item"><span class="legend-swatch-rect" style="background:var(--series-a)"></span>This study (ADS1115)</div>' +
+    (hasAyyada
+      ? '<div class="legend-item"><span class="legend-swatch-rect" style="background:var(--series-a);opacity:.45"></span>Ayyada (MCP3008)</div>'
+      : '<div class="legend-item"><span class="legend-swatch-hatch"></span>Ayyada (MCP3008) — not yet available</div>');
+  container.appendChild(legend);
+
+  if (!hasAyyada) {
+    const note = document.createElement("p");
+    note.className = "card-sub";
+    note.style.marginTop = "0.75rem";
+    note.innerHTML =
+      'Ayyada’s published per-variant min-entropy figures aren’t transcribed into the dashboard yet — his ' +
+      'summary gives an overall range (~0.83–0.91 bits/bit after Von Neumann) but not broken out by A/B/C. Add ' +
+      'them to the <code>AYYADA_REFERENCE</code> object in docs/app.js once available.';
+    container.appendChild(note);
+  }
 }
