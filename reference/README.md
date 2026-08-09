@@ -25,8 +25,17 @@ His own summary (§7.1) states an overall min-entropy range of "~0.83–0.91 bit
 processed sequences," which matches this table (min 0.826, max 0.909) — a consistency
 check on the extraction.
 
-**Note on methodology differences:** he evaluated a single 1M-bit sequence per sensor/voltage
-(not multiple streams), primarily at 24°C, vs. this study's multiple SP 800-22 streams
-(25–100, depending on available bits) across 0/24/40°C. Both used the same underlying NIST
-STS tool (188 sub-tests per run), so the per-run methodology is directly comparable, but the
-temperature coverage differs — his numbers are effectively single-temperature.
+**Methodology differences — read before comparing:**
+- **Temperature: his data is 24°C only.** §5.1.2: "The chamber temperature was typically
+  maintained at approximately 24°C during the measurements." This applies to his entire
+  TRNG dataset (Tables 6.1–6.7) — there is no 0°C or 40°C data to compare against. Any
+  comparison in this project (dashboard chart, LaTeX RQ5 table) must restrict this study's
+  data to its own 24°C rows before comparing — averaging across this study's 0/24/40°C
+  conditions against his 24°C-only numbers would be an apples-to-oranges comparison. See
+  `docs/app.js`'s `AYYADA_TEMPERATURE_C` constant and `modules/report_export.py`'s
+  `AYYADA_TEMPERATURE_C` for where this restriction is enforced.
+- **Streams:** he evaluated a single 1M-bit sequence per sensor/voltage (not multiple
+  streams), vs. this study's multiple SP 800-22 streams (25–100, depending on available
+  bits) at each condition. Both used the same underlying NIST STS tool (188 sub-tests per
+  run), so the per-run methodology is directly comparable, but statistical power per
+  condition differs.
