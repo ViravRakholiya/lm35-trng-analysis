@@ -10,8 +10,21 @@ RESULTS_DIR = Path(__file__).parent / "results"
 DOCS_DATA_DIR = Path(__file__).parent / "docs" / "data"
 
 LSB_BITS = 1
-STS_STREAM_LENGTH_CANDIDATES = [1_000_000, 100_000, 10_000]
-STS_MIN_STREAMS = 10
+# (stream_length, minimum_streams) tried in priority order (longest first).
+# Maurer's Universal test needs stream_length >= 387_840 to set its internal
+# block length L >= 6 -- below that the STS reference implementation aborts
+# the test per-stream without recording a p-value, and the report generator
+# then reads the empty slot as p=0.0 (an automatic failure, every stream,
+# every file). Our post-VN streams are ~2.5M bits, so 10 streams at
+# >=387_840 bits/stream would need ~3.9M bits -- more than we have -- so the
+# 400_000 tier accepts 6 streams (the most that fit) in exchange for
+# Universal actually running instead of auto-failing.
+STS_STREAM_LENGTH_CANDIDATES: list[tuple[int, int]] = [
+    (1_000_000, 10),
+    (400_000, 6),
+    (100_000, 10),
+    (10_000, 10),
+]
 STS_MAX_STREAMS = 100
 
 # Mean SP 800-22 pass rate per variant (post-Von Neumann, matching what this
@@ -22,9 +35,9 @@ AYYADA_SP800_22_REFERENCE: dict[str, float] = {"A": 0.9379, "B": 0.9690, "C": 0.
 
 
 def _choose_sts_params(available_bits: int) -> tuple[int, int] | None:
-    for length in STS_STREAM_LENGTH_CANDIDATES:
+    for length, min_streams in STS_STREAM_LENGTH_CANDIDATES:
         streams = available_bits // length
-        if streams >= STS_MIN_STREAMS:
+        if streams >= min_streams:
             return length, min(streams, STS_MAX_STREAMS)
     return None
 
@@ -41,9 +54,10 @@ def process_one(reading: data_loader.SensorReading) -> PipelineResult:
 
     sts_params = _choose_sts_params(debias.output_bit_count)
     if sts_params is None:
+        smallest_length, smallest_min_streams = STS_STREAM_LENGTH_CANDIDATES[-1]
         print(
             f"  WARNING: only {debias.output_bit_count} debiased bits available, "
-            f"below the {STS_MIN_STREAMS}x{STS_STREAM_LENGTH_CANDIDATES[-1]} minimum "
+            f"below the {smallest_min_streams}x{smallest_length} minimum "
             "for SP 800-22; skipping that test for this file."
         )
         sp800_22_results = []
