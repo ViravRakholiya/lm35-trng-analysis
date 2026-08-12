@@ -17,14 +17,20 @@
       <p class="subtitle">ADS1115 (16-bit ADC) entropy pipeline vs. Ayyada's MCP3008 (10-bit ADC) baseline</p>
     </div>
     <nav class="header-meta">
-      <a href="data/summary.csv">summary.csv</a>
-      <a href="data/full_details.json">full_details.json</a>
+      <a href="compare.html" target="_blank" rel="noopener" class="header-meta-cta">Compare bit positions &#8599;</a>
+      <a href="#" id="link-summary-csv">summary.csv</a>
+      <a href="#" id="link-details-json">full_details.json</a>
       <a href="https://github.com/ViravRakholiya/lm35-trng-analysis">Source repo</a>
     </nav>
   </div>
 </header>
 
 <main>
+  <section class="bit-switch-bar">
+    <span class="filter-group-label">ADC bit position (0 = LSB)</span>
+    <div class="pill-row" id="bit-switch"></div>
+  </section>
+
   <section class="stat-row" id="stat-row"></section>
 
   <section class="filter-bar" id="filter-bar">
@@ -177,6 +183,7 @@
 
 <div id="tooltip" class="tooltip" hidden></div>
 
+<script src="chart-utils.js"></script>
 <script src="app.js"></script>
 </body>
 </html>

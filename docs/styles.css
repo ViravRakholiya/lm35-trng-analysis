@@ -136,6 +136,13 @@ a { color: var(--series-a); }
   transition: background 0.15s ease;
 }
 .header-meta a:hover { background: rgba(255, 255, 255, 0.08); }
+.header-meta-cta {
+  background: var(--series-a);
+  border-color: var(--series-a) !important;
+  color: #ffffff !important;
+  font-weight: 600;
+}
+.header-meta-cta:hover { opacity: 0.88; }
 
 main {
   max-width: 1180px;
@@ -174,6 +181,22 @@ main > * { min-width: 0; }
 .stat-label { color: var(--ink-muted); font-size: 0.82rem; margin-bottom: 0.35rem; }
 .stat-value { font-size: 1.9rem; font-weight: 600; font-variant-numeric: proportional-nums; }
 .stat-sub { color: var(--ink-muted); font-size: 0.78rem; margin-top: 0.2rem; }
+
+/* ---------------------------------------------------------------------
+   Bit position switcher
+   --------------------------------------------------------------------- */
+.bit-switch-bar {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  padding: 1rem 1.3rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.bit-switch-bar .pill-row { max-width: none; }
 
 /* ---------------------------------------------------------------------
    Filter bar
@@ -375,6 +398,9 @@ tbody td {
 tbody tr:last-child td { border-bottom: none; }
 tbody tr:hover td { background: var(--page); }
 tbody td:first-child, tbody td.text-cell { font-variant-numeric: normal; color: var(--ink-primary); }
+.pending-row td { color: var(--ink-muted); font-style: italic; }
+.empty-cell { color: var(--ink-muted); text-align: center; }
+#overview-table thead th, #pivot-table thead th { cursor: default; }
 .badge {
   display: inline-flex;
   align-items: center;

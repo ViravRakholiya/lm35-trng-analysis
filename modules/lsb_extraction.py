@@ -1,17 +1,19 @@
-"""Extracts least-significant bits from raw ADC readings into a bitstream.
+"""Extracts a single bit-plane from raw ADC readings into a bitstream.
 
-For num_bits > 1, each sample contributes its bits in order from bit 0 (LSB)
-up to bit (num_bits - 1), before moving to the next sample.
+Bit position 0 is the LSB. Each bit position is treated as an independent
+bitstream (one bit per sample) rather than concatenated with others, so
+downstream stages (SP 800-90B, Von Neumann, SP 800-22) always see a genuine
+single-bit-per-symbol stream — the bit-plane-analysis convention used for
+ADC-based TRNG evaluation, answering "which bit position is most random?"
+rather than "how many combined bits can we extract?".
 """
 
 import numpy as np
 
 
-def extract_lsb_bitstream(raw_adc: np.ndarray, num_bits: int = 1) -> np.ndarray:
-    if not 1 <= num_bits <= 4:
-        raise ValueError(f"num_bits must be between 1 and 4, got {num_bits}")
+def extract_bit_position_stream(raw_adc: np.ndarray, bit_position: int = 0) -> np.ndarray:
+    if not 0 <= bit_position <= 3:
+        raise ValueError(f"bit_position must be between 0 and 3, got {bit_position}")
 
     raw_adc = np.asarray(raw_adc)
-    shifts = np.arange(num_bits, dtype=raw_adc.dtype)
-    bits = (raw_adc[:, None] >> shifts) & 1
-    return bits.reshape(-1).astype(np.uint8)
+    return ((raw_adc >> bit_position) & 1).astype(np.uint8)

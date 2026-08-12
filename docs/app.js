@@ -1,46 +1,13 @@
 "use strict";
 
 /* ---------------------------------------------------------------------
-   Data loading
+   Data loading — parseCsv/splitCsvLine, and the SVG/data-shaping
+   primitives used below (svgEl, linearScale, pointScale, niceTicks,
+   groupBy, mean, escapeHtml, showTooltip/hideTooltip, VARIANT_COLOR,
+   buildLegend) live in chart-utils.js, shared with compare.js.
    --------------------------------------------------------------------- */
 
-function parseCsv(text) {
-  const lines = text.trim().split(/\r?\n/);
-  const headers = splitCsvLine(lines[0]);
-  return lines.slice(1).map((line) => {
-    const cells = splitCsvLine(line);
-    const row = {};
-    headers.forEach((h, i) => {
-      const raw = cells[i];
-      const num = Number(raw);
-      row[h] = raw !== "" && !Number.isNaN(num) ? num : raw;
-    });
-    return row;
-  });
-}
-
-function splitCsvLine(line) {
-  const out = [];
-  let cur = "";
-  let inQuotes = false;
-  for (let i = 0; i < line.length; i++) {
-    const c = line[i];
-    if (inQuotes) {
-      if (c === '"' && line[i + 1] === '"') { cur += '"'; i++; }
-      else if (c === '"') { inQuotes = false; }
-      else { cur += c; }
-    } else if (c === '"') {
-      inQuotes = true;
-    } else if (c === ",") {
-      out.push(cur);
-      cur = "";
-    } else {
-      cur += c;
-    }
-  }
-  out.push(cur);
-  return out;
-}
+const BIT_POSITIONS = [0, 1, 2, 3];
 
 const state = {
   rows: [],
@@ -50,23 +17,80 @@ const state = {
   search: "",
   detailKey: null,
   subtestSearch: "",
+  bitPosition: 0,
 };
 
-const VARIANT_COLOR = { A: "var(--series-a)", B: "var(--series-b)", C: "var(--series-c)" };
+// Snapshot of main's original markup, captured once before any boot() call
+// mutates it — every boot() restores this first so a prior bit position's
+// error state (which strips most of main down to just the switch bar) never
+// leaks into a subsequent successful load.
+const MAIN_TEMPLATE = document.querySelector("main").innerHTML;
+
+function bitDataPath(name) {
+  return `data/bit${state.bitPosition}/${name}`;
+}
+
+function updateHeaderLinks() {
+  document.getElementById("link-summary-csv").href = bitDataPath("summary.csv");
+  document.getElementById("link-details-json").href = bitDataPath("full_details.json");
+}
+
+function renderBitSwitch() {
+  const el = document.getElementById("bit-switch");
+  el.innerHTML = "";
+  BIT_POSITIONS.forEach((n) => {
+    const btn = document.createElement("button");
+    btn.className = "pill" + (state.bitPosition === n ? " active" : "");
+    btn.type = "button";
+    btn.textContent = `Bit ${n}`;
+    btn.addEventListener("click", () => {
+      if (state.bitPosition === n) return;
+      state.bitPosition = n;
+      state.filters = { variant: new Set(), sensor: new Set(), temp: new Set(), voltage: new Set() };
+      state.detailKey = null;
+      boot();
+    });
+    el.appendChild(btn);
+  });
+}
+
+// Set once a fetch fails and main gets stripped down to just the switch bar
+// + message. The next boot() call must restore the full template (and
+// re-wire the static controls living inside it) before rendering again —
+// but only then, so a normal switch between two *working* bit positions never
+// tears down and re-creates elements the render functions have already
+// wired listeners onto (e.g. table header sort handlers).
+let mainBroken = false;
 
 async function boot() {
+  if (mainBroken) {
+    document.querySelector("main").innerHTML = MAIN_TEMPLATE;
+    wireStaticControls();
+    mainBroken = false;
+  }
+  renderBitSwitch();
+  updateHeaderLinks();
   try {
     const [summaryText, detailsJson] = await Promise.all([
-      fetch("data/summary.csv").then((r) => (r.ok ? r.text() : Promise.reject(r.status))),
-      fetch("data/full_details.json").then((r) => (r.ok ? r.json() : [])).catch(() => []),
+      fetch(bitDataPath("summary.csv")).then((r) => (r.ok ? r.text() : Promise.reject(r.status))),
+      fetch(bitDataPath("full_details.json")).then((r) => (r.ok ? r.json() : [])).catch(() => []),
     ]);
     state.rows = parseCsv(summaryText);
     state.details = detailsJson;
     renderAll();
   } catch (err) {
-    document.querySelector("main").innerHTML =
-      '<div class="empty-state">No results found at data/summary.csv yet. Run the pipeline locally ' +
-      '(<code>python3 main.py</code>, or "Save results" in app.py) and push docs/data/.</div>';
+    const main = document.querySelector("main");
+    const switchBar = document.getElementById("bit-switch").closest("section");
+    main.innerHTML = "";
+    main.appendChild(switchBar);
+    const empty = document.createElement("div");
+    empty.className = "empty-state";
+    empty.innerHTML =
+      `No results found at ${bitDataPath("summary.csv")} yet. Run the pipeline locally at bit position ` +
+      `${state.bitPosition} (<code>python3 main.py</code> with BIT_POSITION=${state.bitPosition}, or pick bit ` +
+      `${state.bitPosition} in app.py's "Save results") and push docs/data/bit${state.bitPosition}/.`;
+    main.appendChild(empty);
+    mainBroken = true;
     console.error("Failed to load dashboard data", err);
   }
 }
@@ -153,7 +177,11 @@ function buildPillGroup(containerId, values, activeSet, onChange, formatLabel) {
   });
 }
 
-document.addEventListener("DOMContentLoaded", () => {
+// Wires the controls that live in main's static template (as opposed to
+// ones rebuilt on every render, like filter pills or table sort headers).
+// Called once on page load and again after boot() restores the template
+// following an error state, since that replaces these elements outright.
+function wireStaticControls() {
   document.getElementById("reset-filters").addEventListener("click", () => {
     state.filters.variant.clear();
     state.filters.sensor.clear();
@@ -175,21 +203,20 @@ document.addEventListener("DOMContentLoaded", () => {
   });
   document.getElementById("download-summary").addEventListener("click", () => {
     const link = document.createElement("a");
-    link.href = "data/summary.csv";
-    link.download = "summary.csv";
+    link.href = bitDataPath("summary.csv");
+    link.download = `summary_bit${state.bitPosition}.csv`;
     link.click();
   });
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  wireStaticControls();
   boot();
 });
 
 /* ---------------------------------------------------------------------
    Stat tiles
    --------------------------------------------------------------------- */
-
-function mean(rows, key) {
-  const vals = rows.map((r) => Number(r[key])).filter((v) => !Number.isNaN(v));
-  return vals.length ? vals.reduce((a, b) => a + b, 0) / vals.length : NaN;
-}
 
 function renderStatTiles(rows) {
   const sensors = new Set(rows.map((r) => r.Sensor)).size;
@@ -207,74 +234,6 @@ function renderStatTiles(rows) {
     div.innerHTML = `<div class="stat-label">${escapeHtml(t.label)}</div><div class="stat-value">${escapeHtml(t.value)}</div>`;
     el.appendChild(div);
   });
-}
-
-function escapeHtml(s) {
-  const d = document.createElement("div");
-  d.textContent = String(s);
-  return d.innerHTML;
-}
-
-/* ---------------------------------------------------------------------
-   SVG chart primitives
-   --------------------------------------------------------------------- */
-
-const SVG_NS = "http://www.w3.org/2000/svg";
-
-function svgEl(tag, attrs) {
-  const el = document.createElementNS(SVG_NS, tag);
-  for (const k in attrs) el.setAttribute(k, attrs[k]);
-  return el;
-}
-
-function linearScale(domain, range) {
-  const [d0, d1] = domain, [r0, r1] = range;
-  const scale = (v) => r0 + ((v - d0) / (d1 - d0 || 1)) * (r1 - r0);
-  scale.invert = (px) => d0 + ((px - r0) / (r1 - r0)) * (d1 - d0);
-  return scale;
-}
-
-function pointScale(domainValues, range) {
-  const [r0, r1] = range;
-  const n = domainValues.length;
-  // For a single category there's no "distance between points" to derive a
-  // step from — fall back to the full range so bar/box width calculations
-  // downstream (which read x.step) don't collapse to zero and vanish.
-  const step = n > 1 ? (r1 - r0) / (n - 1) : (r1 - r0);
-  const scale = (v) => {
-    const i = domainValues.indexOf(v);
-    return n > 1 ? r0 + i * step : (r0 + r1) / 2;
-  };
-  scale.step = step;
-  scale.domainValues = domainValues;
-  return scale;
-}
-
-function niceTicks(max, count = 5) {
-  if (max <= 0) return [0];
-  const rough = max / count;
-  const mag = Math.pow(10, Math.floor(Math.log10(rough)));
-  const norm = rough / mag;
-  const step = (norm >= 5 ? 5 : norm >= 2 ? 2 : 1) * mag;
-  const ticks = [];
-  for (let t = 0; t <= max + step / 2; t += step) ticks.push(Number(t.toFixed(6)));
-  return ticks;
-}
-
-function showTooltip(x, y, html) {
-  const tt = document.getElementById("tooltip");
-  tt.innerHTML = html;
-  tt.hidden = false;
-  const pad = 14;
-  let left = x + pad, top = y + pad;
-  const rect = tt.getBoundingClientRect();
-  if (left + rect.width > window.innerWidth) left = x - rect.width - pad;
-  if (top + rect.height > window.innerHeight) top = y - rect.height - pad;
-  tt.style.left = `${left}px`;
-  tt.style.top = `${top}px`;
-}
-function hideTooltip() {
-  document.getElementById("tooltip").hidden = true;
 }
 
 /* ---------------------------------------------------------------------
@@ -370,27 +329,6 @@ function renderEntropyChart(rows) {
 
   container.appendChild(wrap);
   container.appendChild(buildLegend(variantsPresent));
-}
-
-function groupBy(rows, key) {
-  return rows.reduce((acc, r) => {
-    const k = r[key];
-    (acc[k] = acc[k] || []).push(r);
-    return acc;
-  }, {});
-}
-
-function buildLegend(variants, markType = "line") {
-  const el = document.createElement("div");
-  el.className = "legend";
-  variants.forEach((v) => {
-    const item = document.createElement("div");
-    item.className = "legend-item";
-    const swatchClass = markType === "bar" ? "legend-swatch legend-swatch-rect" : "legend-swatch";
-    item.innerHTML = `<span class="${swatchClass}" style="background:${VARIANT_COLOR[v] || "var(--ink-muted)"}"></span>Variant ${escapeHtml(v)}`;
-    el.appendChild(item);
-  });
-  return el;
 }
 
 /* ---------------------------------------------------------------------
