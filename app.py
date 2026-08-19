@@ -84,6 +84,17 @@ for f in files:
 TEMPS = [0, 24, 40]
 VOLTAGES = [3.3, 5.0]
 
+
+def _saved_keys(bit_position: int) -> set[tuple[str, int, float]]:
+    """(sensor, temp, voltage) keys already saved to docs/data/bit{N}/summary.csv
+    for this bit position -- i.e. already processed and persisted by a prior
+    "Save results" click, possibly in an earlier session."""
+    summary_path = main.DOCS_DATA_DIR / f"bit{bit_position}" / "summary.csv"
+    if not summary_path.is_file():
+        return set()
+    df = pd.read_csv(summary_path)
+    return {(str(s), int(t), float(v)) for s, t, v in zip(df["Sensor"], df["Temp (C)"], df["Voltage (V)"])}
+
 with st.container(border=True):
     st.markdown("##### Select sensor & condition")
     c1, c2, c3, c4, c5 = st.columns(5)
@@ -132,11 +143,39 @@ with st.container(border=True):
                     f"Available for {variant}{number}: {cond_str}"
                 )
 
-    btn_col1, btn_col2 = st.columns(2)
+    already_saved = _saved_keys(bit_position)
+    already_in_session = {
+        (r.sensor_id, r.temperature_c, r.voltage_v)
+        for (path_str, bit), r in st.session_state.results.items()
+        if bit == bit_position
+    }
+    done_keys = already_saved | already_in_session
+    remaining_files = [
+        f
+        for f in files
+        if (
+            (m := data_loader.parse_filename(f))["sensor_id"],
+            m["temperature_c"],
+            m["voltage_v"],
+        )
+        not in done_keys
+    ]
+
+    btn_col1, btn_col2, btn_col3 = st.columns(3)
     run_single = btn_col1.button(
         "Run selected", type="primary", disabled=selected_path is None, use_container_width=True
     )
     run_all = btn_col2.button(f"Run all ({len(files)} files)", use_container_width=True)
+    run_remaining = btn_col3.button(
+        f"Run remaining ({len(remaining_files)} files)" if remaining_files else "All files processed",
+        disabled=not remaining_files,
+        use_container_width=True,
+    )
+    st.caption(
+        f"\"Remaining\" = files not yet saved to `docs/data/bit{bit_position}/summary.csv` and not "
+        "already run this session, for the selected bit position — the way to pick up newly added "
+        "sensor data without reprocessing everything you already saved."
+    )
 
 if run_single and selected_path is not None:
     with st.spinner(f"Processing {selected_path.name} (bit {bit_position})..."):
@@ -155,6 +194,16 @@ if run_all:
         st.session_state.results[(str(f), bit_position)] = main.process_one(reading, bit_position=bit_position)
         progress.progress(i / len(files))
     status.text(f"Done — {len(files)} files processed (bit {bit_position})")
+
+if run_remaining and remaining_files:
+    progress = st.progress(0.0)
+    status = st.empty()
+    for i, f in enumerate(remaining_files, start=1):
+        status.text(f"[{i}/{len(remaining_files)}] {f.name} (bit {bit_position})")
+        reading = data_loader.load_sensor_reading(f, columns=["Raw_ADC"])
+        st.session_state.results[(str(f), bit_position)] = main.process_one(reading, bit_position=bit_position)
+        progress.progress(i / len(remaining_files))
+    status.text(f"Done — {len(remaining_files)} new files processed (bit {bit_position})")
 
 results_list = list(st.session_state.results.values())
 
