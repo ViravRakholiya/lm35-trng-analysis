@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LM35 TRNG Analysis — Raw Data Preview</title>
+<meta name="description" content="Sanity-check table: a handful of raw readings from every LM35 sensor at every temperature/voltage condition, straight from the source CSVs.">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <div class="header-text">
+      <p class="eyebrow">M.Sc. Thesis — University of Passau</p>
+      <h1>Raw Data Preview</h1>
+      <p class="subtitle">First rows of every sensor's raw CSV, one condition at a time — a quick eyeball check that the collected data looks right</p>
+    </div>
+    <nav class="header-meta">
+      <a href="index.html">&#8592; Back to dashboard</a>
+      <a href="https://github.com/ViravRakholiya/lm35-trng-analysis">Source repo</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="stat-row" id="stat-row"></section>
+
+  <section class="filter-bar" id="filter-bar">
+    <div class="filter-group">
+      <span class="filter-group-label">Temperature</span>
+      <div class="pill-row" id="filter-temp"></div>
+    </div>
+    <div class="filter-group">
+      <span class="filter-group-label">Voltage</span>
+      <div class="pill-row" id="filter-voltage"></div>
+    </div>
+    <div class="filter-group">
+      <span class="filter-group-label">Metric</span>
+      <div class="pill-row" id="filter-metric"></div>
+    </div>
+    <div class="filter-group">
+      <span class="filter-group-label">Rows shown</span>
+      <div class="pill-row" id="filter-rowcount"></div>
+    </div>
+  </section>
+
+  <section class="table-card">
+    <div class="card-head">
+      <div>
+        <h2 id="table-title">Sensor readings</h2>
+        <p class="card-sub" id="table-sub">First samples from each sensor's CSV for the selected condition, in file order</p>
+      </div>
+      <div class="table-tools">
+        <input type="search" id="table-search" placeholder="Search sensor…">
+      </div>
+    </div>
+    <div class="table-scroll"><table id="preview-table"></table></div>
+  </section>
+
+  <div class="pending-note" id="expected-note" style="margin-top: -0.5rem;"></div>
+</main>
+
+<footer class="site-footer">
+  <p>Rebuild this preview after collecting new data: <code>python3 -m modules.raw_preview</code>. See the
+    <a href="https://github.com/ViravRakholiya/lm35-trng-analysis">source repository</a> for the full pipeline.</p>
+</footer>
+
+<div id="tooltip" class="tooltip" hidden></div>
+
+<script src="chart-utils.js"></script>
+<script src="raw-data.js"></script>
+</body>
+</html>
