@@ -1,190 +1,261 @@
 <!doctype html>
 <html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>LM35 TRNG Analysis — Results Dashboard</title>
-<meta name="description" content="LM35 temperature sensor TRNG entropy analysis: SP 800-90B min-entropy, Von Neumann debiasing, and SP 800-22 results.">
-<link rel="stylesheet" href="styles.css">
-</head>
-<body>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>LM35 TRNG Analysis — Results Dashboard</title>
+        <meta
+            name="description"
+            content="LM35 temperature sensor TRNG entropy analysis: SP 800-90B min-entropy, Von Neumann debiasing, and SP 800-22 results."
+        />
+        <link rel="stylesheet" href="styles.css" />
+    </head>
+    <body>
+        <header class="site-header">
+            <div class="header-inner">
+                <div class="header-text">
+                    <p class="eyebrow">M.Sc. Thesis — University of Passau</p>
+                    <h1>LM35 TRNG Analysis</h1>
+                    <p class="subtitle">
+                        ADS1115 (16-bit ADC) entropy pipeline vs. Ayyada's
+                        MCP3008 (10-bit ADC) baseline
+                    </p>
+                </div>
+                <nav class="header-meta">
+                    <a
+                        href="compare.html"
+                        target="_blank"
+                        rel="noopener"
+                        class="header-meta-cta"
+                        >Compare LSB counts &#8599;</a
+                    >
+                    <a href="raw-data.html" target="_blank" rel="noopener"
+                        >Raw data preview &#8599;</a
+                    >
+                    <a href="#" id="link-summary-csv">summary.csv</a>
+                    <a href="#" id="link-details-json">full_details.json</a>
+                </nav>
+            </div>
+        </header>
 
-<header class="site-header">
-  <div class="header-inner">
-    <div class="header-text">
-      <p class="eyebrow">M.Sc. Thesis — University of Passau</p>
-      <h1>LM35 TRNG Analysis</h1>
-      <p class="subtitle">ADS1115 (16-bit ADC) entropy pipeline vs. Ayyada's MCP3008 (10-bit ADC) baseline</p>
-    </div>
-    <nav class="header-meta">
-      <a href="compare.html" target="_blank" rel="noopener" class="header-meta-cta">Compare LSB counts &#8599;</a>
-      <a href="raw-data.html" target="_blank" rel="noopener">Raw data preview &#8599;</a>
-      <a href="#" id="link-summary-csv">summary.csv</a>
-      <a href="#" id="link-details-json">full_details.json</a>
-      <a href="https://github.com/ViravRakholiya/lm35-trng-analysis">Source repo</a>
-    </nav>
-  </div>
-</header>
+        <main>
+            <section class="bit-switch-bar">
+                <span class="filter-group-label">Combined ADC LSBs used</span>
+                <div class="pill-row" id="bit-switch"></div>
+            </section>
 
-<main>
-  <section class="bit-switch-bar">
-    <span class="filter-group-label">Combined ADC LSBs used</span>
-    <div class="pill-row" id="bit-switch"></div>
-  </section>
+            <section class="stat-row" id="stat-row"></section>
 
-  <section class="stat-row" id="stat-row"></section>
+            <section class="filter-bar" id="filter-bar">
+                <div class="filter-group">
+                    <span class="filter-group-label">Group</span>
+                    <div class="pill-row" id="filter-variant"></div>
+                </div>
+                <div class="filter-group">
+                    <span class="filter-group-label">Sensor</span>
+                    <div class="pill-row" id="filter-sensor"></div>
+                </div>
+                <div class="filter-group">
+                    <span class="filter-group-label">Temperature</span>
+                    <div class="pill-row" id="filter-temp"></div>
+                </div>
+                <div class="filter-group">
+                    <span class="filter-group-label">Voltage</span>
+                    <div class="pill-row" id="filter-voltage"></div>
+                </div>
+                <div class="filter-bar-actions">
+                    <button class="btn-ghost" id="reset-filters">
+                        Reset filters
+                    </button>
+                </div>
+            </section>
 
-  <section class="filter-bar" id="filter-bar">
-    <div class="filter-group">
-      <span class="filter-group-label">Group</span>
-      <div class="pill-row" id="filter-variant"></div>
-    </div>
-    <div class="filter-group">
-      <span class="filter-group-label">Sensor</span>
-      <div class="pill-row" id="filter-sensor"></div>
-    </div>
-    <div class="filter-group">
-      <span class="filter-group-label">Temperature</span>
-      <div class="pill-row" id="filter-temp"></div>
-    </div>
-    <div class="filter-group">
-      <span class="filter-group-label">Voltage</span>
-      <div class="pill-row" id="filter-voltage"></div>
-    </div>
-    <div class="filter-bar-actions">
-      <button class="btn-ghost" id="reset-filters">Reset filters</button>
-    </div>
-  </section>
+            <section class="chart-card">
+                <div class="card-head">
+                    <div>
+                        <h2>Min-entropy by temperature and voltage</h2>
+                        <p class="card-sub">
+                            RQ3 — SP 800-90B min-entropy, raw bitstream, one
+                            line per sensor
+                        </p>
+                    </div>
+                </div>
+                <div class="chart-svg-wrap" id="chart-entropy"></div>
+            </section>
 
-  <section class="chart-card">
-    <div class="card-head">
-      <div>
-        <h2>Min-entropy by temperature and voltage</h2>
-        <p class="card-sub">RQ3 — SP 800-90B min-entropy, raw bitstream, one line per sensor</p>
-      </div>
-    </div>
-    <div class="chart-svg-wrap" id="chart-entropy"></div>
-  </section>
+            <section class="chart-card">
+                <div class="card-head">
+                    <div>
+                        <h2>Von Neumann retention rate</h2>
+                        <p class="card-sub">
+                            RQ4 — mean retention across selected conditions, per
+                            sensor
+                        </p>
+                    </div>
+                </div>
+                <div class="chart-svg-wrap" id="chart-retention"></div>
+            </section>
 
-  <section class="chart-card">
-    <div class="card-head">
-      <div>
-        <h2>Von Neumann retention rate</h2>
-        <p class="card-sub">RQ4 — mean retention across selected conditions, per sensor</p>
-      </div>
-    </div>
-    <div class="chart-svg-wrap" id="chart-retention"></div>
-  </section>
+            <section class="chart-card">
+                <div class="card-head">
+                    <div>
+                        <h2>SP 800-22 pass rate</h2>
+                        <p class="card-sub">
+                            RQ5 — mean pass rate across selected conditions, per
+                            sensor
+                        </p>
+                    </div>
+                </div>
+                <div class="chart-svg-wrap" id="chart-passrate"></div>
+            </section>
 
-  <section class="chart-card">
-    <div class="card-head">
-      <div>
-        <h2>SP 800-22 pass rate</h2>
-        <p class="card-sub">RQ5 — mean pass rate across selected conditions, per sensor</p>
-      </div>
-    </div>
-    <div class="chart-svg-wrap" id="chart-passrate"></div>
-  </section>
+            <section class="chart-card">
+                <div class="card-head">
+                    <div>
+                        <h2>Min-entropy vs. temperature, by voltage</h2>
+                        <p class="card-sub">
+                            Mean min-entropy across selected sensors at each
+                            temperature, one line per voltage
+                        </p>
+                    </div>
+                </div>
+                <div class="chart-svg-wrap" id="chart-tempvoltage"></div>
+            </section>
 
-  <section class="chart-card">
-    <div class="card-head">
-      <div>
-        <h2>Min-entropy vs. temperature, by voltage</h2>
-        <p class="card-sub">Mean min-entropy across selected sensors at each temperature, one line per voltage</p>
-      </div>
-    </div>
-    <div class="chart-svg-wrap" id="chart-tempvoltage"></div>
-  </section>
+            <section class="chart-card">
+                <div class="card-head">
+                    <div>
+                        <h2>Raw vs. Von Neumann-processed entropy</h2>
+                        <p class="card-sub">
+                            RQ4 — min-entropy before and after debiasing, per
+                            sensor
+                        </p>
+                    </div>
+                </div>
+                <div class="chart-svg-wrap" id="chart-raw-vs-processed"></div>
+            </section>
 
-  <section class="chart-card">
-    <div class="card-head">
-      <div>
-        <h2>Raw vs. Von Neumann-processed entropy</h2>
-        <p class="card-sub">RQ4 — min-entropy before and after debiasing, per sensor</p>
-      </div>
-    </div>
-    <div class="chart-svg-wrap" id="chart-raw-vs-processed"></div>
-  </section>
+            <section class="chart-card">
+                <div class="card-head">
+                    <div>
+                        <h2>SP 800-22 pass rate heatmap</h2>
+                        <p class="card-sub">
+                            Every sensor × every test condition, fixed 0–100%
+                            color scale
+                        </p>
+                    </div>
+                </div>
+                <div
+                    class="chart-svg-wrap heatmap-scroll"
+                    id="chart-heatmap"
+                ></div>
+            </section>
 
-  <section class="chart-card">
-    <div class="card-head">
-      <div>
-        <h2>SP 800-22 pass rate heatmap</h2>
-        <p class="card-sub">Every sensor × every test condition, fixed 0–100% color scale</p>
-      </div>
-    </div>
-    <div class="chart-svg-wrap heatmap-scroll" id="chart-heatmap"></div>
-  </section>
+            <section class="chart-card">
+                <div class="card-head">
+                    <div>
+                        <h2>Min-entropy distribution by group</h2>
+                        <p class="card-sub">
+                            Spread across all sensors and conditions within each
+                            variant, not just the mean
+                        </p>
+                    </div>
+                </div>
+                <div class="chart-svg-wrap" id="chart-boxplot"></div>
+            </section>
 
-  <section class="chart-card">
-    <div class="card-head">
-      <div>
-        <h2>Min-entropy distribution by group</h2>
-        <p class="card-sub">Spread across all sensors and conditions within each variant, not just the mean</p>
-      </div>
-    </div>
-    <div class="chart-svg-wrap" id="chart-boxplot"></div>
-  </section>
+            <div class="ayyada-intro">
+                <h2>
+                    ADS1115 (this study) vs. MCP3008 (Ayyada) — min-entropy by
+                    variant
+                </h2>
+                <p class="card-sub">
+                    The core 16-bit vs. 10-bit ADC comparison, one card per
+                    matched sensor variant — restricted to 24°C, the only
+                    temperature in Ayyada's thesis
+                </p>
+            </div>
+            <div class="chart-row" id="chart-ayyada"></div>
 
-  <div class="ayyada-intro">
-    <h2>ADS1115 (this study) vs. MCP3008 (Ayyada) — min-entropy by variant</h2>
-    <p class="card-sub">The core 16-bit vs. 10-bit ADC comparison, one card per matched sensor variant — restricted to 24°C, the only temperature in Ayyada's thesis</p>
-  </div>
-  <div class="chart-row" id="chart-ayyada"></div>
+            <section class="table-card">
+                <div class="card-head">
+                    <div>
+                        <h2>Full results table</h2>
+                        <p class="card-sub">
+                            Every condition on record, respecting the filters
+                            above
+                        </p>
+                    </div>
+                    <div class="table-tools">
+                        <input
+                            type="search"
+                            id="table-search"
+                            placeholder="Search sensor, variant…"
+                        />
+                        <button class="btn-ghost" id="download-summary">
+                            Download CSV
+                        </button>
+                    </div>
+                </div>
+                <div class="table-scroll">
+                    <table id="results-table"></table>
+                </div>
+            </section>
 
-  <section class="table-card">
-    <div class="card-head">
-      <div>
-        <h2>Full results table</h2>
-        <p class="card-sub">Every condition on record, respecting the filters above</p>
-      </div>
-      <div class="table-tools">
-        <input type="search" id="table-search" placeholder="Search sensor, variant…">
-        <button class="btn-ghost" id="download-summary">Download CSV</button>
-      </div>
-    </div>
-    <div class="table-scroll"><table id="results-table"></table></div>
-  </section>
+            <section class="detail-card">
+                <div class="card-head">
+                    <div>
+                        <h2>Full details</h2>
+                        <p class="card-sub">
+                            Every SP 800-90B estimator and every SP 800-22
+                            sub-test, for one sensor/condition
+                        </p>
+                    </div>
+                </div>
+                <div class="detail-controls">
+                    <select id="detail-select"></select>
+                </div>
+                <div class="detail-stats" id="detail-stats"></div>
+                <div class="detail-tables">
+                    <div>
+                        <h3>SP 800-90B estimator breakdown (raw)</h3>
+                        <div class="table-scroll">
+                            <table id="estimator-table"></table>
+                        </div>
+                    </div>
+                    <div>
+                        <h3>SP 800-90B estimator breakdown (VN-processed)</h3>
+                        <div class="table-scroll">
+                            <table id="estimator-table-vn"></table>
+                        </div>
+                    </div>
+                    <div>
+                        <h3>SP 800-22 sub-test results</h3>
+                        <div class="table-tools">
+                            <input
+                                type="search"
+                                id="subtest-search"
+                                placeholder="Filter tests…"
+                            />
+                        </div>
+                        <div class="table-scroll">
+                            <table id="subtest-table"></table>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
 
-  <section class="detail-card">
-    <div class="card-head">
-      <div>
-        <h2>Full details</h2>
-        <p class="card-sub">Every SP 800-90B estimator and every SP 800-22 sub-test, for one sensor/condition</p>
-      </div>
-    </div>
-    <div class="detail-controls">
-      <select id="detail-select"></select>
-    </div>
-    <div class="detail-stats" id="detail-stats"></div>
-    <div class="detail-tables">
-      <div>
-        <h3>SP 800-90B estimator breakdown (raw)</h3>
-        <div class="table-scroll"><table id="estimator-table"></table></div>
-      </div>
-      <div>
-        <h3>SP 800-90B estimator breakdown (VN-processed)</h3>
-        <div class="table-scroll"><table id="estimator-table-vn"></table></div>
-      </div>
-      <div>
-        <h3>SP 800-22 sub-test results</h3>
-        <div class="table-tools">
-          <input type="search" id="subtest-search" placeholder="Filter tests…">
-        </div>
-        <div class="table-scroll"><table id="subtest-table"></table></div>
-      </div>
-    </div>
-  </section>
-</main>
+        <footer class="site-footer">
+            <p>
+                Data refreshed by running the pipeline locally and pushing
+                docs/data/.
+            </p>
+        </footer>
 
-<footer class="site-footer">
-  <p>Data refreshed by running the pipeline locally and pushing docs/data/. See the
-    <a href="https://github.com/ViravRakholiya/lm35-trng-analysis">source repository</a> for the full pipeline.</p>
-</footer>
+        <div id="tooltip" class="tooltip" hidden></div>
 
-<div id="tooltip" class="tooltip" hidden></div>
-
-<script src="chart-utils.js"></script>
-<script src="app.js"></script>
-</body>
+        <script src="chart-utils.js"></script>
+        <script src="app.js"></script>
+    </body>
 </html>
