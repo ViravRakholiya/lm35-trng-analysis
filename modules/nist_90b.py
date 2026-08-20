@@ -19,8 +19,17 @@ TOOL_PATH = Path(__file__).resolve().parents[2] / "SP800-90B_EntropyAssessment" 
 
 @dataclass
 class MinEntropyResult:
-    min_entropy_per_bit: float
+    min_entropy_per_symbol: float
+    bits_per_symbol: int
     estimator_results: dict
+
+    @property
+    def min_entropy_per_bit(self) -> float:
+        """hAssessed is min-entropy per bits_per_symbol-wide symbol (SP 800-90B
+        S3.1.3/S3.1.5.2); normalizing by bits_per_symbol makes this comparable
+        across different symbol widths (e.g. raw k-LSB symbols vs. the always
+        single-bit post-Von Neumann stream)."""
+        return self.min_entropy_per_symbol / self.bits_per_symbol
 
 
 def _run_ea_non_iid(
@@ -57,7 +66,8 @@ def _run_ea_non_iid(
     overall = test_cases.pop("Overall")
 
     return MinEntropyResult(
-        min_entropy_per_bit=overall["hAssessed"],
+        min_entropy_per_symbol=overall["hAssessed"],
+        bits_per_symbol=bits_per_symbol,
         estimator_results=test_cases,
     )
 

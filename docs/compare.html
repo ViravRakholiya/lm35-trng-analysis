@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>LM35 TRNG Analysis — Bit Position Comparison</title>
-<meta name="description" content="Compare min-entropy, Von Neumann retention, and SP 800-22 pass rate across ADC bit positions 0-3, analyzed as independent bit-plane streams.">
+<title>LM35 TRNG Analysis — LSB Count Comparison</title>
+<meta name="description" content="Compare min-entropy, Von Neumann retention, and SP 800-22 pass rate across 1-4 combined ADC LSBs.">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -13,8 +13,8 @@
   <div class="header-inner">
     <div class="header-text">
       <p class="eyebrow">M.Sc. Thesis — University of Passau</p>
-      <h1>Bit Position Comparison</h1>
-      <p class="subtitle">Same sensors, same conditions — each ADC bit position (0 = LSB) analyzed as its own independent bitstream, compared across all four</p>
+      <h1>LSB Count Comparison</h1>
+      <p class="subtitle">Same sensors, same conditions — 1 through 4 combined ADC LSBs, each analyzed as its own independent bitstream, compared across all four</p>
     </div>
     <nav class="header-meta">
       <a href="index.html">&#8592; Back to dashboard</a>
@@ -28,7 +28,7 @@
     <div class="card-head">
       <div>
         <h2>Overview</h2>
-        <p class="card-sub">Mean across every sensor and condition on record for each bit position</p>
+        <p class="card-sub">Mean across every sensor and condition on record for each LSB count</p>
       </div>
     </div>
     <div class="table-scroll"><table id="overview-table"></table></div>
@@ -37,7 +37,7 @@
   <section class="chart-card">
     <div class="card-head">
       <div>
-        <h2>Mean min-entropy by bit position</h2>
+        <h2>Mean min-entropy by LSB count</h2>
         <p class="card-sub">RQ3 — SP 800-90B min-entropy (raw bitstream), grouped by variant</p>
       </div>
     </div>
@@ -47,7 +47,7 @@
   <section class="chart-card">
     <div class="card-head">
       <div>
-        <h2>Mean Von Neumann retention rate by bit position</h2>
+        <h2>Mean Von Neumann retention rate by LSB count</h2>
         <p class="card-sub">RQ4 — grouped by variant</p>
       </div>
     </div>
@@ -57,7 +57,7 @@
   <section class="chart-card">
     <div class="card-head">
       <div>
-        <h2>Mean SP 800-22 pass rate by bit position</h2>
+        <h2>Mean SP 800-22 pass rate by LSB count</h2>
         <p class="card-sub">RQ5 — grouped by variant</p>
       </div>
     </div>
@@ -68,7 +68,7 @@
     <div class="card-head">
       <div>
         <h2>Per-sensor comparison</h2>
-        <p class="card-sub">Every sensor &times; condition on record, one column per bit position — pick the metric below</p>
+        <p class="card-sub">Every sensor &times; condition on record, one column per LSB count — pick the metric below</p>
       </div>
       <div class="table-tools">
         <input type="search" id="pivot-search" placeholder="Search sensor, variant…">
@@ -83,7 +83,7 @@
 </main>
 
 <footer class="site-footer">
-  <p>Data refreshed by running the pipeline locally and pushing docs/data/bit{N}/. See the
+  <p>Data refreshed by running the pipeline locally and pushing docs/data/lsb{N}/. See the
     <a href="https://github.com/ViravRakholiya/lm35-trng-analysis">source repository</a> for the full pipeline.</p>
 </footer>
 

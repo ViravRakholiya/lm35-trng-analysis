@@ -31,10 +31,10 @@ class PipelineResult:
     vn_min_entropy: MinEntropyResult | None = None
     """Conditioned-mode (post-Von Neumann) min-entropy — None for results
     computed before this field existed; re-run the pipeline to populate it."""
-    bit_position: int = 0
-    """Which single ADC bit this record's bitstream was extracted from (0 =
-    LSB; see BIT_POSITION in main.py). Stamped onto the record so a file is
-    self-describing even if moved out of its bit{N}/ output folder."""
+    num_lsb_bits: int = 1
+    """How many combined least-significant bits this record's bitstream was
+    extracted from (see NUM_LSB_BITS in main.py). Stamped onto the record so
+    a file is self-describing even if moved out of its lsb{N}/ output folder."""
 
     @property
     def sp800_22_pass_rate(self) -> float:
@@ -149,7 +149,7 @@ def _build_summary_dataframe(results: list[PipelineResult]) -> pd.DataFrame:
                 "Variant": r.variant,
                 "Temp (C)": r.temperature_c,
                 "Voltage (V)": r.voltage_v,
-                "Bit Position": r.bit_position,
+                "LSBs Used": r.num_lsb_bits,
                 "Min-Entropy (bits/bit)": r.min_entropy.min_entropy_per_bit,
                 "VN Min-Entropy (bits/bit)": r.vn_min_entropy.min_entropy_per_bit if r.vn_min_entropy else None,
                 "VN Input Bits": r.debias.input_bit_count,
@@ -206,9 +206,11 @@ def _result_to_detail_record(r: PipelineResult) -> dict:
         "variant": r.variant,
         "temperature_c": r.temperature_c,
         "voltage_v": r.voltage_v,
-        "bit_position": r.bit_position,
+        "num_lsb_bits": r.num_lsb_bits,
         "min_entropy": {
             "min_entropy_per_bit": r.min_entropy.min_entropy_per_bit,
+            "min_entropy_per_symbol": r.min_entropy.min_entropy_per_symbol,
+            "bits_per_symbol": r.min_entropy.bits_per_symbol,
             "estimators": r.min_entropy.estimator_results,
         },
         "vn_min_entropy": (

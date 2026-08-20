@@ -7,7 +7,7 @@
    buildLegend) live in chart-utils.js, shared with compare.js.
    --------------------------------------------------------------------- */
 
-const BIT_POSITIONS = [0, 1, 2, 3];
+const LSB_COUNTS = [1, 2, 3, 4];
 
 const state = {
   rows: [],
@@ -17,35 +17,35 @@ const state = {
   search: "",
   detailKey: null,
   subtestSearch: "",
-  bitPosition: 0,
+  numLsbBits: 1,
 };
 
 // Snapshot of main's original markup, captured once before any boot() call
-// mutates it — every boot() restores this first so a prior bit position's
+// mutates it — every boot() restores this first so a prior LSB count's
 // error state (which strips most of main down to just the switch bar) never
 // leaks into a subsequent successful load.
 const MAIN_TEMPLATE = document.querySelector("main").innerHTML;
 
-function bitDataPath(name) {
-  return `data/bit${state.bitPosition}/${name}`;
+function lsbDataPath(name) {
+  return `data/lsb${state.numLsbBits}/${name}`;
 }
 
 function updateHeaderLinks() {
-  document.getElementById("link-summary-csv").href = bitDataPath("summary.csv");
-  document.getElementById("link-details-json").href = bitDataPath("full_details.json");
+  document.getElementById("link-summary-csv").href = lsbDataPath("summary.csv");
+  document.getElementById("link-details-json").href = lsbDataPath("full_details.json");
 }
 
 function renderBitSwitch() {
   const el = document.getElementById("bit-switch");
   el.innerHTML = "";
-  BIT_POSITIONS.forEach((n) => {
+  LSB_COUNTS.forEach((n) => {
     const btn = document.createElement("button");
-    btn.className = "pill" + (state.bitPosition === n ? " active" : "");
+    btn.className = "pill" + (state.numLsbBits === n ? " active" : "");
     btn.type = "button";
-    btn.textContent = `Bit ${n}`;
+    btn.textContent = `${n} LSB${n !== 1 ? "s" : ""}`;
     btn.addEventListener("click", () => {
-      if (state.bitPosition === n) return;
-      state.bitPosition = n;
+      if (state.numLsbBits === n) return;
+      state.numLsbBits = n;
       state.filters = { variant: new Set(), sensor: new Set(), temp: new Set(), voltage: new Set() };
       state.detailKey = null;
       boot();
@@ -57,7 +57,7 @@ function renderBitSwitch() {
 // Set once a fetch fails and main gets stripped down to just the switch bar
 // + message. The next boot() call must restore the full template (and
 // re-wire the static controls living inside it) before rendering again —
-// but only then, so a normal switch between two *working* bit positions never
+// but only then, so a normal switch between two *working* LSB counts never
 // tears down and re-creates elements the render functions have already
 // wired listeners onto (e.g. table header sort handlers).
 let mainBroken = false;
@@ -72,8 +72,8 @@ async function boot() {
   updateHeaderLinks();
   try {
     const [summaryText, detailsJson] = await Promise.all([
-      fetch(bitDataPath("summary.csv")).then((r) => (r.ok ? r.text() : Promise.reject(r.status))),
-      fetch(bitDataPath("full_details.json")).then((r) => (r.ok ? r.json() : [])).catch(() => []),
+      fetch(lsbDataPath("summary.csv")).then((r) => (r.ok ? r.text() : Promise.reject(r.status))),
+      fetch(lsbDataPath("full_details.json")).then((r) => (r.ok ? r.json() : [])).catch(() => []),
     ]);
     state.rows = parseCsv(summaryText);
     state.details = detailsJson;
@@ -86,9 +86,10 @@ async function boot() {
     const empty = document.createElement("div");
     empty.className = "empty-state";
     empty.innerHTML =
-      `No results found at ${bitDataPath("summary.csv")} yet. Run the pipeline locally at bit position ` +
-      `${state.bitPosition} (<code>python3 main.py</code> with BIT_POSITION=${state.bitPosition}, or pick bit ` +
-      `${state.bitPosition} in app.py's "Save results") and push docs/data/bit${state.bitPosition}/.`;
+      `No results found at ${lsbDataPath("summary.csv")} yet. Run the pipeline locally with ` +
+      `${state.numLsbBits} LSB${state.numLsbBits !== 1 ? "s" : ""} (<code>python3 main.py</code> with ` +
+      `NUM_LSB_BITS=${state.numLsbBits}, or pick ${state.numLsbBits} in app.py's "Save results") and push ` +
+      `docs/data/lsb${state.numLsbBits}/.`;
     main.appendChild(empty);
     mainBroken = true;
     console.error("Failed to load dashboard data", err);
@@ -203,8 +204,8 @@ function wireStaticControls() {
   });
   document.getElementById("download-summary").addEventListener("click", () => {
     const link = document.createElement("a");
-    link.href = bitDataPath("summary.csv");
-    link.download = `summary_bit${state.bitPosition}.csv`;
+    link.href = lsbDataPath("summary.csv");
+    link.download = `summary_lsb${state.numLsbBits}.csv`;
     link.click();
   });
 }

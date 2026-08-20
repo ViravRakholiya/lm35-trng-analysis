@@ -55,7 +55,7 @@ st.markdown(
 )
 
 if "results" not in st.session_state:
-    st.session_state.results = {}  # (str(path), bit_position) -> PipelineResult
+    st.session_state.results = {}  # (str(path), num_lsb_bits) -> PipelineResult
 
 files = data_loader.discover_csv_files(main.DATA_DIR)
 if not files:
@@ -85,11 +85,11 @@ TEMPS = [0, 24, 40]
 VOLTAGES = [3.3, 5.0]
 
 
-def _saved_keys(bit_position: int) -> set[tuple[str, int, float]]:
-    """(sensor, temp, voltage) keys already saved to docs/data/bit{N}/summary.csv
-    for this bit position -- i.e. already processed and persisted by a prior
+def _saved_keys(num_lsb_bits: int) -> set[tuple[str, int, float]]:
+    """(sensor, temp, voltage) keys already saved to docs/data/lsb{N}/summary.csv
+    for this LSB count -- i.e. already processed and persisted by a prior
     "Save results" click, possibly in an earlier session."""
-    summary_path = main.DOCS_DATA_DIR / f"bit{bit_position}" / "summary.csv"
+    summary_path = main.DOCS_DATA_DIR / f"lsb{num_lsb_bits}" / "summary.csv"
     if not summary_path.is_file():
         return set()
     df = pd.read_csv(summary_path)
@@ -107,14 +107,15 @@ with st.container(border=True):
     with c4:
         voltage = st.segmented_control("Voltage (V)", VOLTAGES, default=3.3, required=True)
     with c5:
-        bit_position = st.segmented_control(
-            "Bit position",
-            [0, 1, 2, 3],
-            default=0,
+        num_lsb_bits = st.segmented_control(
+            "LSBs used",
+            [1, 2, 3, 4],
+            default=1,
             required=True,
-            help="Which single ADC bit to analyze (0 = LSB). Each bit position is treated as its own "
+            help="How many combined least-significant ADC bits to analyze (e.g. 3 = the 3 LSBs "
+            "taken together as one 3-bit value per sample, 0-7). Each setting is treated as its own "
             "independent bitstream, and each setting's results are saved and viewed separately, so "
-            "you can run and compare all four bit-plane's entropy independently.",
+            "you can run and compare all four LSB counts' entropy independently.",
         )
 
     selected_path = None
@@ -143,11 +144,11 @@ with st.container(border=True):
                     f"Available for {variant}{number}: {cond_str}"
                 )
 
-    already_saved = _saved_keys(bit_position)
+    already_saved = _saved_keys(num_lsb_bits)
     already_in_session = {
         (r.sensor_id, r.temperature_c, r.voltage_v)
-        for (path_str, bit), r in st.session_state.results.items()
-        if bit == bit_position
+        for (path_str, n), r in st.session_state.results.items()
+        if n == num_lsb_bits
     }
     done_keys = already_saved | already_in_session
     remaining_files = [
@@ -172,16 +173,16 @@ with st.container(border=True):
         use_container_width=True,
     )
     st.caption(
-        f"\"Remaining\" = files not yet saved to `docs/data/bit{bit_position}/summary.csv` and not "
-        "already run this session, for the selected bit position — the way to pick up newly added "
+        f"\"Remaining\" = files not yet saved to `docs/data/lsb{num_lsb_bits}/summary.csv` and not "
+        "already run this session, for the selected LSB count — the way to pick up newly added "
         "sensor data without reprocessing everything you already saved."
     )
 
 if run_single and selected_path is not None:
-    with st.spinner(f"Processing {selected_path.name} (bit {bit_position})..."):
+    with st.spinner(f"Processing {selected_path.name} ({num_lsb_bits} LSB{'s' if num_lsb_bits != 1 else ''})..."):
         reading = data_loader.load_sensor_reading(selected_path, columns=["Raw_ADC"])
-        st.session_state.results[(str(selected_path), bit_position)] = main.process_one(
-            reading, bit_position=bit_position
+        st.session_state.results[(str(selected_path), num_lsb_bits)] = main.process_one(
+            reading, num_lsb_bits=num_lsb_bits
         )
     st.toast("Done", icon="✅")
 
@@ -189,21 +190,21 @@ if run_all:
     progress = st.progress(0.0)
     status = st.empty()
     for i, f in enumerate(files, start=1):
-        status.text(f"[{i}/{len(files)}] {f.name} (bit {bit_position})")
+        status.text(f"[{i}/{len(files)}] {f.name} ({num_lsb_bits} LSBs)")
         reading = data_loader.load_sensor_reading(f, columns=["Raw_ADC"])
-        st.session_state.results[(str(f), bit_position)] = main.process_one(reading, bit_position=bit_position)
+        st.session_state.results[(str(f), num_lsb_bits)] = main.process_one(reading, num_lsb_bits=num_lsb_bits)
         progress.progress(i / len(files))
-    status.text(f"Done — {len(files)} files processed (bit {bit_position})")
+    status.text(f"Done — {len(files)} files processed ({num_lsb_bits} LSBs)")
 
 if run_remaining and remaining_files:
     progress = st.progress(0.0)
     status = st.empty()
     for i, f in enumerate(remaining_files, start=1):
-        status.text(f"[{i}/{len(remaining_files)}] {f.name} (bit {bit_position})")
+        status.text(f"[{i}/{len(remaining_files)}] {f.name} ({num_lsb_bits} LSBs)")
         reading = data_loader.load_sensor_reading(f, columns=["Raw_ADC"])
-        st.session_state.results[(str(f), bit_position)] = main.process_one(reading, bit_position=bit_position)
+        st.session_state.results[(str(f), num_lsb_bits)] = main.process_one(reading, num_lsb_bits=num_lsb_bits)
         progress.progress(i / len(remaining_files))
-    status.text(f"Done — {len(remaining_files)} new files processed (bit {bit_position})")
+    status.text(f"Done — {len(remaining_files)} new files processed ({num_lsb_bits} LSBs)")
 
 results_list = list(st.session_state.results.values())
 
@@ -214,7 +215,7 @@ if not results_list:
 st.markdown("### Results")
 
 st.markdown("##### Summary")
-st.caption("Each row also carries its bit position, so results from different bit planes sit side by side here.")
+st.caption("Each row also carries its LSB count, so results from different LSB counts sit side by side here.")
 summary_df = pd.DataFrame(
     [
         {
@@ -222,7 +223,7 @@ summary_df = pd.DataFrame(
             "Variant": r.variant,
             "Temp (C)": r.temperature_c,
             "Voltage (V)": r.voltage_v,
-            "Bit Position": r.bit_position,
+            "LSBs Used": r.num_lsb_bits,
             "Min-Entropy (bits/bit)": r.min_entropy.min_entropy_per_bit,
             "VN Retention Rate": r.debias.retention_rate,
             "Post-VN One Fraction": r.post_debias_one_fraction,
@@ -233,10 +234,12 @@ summary_df = pd.DataFrame(
 )
 st.dataframe(summary_df, width="stretch")
 
-detail_key = (str(selected_path), bit_position) if selected_path is not None else None
+detail_key = (str(selected_path), num_lsb_bits) if selected_path is not None else None
 if detail_key is not None and detail_key in st.session_state.results:
     r = st.session_state.results[detail_key]
-    st.markdown(f"##### Detail: {r.sensor_id} ({r.variant}) — {r.temperature_c}°C @ {r.voltage_v}V, bit {r.bit_position}")
+    st.markdown(
+        f"##### Detail: {r.sensor_id} ({r.variant}) — {r.temperature_c}°C @ {r.voltage_v}V, {r.num_lsb_bits} LSB{'s' if r.num_lsb_bits != 1 else ''}"
+    )
 
     m1, m2, m3, m4 = st.columns(4)
     m1.metric("Raw Min-Entropy (bits/bit)", f"{r.min_entropy.min_entropy_per_bit:.4f}")
@@ -279,64 +282,64 @@ if detail_key is not None and detail_key in st.session_state.results:
 
 st.markdown("##### Export & save results")
 st.caption(
-    "Saves this session's results into docs/data/bit{N}/ (the dashboard's data source) and "
-    "results/bit{N}/*.tex (LaTeX for the thesis) — one folder per bit position, so the four "
-    "bit planes never overwrite each other and the dashboard's bit-position toggle can switch "
+    "Saves this session's results into docs/data/lsb{N}/ (the dashboard's data source) and "
+    "results/lsb{N}/*.tex (LaTeX for the thesis) — one folder per LSB count, so the four "
+    "counts never overwrite each other and the dashboard's LSB-count toggle can switch "
     "between them. Merged with whatever's already in each folder — running sensors one at a "
     "time across separate sessions accumulates into the same permanent record instead of "
     "overwriting it."
 )
 if st.button("Save results", type="primary"):
-    by_bit: dict[int, list] = {}
+    by_lsb: dict[int, list] = {}
     for r in results_list:
-        by_bit.setdefault(r.bit_position, []).append(r)
+        by_lsb.setdefault(r.num_lsb_bits, []).append(r)
 
     saved_summary = {}
-    for bit, bucket in by_bit.items():
-        bit_results_dir = main.RESULTS_DIR / f"bit{bit}"
-        bit_docs_data_dir = main.DOCS_DATA_DIR / f"bit{bit}"
-        bit_results_dir.mkdir(parents=True, exist_ok=True)
-        bit_docs_data_dir.mkdir(parents=True, exist_ok=True)
-        report_export.min_entropy_table(bucket, bit_results_dir / "rq3_min_entropy.tex")
-        report_export.von_neumann_table(bucket, bit_results_dir / "rq4_von_neumann.tex")
-        report_export.sp800_22_table(bucket, main.AYYADA_SP800_22_REFERENCE, bit_results_dir / "rq5_sp800_22.tex")
-        report_export.appendix_table(bucket, bit_results_dir / "appendix_full.tex")
-        combined_summary = report_export.summary_csv(bucket, bit_docs_data_dir / "summary.csv")
-        report_export.full_detail_json(bucket, bit_docs_data_dir / "full_details.json")
-        saved_summary[bit] = len(combined_summary)
+    for n, bucket in by_lsb.items():
+        lsb_results_dir = main.RESULTS_DIR / f"lsb{n}"
+        lsb_docs_data_dir = main.DOCS_DATA_DIR / f"lsb{n}"
+        lsb_results_dir.mkdir(parents=True, exist_ok=True)
+        lsb_docs_data_dir.mkdir(parents=True, exist_ok=True)
+        report_export.min_entropy_table(bucket, lsb_results_dir / "rq3_min_entropy.tex")
+        report_export.von_neumann_table(bucket, lsb_results_dir / "rq4_von_neumann.tex")
+        report_export.sp800_22_table(bucket, main.AYYADA_SP800_22_REFERENCE, lsb_results_dir / "rq5_sp800_22.tex")
+        report_export.appendix_table(bucket, lsb_results_dir / "appendix_full.tex")
+        combined_summary = report_export.summary_csv(bucket, lsb_docs_data_dir / "summary.csv")
+        report_export.full_detail_json(bucket, lsb_docs_data_dir / "full_details.json")
+        saved_summary[n] = len(combined_summary)
 
-    summary_str = ", ".join(f"bit {bit}: {n} conditions" for bit, n in sorted(saved_summary.items()))
-    st.success(f"Saved. {summary_str} ({main.RESULTS_DIR}/bit* + {main.DOCS_DATA_DIR}/bit*)")
+    summary_str = ", ".join(f"{n} LSB(s): {count} conditions" for n, count in sorted(saved_summary.items()))
+    st.success(f"Saved. {summary_str} ({main.RESULTS_DIR}/lsb* + {main.DOCS_DATA_DIR}/lsb*)")
 
 tex_names = ["rq3_min_entropy.tex", "rq4_von_neumann.tex", "rq5_sp800_22.tex", "appendix_full.tex"]
 data_names = ["summary.csv", "full_details.json"]
-present_bit_dirs = sorted(
-    {d.name for d in main.DOCS_DATA_DIR.glob("bit*") if d.is_dir()}
-    | {d.name for d in main.RESULTS_DIR.glob("bit*") if d.is_dir()}
+present_lsb_dirs = sorted(
+    {d.name for d in main.DOCS_DATA_DIR.glob("lsb*") if d.is_dir()}
+    | {d.name for d in main.RESULTS_DIR.glob("lsb*") if d.is_dir()}
 )
-for bit_dir_name in present_bit_dirs:
-    st.caption(f"**{bit_dir_name}**")
+for lsb_dir_name in present_lsb_dirs:
+    st.caption(f"**{lsb_dir_name}**")
     export_cols = st.columns(3)
     col_i = 0
     for name in tex_names:
-        path = main.RESULTS_DIR / bit_dir_name / name
+        path = main.RESULTS_DIR / lsb_dir_name / name
         if path.is_file():
             export_cols[col_i % 3].download_button(
                 f"Download {name}",
                 path.read_text(),
                 file_name=name,
                 use_container_width=True,
-                key=f"dl-{bit_dir_name}-{name}",
+                key=f"dl-{lsb_dir_name}-{name}",
             )
             col_i += 1
     for name in data_names:
-        path = main.DOCS_DATA_DIR / bit_dir_name / name
+        path = main.DOCS_DATA_DIR / lsb_dir_name / name
         if path.is_file():
             export_cols[col_i % 3].download_button(
                 f"Download {name}",
                 path.read_text(),
                 file_name=name,
                 use_container_width=True,
-                key=f"dl-{bit_dir_name}-{name}",
+                key=f"dl-{lsb_dir_name}-{name}",
             )
             col_i += 1
