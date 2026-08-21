@@ -2462,9 +2462,9 @@
         "rows": [
           {
             "Index": 0,
-            "Raw_ADC": 3257,
-            "Voltage_mV": 50.8906,
-            "Temperature_C": 5.09
+            "Raw_ADC": 25453,
+            "Voltage_mV": 397.7031,
+            "Temperature_C": 39.77
           },
           {
             "Index": 1,

@@ -188,7 +188,7 @@ def summary_csv(results: list[PipelineResult], out_path: Path) -> pd.DataFrame:
     new_df = _build_summary_dataframe(results)
 
     if out_path.is_file():
-        existing_df = pd.read_csv(out_path)
+        existing_df = pd.read_csv(out_path, float_precision="round_trip")
         combined = pd.concat([existing_df, new_df], ignore_index=True)
         combined = combined.drop_duplicates(subset=_RESULT_KEY_COLUMNS, keep="last")
     else:

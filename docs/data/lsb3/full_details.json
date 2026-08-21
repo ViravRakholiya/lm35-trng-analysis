@@ -51815,7 +51815,7 @@
       "bits_per_symbol": 3,
       "estimators": {
         "Most Common Value": {
-          "hBitstring": 0.996492345277789,
+          "hBitstring": 0.9964922493317712,
           "hOriginal": 2.9600727744578594,
           "mcvEstimateMode": 1282354.0,
           "mcvEstimatePHat": 0.1282354,
@@ -51823,11 +51823,11 @@
           "testCaseDesc": "Most Common Value"
         },
         "Collision Test (for bit strings only)": {
-          "hBitstring": 0.921253178668384,
+          "hBitstring": 0.9212582465627502,
           "testCaseDesc": "Collision Test (for bit strings only)"
         },
         "Markov Test (for bit strings only)": {
-          "hBitstring": 0.9931434311188105,
+          "hBitstring": 0.9931435256100949,
           "testCaseDesc": "Markov Test (for bit strings only)"
         },
         "Compression Test (for bit strings only)": {
@@ -51850,13 +51850,13 @@
           "testCaseDesc": "Multi Most Common in Window Test"
         },
         "Lag Prediction Test": {
-          "hBitstring": 0.9953753425333022,
-          "hOriginal": 2.997055450778741,
+          "hBitstring": 0.99537620537915,
+          "hOriginal": 2.9970185595125116,
           "testCaseDesc": "Lag Prediction Test"
         },
         "Multi Markov Model with Counting Test (MultiMMC)": {
-          "hBitstring": 0.991208312029092,
-          "hOriginal": 2.963272873850835,
+          "hBitstring": 0.9912100327417712,
+          "hOriginal": 2.9631771529035835,
           "testCaseDesc": "Multi Markov Model with Counting Test (MultiMMC)"
         },
         "LZ78Y Test": {
@@ -51867,13 +51867,13 @@
       }
     },
     "vn_min_entropy": {
-      "min_entropy_per_bit": 0.926334174236225,
+      "min_entropy_per_bit": 0.9263341844661735,
       "estimators": {
         "Most Common Value": {
-          "hBitstring": 0.9985927968678303,
+          "hBitstring": 0.9985929896892977,
           "mcvEstimateMode": 3739379.0,
-          "mcvEstimatePHat": 0.5000169820060268,
-          "mcvEstimatePU": 0.5004879373698667,
+          "mcvEstimatePHat": 0.5000169151454736,
+          "mcvEstimatePU": 0.5004878704778284,
           "testCaseDesc": "Most Common Value"
         },
         "Collision Test (for bit strings only)": {
@@ -51881,198 +51881,100 @@
           "testCaseDesc": "Collision Test (for bit strings only)"
         },
         "Markov Test (for bit strings only)": {
-          "hBitstring": 0.9960470110323896,
+          "hBitstring": 0.9960472024439897,
           "testCaseDesc": "Markov Test (for bit strings only)"
         },
         "Compression Test (for bit strings only)": {
-          "hBitstring": 0.9286153127193492,
+          "hBitstring": 0.9446343634020842,
           "testCaseDesc": "Compression Test (for bit strings only)"
         },
         "T-Tuple Test": {
-          "binTTupleRes": 0.926334174236225,
+          "binTTupleRes": 0.9263341844661735,
           "testCaseDesc": "T-Tuple Test"
         },
         "LRS Test": {
-          "binLrsRes": 0.9907591870169045,
+          "binLrsRes": 0.9907591962848794,
           "testCaseDesc": "LRS Test"
         },
         "Multi Most Common in Window Test": {
-          "hBitstring": 0.9996302214952179,
+          "hBitstring": 0.9996350430752736,
           "testCaseDesc": "Multi Most Common in Window Test"
         },
         "Lag Prediction Test": {
-          "hBitstring": 0.997680151256211,
+          "hBitstring": 0.9976668619865104,
           "testCaseDesc": "Lag Prediction Test"
         },
         "Multi Markov Model with Counting Test (MultiMMC)": {
-          "hBitstring": 0.9950037331043267,
+          "hBitstring": 0.995052372458788,
           "testCaseDesc": "Multi Markov Model with Counting Test (MultiMMC)"
         },
         "LZ78Y Test": {
-          "hBitstring": 0.9948958788794088,
+          "hBitstring": 0.9948849223510123,
           "testCaseDesc": "LZ78Y Test"
         }
       }
     },
     "debias": {
       "input_bit_count": 30000000,
-      "output_bit_count": 7478504,
-      "retention_rate": 0.24928346666666668,
-      "post_debias_one_fraction": 0.4999830179939731
+      "output_bit_count": 7478505,
+      "retention_rate": 0.2492835,
+      "post_debias_one_fraction": 0.4999830848545264
     },
     "sp800_22": {
-      "pass_rate": 0.9361702127659575,
+      "pass_rate": 0.005319148936170213,
       "sub_tests": [
         {
           "test_name": "Frequency",
-          "uniformity_p_value": 0.066882,
+          "uniformity_p_value": 0.0,
           "num_passed": 18,
           "num_total": 18,
-          "passed": true
+          "passed": false
         },
         {
           "test_name": "BlockFrequency",
-          "uniformity_p_value": 0.066882,
+          "uniformity_p_value": 0.0,
           "num_passed": 18,
           "num_total": 18,
-          "passed": true
+          "passed": false
         },
         {
           "test_name": "CumulativeSums",
-          "uniformity_p_value": 0.017912,
+          "uniformity_p_value": 0.0,
           "num_passed": 18,
           "num_total": 18,
-          "passed": true
+          "passed": false
         },
         {
           "test_name": "CumulativeSums",
-          "uniformity_p_value": 0.017912,
+          "uniformity_p_value": 0.0,
           "num_passed": 18,
           "num_total": 18,
-          "passed": true
+          "passed": false
         },
         {
           "test_name": "Runs",
           "uniformity_p_value": 0.0,
-          "num_passed": 15,
+          "num_passed": 18,
           "num_total": 18,
           "passed": false
         },
         {
           "test_name": "LongestRun",
-          "uniformity_p_value": 0.002043,
-          "num_passed": 17,
+          "uniformity_p_value": 0.0,
+          "num_passed": 4,
           "num_total": 18,
-          "passed": true
+          "passed": false
         },
         {
           "test_name": "Rank",
-          "uniformity_p_value": 0.002043,
+          "uniformity_p_value": 0.0,
           "num_passed": 18,
           "num_total": 18,
-          "passed": true
+          "passed": false
         },
         {
           "test_name": "FFT",
-          "uniformity_p_value": 0.035174,
-          "num_passed": 18,
-          "num_total": 18,
-          "passed": true
-        },
-        {
-          "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 0.017912,
-          "num_passed": 18,
-          "num_total": 18,
-          "passed": true
-        },
-        {
-          "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 0.066882,
-          "num_passed": 18,
-          "num_total": 18,
-          "passed": true
-        },
-        {
-          "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 0.066882,
-          "num_passed": 18,
-          "num_total": 18,
-          "passed": true
-        },
-        {
-          "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 0.213309,
-          "num_passed": 18,
-          "num_total": 18,
-          "passed": true
-        },
-        {
-          "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 0.035174,
-          "num_passed": 18,
-          "num_total": 18,
-          "passed": true
-        },
-        {
-          "test_name": "NonOverlappingTemplate",
           "uniformity_p_value": 0.002043,
-          "num_passed": 18,
-          "num_total": 18,
-          "passed": true
-        },
-        {
-          "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 0.002043,
-          "num_passed": 18,
-          "num_total": 18,
-          "passed": true
-        },
-        {
-          "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 0.066882,
-          "num_passed": 18,
-          "num_total": 18,
-          "passed": true
-        },
-        {
-          "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 1.7e-05,
-          "num_passed": 17,
-          "num_total": 18,
-          "passed": false
-        },
-        {
-          "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 0.066882,
-          "num_passed": 18,
-          "num_total": 18,
-          "passed": true
-        },
-        {
-          "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 0.066882,
-          "num_passed": 18,
-          "num_total": 18,
-          "passed": true
-        },
-        {
-          "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 0.017912,
-          "num_passed": 18,
-          "num_total": 18,
-          "passed": true
-        },
-        {
-          "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 0.000439,
-          "num_passed": 18,
-          "num_total": 18,
-          "passed": true
-        },
-        {
-          "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 0.066882,
           "num_passed": 18,
           "num_total": 18,
           "passed": true
@@ -52086,703 +51988,10 @@
         },
         {
           "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 0.122325,
-          "num_passed": 18,
-          "num_total": 18,
-          "passed": true
-        },
-        {
-          "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 1.7e-05,
+          "uniformity_p_value": 0.0,
           "num_passed": 18,
           "num_total": 18,
           "passed": false
-        },
-        {
-          "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 0.000199,
-          "num_passed": 18,
-          "num_total": 18,
-          "passed": true
-        },
-        {
-          "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 0.066882,
-          "num_passed": 18,
-          "num_total": 18,
-          "passed": true
-        },
-        {
-          "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 0.008879,
-          "num_passed": 17,
-          "num_total": 18,
-          "passed": true
-        },
-        {
-          "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 0.000439,
-          "num_passed": 18,
-          "num_total": 18,
-          "passed": true
-        },
-        {
-          "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 0.002043,
-          "num_passed": 18,
-          "num_total": 18,
-          "passed": true
-        },
-        {
-          "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 0.000954,
-          "num_passed": 17,
-          "num_total": 18,
-          "passed": true
-        },
-        {
-          "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 0.066882,
-          "num_passed": 18,
-          "num_total": 18,
-          "passed": true
-        },
-        {
-          "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 0.122325,
-          "num_passed": 18,
-          "num_total": 18,
-          "passed": true
-        },
-        {
-          "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 0.035174,
-          "num_passed": 18,
-          "num_total": 18,
-          "passed": true
-        },
-        {
-          "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 0.004301,
-          "num_passed": 18,
-          "num_total": 18,
-          "passed": true
-        },
-        {
-          "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 0.000954,
-          "num_passed": 18,
-          "num_total": 18,
-          "passed": true
-        },
-        {
-          "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 0.066882,
-          "num_passed": 18,
-          "num_total": 18,
-          "passed": true
-        },
-        {
-          "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 0.213309,
-          "num_passed": 18,
-          "num_total": 18,
-          "passed": true
-        },
-        {
-          "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 0.004301,
-          "num_passed": 18,
-          "num_total": 18,
-          "passed": true
-        },
-        {
-          "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 0.002043,
-          "num_passed": 17,
-          "num_total": 18,
-          "passed": true
-        },
-        {
-          "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 0.002043,
-          "num_passed": 17,
-          "num_total": 18,
-          "passed": true
-        },
-        {
-          "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 0.008879,
-          "num_passed": 18,
-          "num_total": 18,
-          "passed": true
-        },
-        {
-          "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 0.002043,
-          "num_passed": 18,
-          "num_total": 18,
-          "passed": true
-        },
-        {
-          "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 3e-06,
-          "num_passed": 18,
-          "num_total": 18,
-          "passed": false
-        },
-        {
-          "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 0.008879,
-          "num_passed": 17,
-          "num_total": 18,
-          "passed": true
-        },
-        {
-          "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 0.004301,
-          "num_passed": 17,
-          "num_total": 18,
-          "passed": true
-        },
-        {
-          "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 0.000954,
-          "num_passed": 18,
-          "num_total": 18,
-          "passed": true
-        },
-        {
-          "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 0.000439,
-          "num_passed": 17,
-          "num_total": 18,
-          "passed": true
-        },
-        {
-          "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 0.008879,
-          "num_passed": 18,
-          "num_total": 18,
-          "passed": true
-        },
-        {
-          "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 0.000439,
-          "num_passed": 17,
-          "num_total": 18,
-          "passed": true
-        },
-        {
-          "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 0.017912,
-          "num_passed": 18,
-          "num_total": 18,
-          "passed": true
-        },
-        {
-          "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 0.004301,
-          "num_passed": 18,
-          "num_total": 18,
-          "passed": true
-        },
-        {
-          "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 0.035174,
-          "num_passed": 18,
-          "num_total": 18,
-          "passed": true
-        },
-        {
-          "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 0.004301,
-          "num_passed": 18,
-          "num_total": 18,
-          "passed": true
-        },
-        {
-          "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 0.000199,
-          "num_passed": 18,
-          "num_total": 18,
-          "passed": true
-        },
-        {
-          "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 0.008879,
-          "num_passed": 18,
-          "num_total": 18,
-          "passed": true
-        },
-        {
-          "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 0.122325,
-          "num_passed": 18,
-          "num_total": 18,
-          "passed": true
-        },
-        {
-          "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 0.000199,
-          "num_passed": 18,
-          "num_total": 18,
-          "passed": true
-        },
-        {
-          "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 0.066882,
-          "num_passed": 18,
-          "num_total": 18,
-          "passed": true
-        },
-        {
-          "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 0.122325,
-          "num_passed": 18,
-          "num_total": 18,
-          "passed": true
-        },
-        {
-          "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 0.004301,
-          "num_passed": 18,
-          "num_total": 18,
-          "passed": true
-        },
-        {
-          "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 0.000439,
-          "num_passed": 18,
-          "num_total": 18,
-          "passed": true
-        },
-        {
-          "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 0.066882,
-          "num_passed": 18,
-          "num_total": 18,
-          "passed": true
-        },
-        {
-          "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 0.213309,
-          "num_passed": 18,
-          "num_total": 18,
-          "passed": true
-        },
-        {
-          "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 0.017912,
-          "num_passed": 18,
-          "num_total": 18,
-          "passed": true
-        },
-        {
-          "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 0.000439,
-          "num_passed": 17,
-          "num_total": 18,
-          "passed": true
-        },
-        {
-          "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 0.008879,
-          "num_passed": 17,
-          "num_total": 18,
-          "passed": true
-        },
-        {
-          "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 0.035174,
-          "num_passed": 18,
-          "num_total": 18,
-          "passed": true
-        },
-        {
-          "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 0.004301,
-          "num_passed": 18,
-          "num_total": 18,
-          "passed": true
-        },
-        {
-          "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 0.004301,
-          "num_passed": 17,
-          "num_total": 18,
-          "passed": true
-        },
-        {
-          "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 0.035174,
-          "num_passed": 18,
-          "num_total": 18,
-          "passed": true
-        },
-        {
-          "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 0.000439,
-          "num_passed": 17,
-          "num_total": 18,
-          "passed": true
-        },
-        {
-          "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 0.017912,
-          "num_passed": 18,
-          "num_total": 18,
-          "passed": true
-        },
-        {
-          "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 0.017912,
-          "num_passed": 18,
-          "num_total": 18,
-          "passed": true
-        },
-        {
-          "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 0.004301,
-          "num_passed": 18,
-          "num_total": 18,
-          "passed": true
-        },
-        {
-          "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 0.002043,
-          "num_passed": 18,
-          "num_total": 18,
-          "passed": true
-        },
-        {
-          "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 0.035174,
-          "num_passed": 18,
-          "num_total": 18,
-          "passed": true
-        },
-        {
-          "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 0.066882,
-          "num_passed": 18,
-          "num_total": 18,
-          "passed": true
-        },
-        {
-          "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 0.017912,
-          "num_passed": 17,
-          "num_total": 18,
-          "passed": true
-        },
-        {
-          "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 0.002043,
-          "num_passed": 18,
-          "num_total": 18,
-          "passed": true
-        },
-        {
-          "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 0.035174,
-          "num_passed": 18,
-          "num_total": 18,
-          "passed": true
-        },
-        {
-          "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 0.035174,
-          "num_passed": 18,
-          "num_total": 18,
-          "passed": true
-        },
-        {
-          "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 0.017912,
-          "num_passed": 18,
-          "num_total": 18,
-          "passed": true
-        },
-        {
-          "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 0.066882,
-          "num_passed": 18,
-          "num_total": 18,
-          "passed": true
-        },
-        {
-          "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 0.000954,
-          "num_passed": 17,
-          "num_total": 18,
-          "passed": true
-        },
-        {
-          "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 0.004301,
-          "num_passed": 18,
-          "num_total": 18,
-          "passed": true
-        },
-        {
-          "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 0.008879,
-          "num_passed": 18,
-          "num_total": 18,
-          "passed": true
-        },
-        {
-          "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 1.7e-05,
-          "num_passed": 18,
-          "num_total": 18,
-          "passed": false
-        },
-        {
-          "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 0.035174,
-          "num_passed": 18,
-          "num_total": 18,
-          "passed": true
-        },
-        {
-          "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 0.008879,
-          "num_passed": 17,
-          "num_total": 18,
-          "passed": true
-        },
-        {
-          "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 0.000954,
-          "num_passed": 18,
-          "num_total": 18,
-          "passed": true
-        },
-        {
-          "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 0.213309,
-          "num_passed": 18,
-          "num_total": 18,
-          "passed": true
-        },
-        {
-          "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 0.000199,
-          "num_passed": 18,
-          "num_total": 18,
-          "passed": true
-        },
-        {
-          "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 0.008879,
-          "num_passed": 18,
-          "num_total": 18,
-          "passed": true
-        },
-        {
-          "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 0.008879,
-          "num_passed": 18,
-          "num_total": 18,
-          "passed": true
-        },
-        {
-          "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 0.213309,
-          "num_passed": 18,
-          "num_total": 18,
-          "passed": true
-        },
-        {
-          "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 0.008879,
-          "num_passed": 18,
-          "num_total": 18,
-          "passed": true
-        },
-        {
-          "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 4e-05,
-          "num_passed": 18,
-          "num_total": 18,
-          "passed": false
-        },
-        {
-          "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 0.000199,
-          "num_passed": 18,
-          "num_total": 18,
-          "passed": true
-        },
-        {
-          "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 0.004301,
-          "num_passed": 17,
-          "num_total": 18,
-          "passed": true
-        },
-        {
-          "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 8.9e-05,
-          "num_passed": 18,
-          "num_total": 18,
-          "passed": false
-        },
-        {
-          "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 0.017912,
-          "num_passed": 18,
-          "num_total": 18,
-          "passed": true
-        },
-        {
-          "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 0.035174,
-          "num_passed": 18,
-          "num_total": 18,
-          "passed": true
-        },
-        {
-          "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 0.017912,
-          "num_passed": 17,
-          "num_total": 18,
-          "passed": true
-        },
-        {
-          "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 0.066882,
-          "num_passed": 18,
-          "num_total": 18,
-          "passed": true
-        },
-        {
-          "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 0.008879,
-          "num_passed": 18,
-          "num_total": 18,
-          "passed": true
-        },
-        {
-          "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 0.000439,
-          "num_passed": 18,
-          "num_total": 18,
-          "passed": true
-        },
-        {
-          "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 0.004301,
-          "num_passed": 18,
-          "num_total": 18,
-          "passed": true
-        },
-        {
-          "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 0.002043,
-          "num_passed": 18,
-          "num_total": 18,
-          "passed": true
-        },
-        {
-          "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 0.000954,
-          "num_passed": 16,
-          "num_total": 18,
-          "passed": true
-        },
-        {
-          "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 0.213309,
-          "num_passed": 18,
-          "num_total": 18,
-          "passed": true
-        },
-        {
-          "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 0.002043,
-          "num_passed": 17,
-          "num_total": 18,
-          "passed": true
-        },
-        {
-          "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 0.000199,
-          "num_passed": 18,
-          "num_total": 18,
-          "passed": true
-        },
-        {
-          "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 0.002043,
-          "num_passed": 18,
-          "num_total": 18,
-          "passed": true
-        },
-        {
-          "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 0.002043,
-          "num_passed": 18,
-          "num_total": 18,
-          "passed": true
-        },
-        {
-          "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 0.122325,
-          "num_passed": 18,
-          "num_total": 18,
-          "passed": true
-        },
-        {
-          "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 0.066882,
-          "num_passed": 17,
-          "num_total": 18,
-          "passed": true
-        },
-        {
-          "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 0.008879,
-          "num_passed": 18,
-          "num_total": 18,
-          "passed": true
-        },
-        {
-          "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 0.000954,
-          "num_passed": 17,
-          "num_total": 18,
-          "passed": true
-        },
-        {
-          "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 0.004301,
-          "num_passed": 18,
-          "num_total": 18,
-          "passed": true
-        },
-        {
-          "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 0.122325,
-          "num_passed": 17,
-          "num_total": 18,
-          "passed": true
-        },
-        {
-          "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 8e-06,
-          "num_passed": 18,
-          "num_total": 18,
-          "passed": false
-        },
-        {
-          "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 0.035174,
-          "num_passed": 18,
-          "num_total": 18,
-          "passed": true
         },
         {
           "test_name": "NonOverlappingTemplate",
@@ -52793,451 +52002,1242 @@
         },
         {
           "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 0.008879,
+          "uniformity_p_value": 0.0,
           "num_passed": 18,
           "num_total": 18,
-          "passed": true
+          "passed": false
         },
         {
           "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 0.017912,
+          "uniformity_p_value": 0.0,
           "num_passed": 18,
           "num_total": 18,
-          "passed": true
+          "passed": false
         },
         {
           "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 0.213309,
-          "num_passed": 17,
-          "num_total": 18,
-          "passed": true
-        },
-        {
-          "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 0.017912,
+          "uniformity_p_value": 0.0,
           "num_passed": 18,
           "num_total": 18,
-          "passed": true
+          "passed": false
         },
         {
           "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 0.000439,
+          "uniformity_p_value": 0.0,
           "num_passed": 18,
           "num_total": 18,
-          "passed": true
+          "passed": false
         },
         {
           "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 0.017912,
-          "num_passed": 17,
-          "num_total": 18,
-          "passed": true
-        },
-        {
-          "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 0.002043,
+          "uniformity_p_value": 0.0,
           "num_passed": 18,
           "num_total": 18,
-          "passed": true
+          "passed": false
         },
         {
           "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 0.213309,
+          "uniformity_p_value": 0.0,
           "num_passed": 18,
           "num_total": 18,
-          "passed": true
+          "passed": false
         },
         {
           "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 0.008879,
+          "uniformity_p_value": 0.0,
           "num_passed": 18,
           "num_total": 18,
-          "passed": true
+          "passed": false
         },
         {
           "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 0.000954,
-          "num_passed": 17,
-          "num_total": 18,
-          "passed": true
-        },
-        {
-          "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 0.004301,
+          "uniformity_p_value": 0.0,
           "num_passed": 18,
           "num_total": 18,
-          "passed": true
+          "passed": false
         },
         {
           "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 0.008879,
+          "uniformity_p_value": 0.0,
           "num_passed": 18,
           "num_total": 18,
-          "passed": true
+          "passed": false
         },
         {
           "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 0.000199,
+          "uniformity_p_value": 0.0,
           "num_passed": 18,
           "num_total": 18,
-          "passed": true
+          "passed": false
         },
         {
           "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 0.017912,
+          "uniformity_p_value": 0.0,
           "num_passed": 18,
           "num_total": 18,
-          "passed": true
+          "passed": false
         },
         {
           "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 0.002043,
+          "uniformity_p_value": 0.0,
           "num_passed": 18,
           "num_total": 18,
-          "passed": true
+          "passed": false
         },
         {
           "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 8.9e-05,
+          "uniformity_p_value": 0.0,
+          "num_passed": 18,
+          "num_total": 18,
+          "passed": false
+        },
+        {
+          "test_name": "NonOverlappingTemplate",
+          "uniformity_p_value": 0.0,
+          "num_passed": 18,
+          "num_total": 18,
+          "passed": false
+        },
+        {
+          "test_name": "NonOverlappingTemplate",
+          "uniformity_p_value": 0.0,
+          "num_passed": 18,
+          "num_total": 18,
+          "passed": false
+        },
+        {
+          "test_name": "NonOverlappingTemplate",
+          "uniformity_p_value": 0.0,
+          "num_passed": 18,
+          "num_total": 18,
+          "passed": false
+        },
+        {
+          "test_name": "NonOverlappingTemplate",
+          "uniformity_p_value": 0.0,
+          "num_passed": 18,
+          "num_total": 18,
+          "passed": false
+        },
+        {
+          "test_name": "NonOverlappingTemplate",
+          "uniformity_p_value": 0.0,
+          "num_passed": 18,
+          "num_total": 18,
+          "passed": false
+        },
+        {
+          "test_name": "NonOverlappingTemplate",
+          "uniformity_p_value": 0.0,
+          "num_passed": 18,
+          "num_total": 18,
+          "passed": false
+        },
+        {
+          "test_name": "NonOverlappingTemplate",
+          "uniformity_p_value": 0.0,
+          "num_passed": 18,
+          "num_total": 18,
+          "passed": false
+        },
+        {
+          "test_name": "NonOverlappingTemplate",
+          "uniformity_p_value": 0.0,
+          "num_passed": 18,
+          "num_total": 18,
+          "passed": false
+        },
+        {
+          "test_name": "NonOverlappingTemplate",
+          "uniformity_p_value": 0.0,
+          "num_passed": 18,
+          "num_total": 18,
+          "passed": false
+        },
+        {
+          "test_name": "NonOverlappingTemplate",
+          "uniformity_p_value": 0.0,
+          "num_passed": 18,
+          "num_total": 18,
+          "passed": false
+        },
+        {
+          "test_name": "NonOverlappingTemplate",
+          "uniformity_p_value": 0.0,
+          "num_passed": 18,
+          "num_total": 18,
+          "passed": false
+        },
+        {
+          "test_name": "NonOverlappingTemplate",
+          "uniformity_p_value": 0.0,
+          "num_passed": 18,
+          "num_total": 18,
+          "passed": false
+        },
+        {
+          "test_name": "NonOverlappingTemplate",
+          "uniformity_p_value": 0.0,
+          "num_passed": 18,
+          "num_total": 18,
+          "passed": false
+        },
+        {
+          "test_name": "NonOverlappingTemplate",
+          "uniformity_p_value": 0.0,
           "num_passed": 17,
           "num_total": 18,
           "passed": false
         },
         {
           "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 0.000954,
+          "uniformity_p_value": 0.0,
           "num_passed": 18,
           "num_total": 18,
-          "passed": true
+          "passed": false
         },
         {
           "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 0.066882,
+          "uniformity_p_value": 0.0,
           "num_passed": 18,
           "num_total": 18,
-          "passed": true
+          "passed": false
         },
         {
           "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 0.066882,
+          "uniformity_p_value": 0.0,
           "num_passed": 18,
           "num_total": 18,
-          "passed": true
+          "passed": false
         },
         {
           "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 0.008879,
+          "uniformity_p_value": 0.0,
           "num_passed": 18,
           "num_total": 18,
-          "passed": true
+          "passed": false
         },
         {
           "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 0.002043,
+          "uniformity_p_value": 0.0,
           "num_passed": 18,
           "num_total": 18,
-          "passed": true
+          "passed": false
         },
         {
           "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 0.035174,
-          "num_passed": 18,
+          "uniformity_p_value": 0.0,
+          "num_passed": 17,
           "num_total": 18,
-          "passed": true
+          "passed": false
         },
         {
           "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 0.035174,
+          "uniformity_p_value": 0.0,
           "num_passed": 18,
           "num_total": 18,
-          "passed": true
+          "passed": false
         },
         {
           "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 0.000439,
+          "uniformity_p_value": 0.0,
           "num_passed": 18,
           "num_total": 18,
-          "passed": true
+          "passed": false
         },
         {
           "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 0.008879,
+          "uniformity_p_value": 0.0,
           "num_passed": 18,
           "num_total": 18,
-          "passed": true
+          "passed": false
         },
         {
           "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 0.066882,
+          "uniformity_p_value": 0.0,
           "num_passed": 18,
           "num_total": 18,
-          "passed": true
+          "passed": false
         },
         {
           "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 0.066882,
+          "uniformity_p_value": 0.0,
           "num_passed": 18,
           "num_total": 18,
-          "passed": true
+          "passed": false
         },
         {
           "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 0.004301,
-          "num_passed": 18,
+          "uniformity_p_value": 0.0,
+          "num_passed": 17,
           "num_total": 18,
-          "passed": true
+          "passed": false
         },
         {
           "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 0.008879,
-          "num_passed": 16,
+          "uniformity_p_value": 0.0,
+          "num_passed": 18,
           "num_total": 18,
-          "passed": true
+          "passed": false
         },
         {
           "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 0.008879,
+          "uniformity_p_value": 0.0,
           "num_passed": 18,
           "num_total": 18,
-          "passed": true
+          "passed": false
         },
         {
           "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 0.066882,
+          "uniformity_p_value": 0.0,
           "num_passed": 18,
           "num_total": 18,
-          "passed": true
+          "passed": false
         },
         {
           "test_name": "NonOverlappingTemplate",
-          "uniformity_p_value": 0.035174,
+          "uniformity_p_value": 0.0,
           "num_passed": 18,
           "num_total": 18,
-          "passed": true
+          "passed": false
+        },
+        {
+          "test_name": "NonOverlappingTemplate",
+          "uniformity_p_value": 0.0,
+          "num_passed": 18,
+          "num_total": 18,
+          "passed": false
+        },
+        {
+          "test_name": "NonOverlappingTemplate",
+          "uniformity_p_value": 0.0,
+          "num_passed": 18,
+          "num_total": 18,
+          "passed": false
+        },
+        {
+          "test_name": "NonOverlappingTemplate",
+          "uniformity_p_value": 0.0,
+          "num_passed": 18,
+          "num_total": 18,
+          "passed": false
+        },
+        {
+          "test_name": "NonOverlappingTemplate",
+          "uniformity_p_value": 0.0,
+          "num_passed": 18,
+          "num_total": 18,
+          "passed": false
+        },
+        {
+          "test_name": "NonOverlappingTemplate",
+          "uniformity_p_value": 0.0,
+          "num_passed": 18,
+          "num_total": 18,
+          "passed": false
+        },
+        {
+          "test_name": "NonOverlappingTemplate",
+          "uniformity_p_value": 0.0,
+          "num_passed": 18,
+          "num_total": 18,
+          "passed": false
+        },
+        {
+          "test_name": "NonOverlappingTemplate",
+          "uniformity_p_value": 0.0,
+          "num_passed": 18,
+          "num_total": 18,
+          "passed": false
+        },
+        {
+          "test_name": "NonOverlappingTemplate",
+          "uniformity_p_value": 0.0,
+          "num_passed": 18,
+          "num_total": 18,
+          "passed": false
+        },
+        {
+          "test_name": "NonOverlappingTemplate",
+          "uniformity_p_value": 0.0,
+          "num_passed": 18,
+          "num_total": 18,
+          "passed": false
+        },
+        {
+          "test_name": "NonOverlappingTemplate",
+          "uniformity_p_value": 0.0,
+          "num_passed": 18,
+          "num_total": 18,
+          "passed": false
+        },
+        {
+          "test_name": "NonOverlappingTemplate",
+          "uniformity_p_value": 0.0,
+          "num_passed": 18,
+          "num_total": 18,
+          "passed": false
+        },
+        {
+          "test_name": "NonOverlappingTemplate",
+          "uniformity_p_value": 0.0,
+          "num_passed": 18,
+          "num_total": 18,
+          "passed": false
+        },
+        {
+          "test_name": "NonOverlappingTemplate",
+          "uniformity_p_value": 0.0,
+          "num_passed": 18,
+          "num_total": 18,
+          "passed": false
+        },
+        {
+          "test_name": "NonOverlappingTemplate",
+          "uniformity_p_value": 0.0,
+          "num_passed": 18,
+          "num_total": 18,
+          "passed": false
+        },
+        {
+          "test_name": "NonOverlappingTemplate",
+          "uniformity_p_value": 0.0,
+          "num_passed": 18,
+          "num_total": 18,
+          "passed": false
+        },
+        {
+          "test_name": "NonOverlappingTemplate",
+          "uniformity_p_value": 0.0,
+          "num_passed": 18,
+          "num_total": 18,
+          "passed": false
+        },
+        {
+          "test_name": "NonOverlappingTemplate",
+          "uniformity_p_value": 0.0,
+          "num_passed": 18,
+          "num_total": 18,
+          "passed": false
+        },
+        {
+          "test_name": "NonOverlappingTemplate",
+          "uniformity_p_value": 0.0,
+          "num_passed": 18,
+          "num_total": 18,
+          "passed": false
+        },
+        {
+          "test_name": "NonOverlappingTemplate",
+          "uniformity_p_value": 0.0,
+          "num_passed": 18,
+          "num_total": 18,
+          "passed": false
+        },
+        {
+          "test_name": "NonOverlappingTemplate",
+          "uniformity_p_value": 0.0,
+          "num_passed": 18,
+          "num_total": 18,
+          "passed": false
+        },
+        {
+          "test_name": "NonOverlappingTemplate",
+          "uniformity_p_value": 0.0,
+          "num_passed": 18,
+          "num_total": 18,
+          "passed": false
+        },
+        {
+          "test_name": "NonOverlappingTemplate",
+          "uniformity_p_value": 0.0,
+          "num_passed": 17,
+          "num_total": 18,
+          "passed": false
+        },
+        {
+          "test_name": "NonOverlappingTemplate",
+          "uniformity_p_value": 0.0,
+          "num_passed": 18,
+          "num_total": 18,
+          "passed": false
+        },
+        {
+          "test_name": "NonOverlappingTemplate",
+          "uniformity_p_value": 0.0,
+          "num_passed": 18,
+          "num_total": 18,
+          "passed": false
+        },
+        {
+          "test_name": "NonOverlappingTemplate",
+          "uniformity_p_value": 0.0,
+          "num_passed": 18,
+          "num_total": 18,
+          "passed": false
+        },
+        {
+          "test_name": "NonOverlappingTemplate",
+          "uniformity_p_value": 0.0,
+          "num_passed": 18,
+          "num_total": 18,
+          "passed": false
+        },
+        {
+          "test_name": "NonOverlappingTemplate",
+          "uniformity_p_value": 0.0,
+          "num_passed": 18,
+          "num_total": 18,
+          "passed": false
+        },
+        {
+          "test_name": "NonOverlappingTemplate",
+          "uniformity_p_value": 0.0,
+          "num_passed": 18,
+          "num_total": 18,
+          "passed": false
+        },
+        {
+          "test_name": "NonOverlappingTemplate",
+          "uniformity_p_value": 0.0,
+          "num_passed": 18,
+          "num_total": 18,
+          "passed": false
+        },
+        {
+          "test_name": "NonOverlappingTemplate",
+          "uniformity_p_value": 0.0,
+          "num_passed": 18,
+          "num_total": 18,
+          "passed": false
+        },
+        {
+          "test_name": "NonOverlappingTemplate",
+          "uniformity_p_value": 0.0,
+          "num_passed": 18,
+          "num_total": 18,
+          "passed": false
+        },
+        {
+          "test_name": "NonOverlappingTemplate",
+          "uniformity_p_value": 0.0,
+          "num_passed": 18,
+          "num_total": 18,
+          "passed": false
+        },
+        {
+          "test_name": "NonOverlappingTemplate",
+          "uniformity_p_value": 0.0,
+          "num_passed": 18,
+          "num_total": 18,
+          "passed": false
+        },
+        {
+          "test_name": "NonOverlappingTemplate",
+          "uniformity_p_value": 0.0,
+          "num_passed": 18,
+          "num_total": 18,
+          "passed": false
+        },
+        {
+          "test_name": "NonOverlappingTemplate",
+          "uniformity_p_value": 0.0,
+          "num_passed": 18,
+          "num_total": 18,
+          "passed": false
+        },
+        {
+          "test_name": "NonOverlappingTemplate",
+          "uniformity_p_value": 0.0,
+          "num_passed": 18,
+          "num_total": 18,
+          "passed": false
+        },
+        {
+          "test_name": "NonOverlappingTemplate",
+          "uniformity_p_value": 0.0,
+          "num_passed": 18,
+          "num_total": 18,
+          "passed": false
+        },
+        {
+          "test_name": "NonOverlappingTemplate",
+          "uniformity_p_value": 0.0,
+          "num_passed": 18,
+          "num_total": 18,
+          "passed": false
+        },
+        {
+          "test_name": "NonOverlappingTemplate",
+          "uniformity_p_value": 0.0,
+          "num_passed": 18,
+          "num_total": 18,
+          "passed": false
+        },
+        {
+          "test_name": "NonOverlappingTemplate",
+          "uniformity_p_value": 0.0,
+          "num_passed": 18,
+          "num_total": 18,
+          "passed": false
+        },
+        {
+          "test_name": "NonOverlappingTemplate",
+          "uniformity_p_value": 0.0,
+          "num_passed": 18,
+          "num_total": 18,
+          "passed": false
+        },
+        {
+          "test_name": "NonOverlappingTemplate",
+          "uniformity_p_value": 0.0,
+          "num_passed": 18,
+          "num_total": 18,
+          "passed": false
+        },
+        {
+          "test_name": "NonOverlappingTemplate",
+          "uniformity_p_value": 0.0,
+          "num_passed": 18,
+          "num_total": 18,
+          "passed": false
+        },
+        {
+          "test_name": "NonOverlappingTemplate",
+          "uniformity_p_value": 0.0,
+          "num_passed": 18,
+          "num_total": 18,
+          "passed": false
+        },
+        {
+          "test_name": "NonOverlappingTemplate",
+          "uniformity_p_value": 0.0,
+          "num_passed": 18,
+          "num_total": 18,
+          "passed": false
+        },
+        {
+          "test_name": "NonOverlappingTemplate",
+          "uniformity_p_value": 0.0,
+          "num_passed": 18,
+          "num_total": 18,
+          "passed": false
+        },
+        {
+          "test_name": "NonOverlappingTemplate",
+          "uniformity_p_value": 0.0,
+          "num_passed": 18,
+          "num_total": 18,
+          "passed": false
+        },
+        {
+          "test_name": "NonOverlappingTemplate",
+          "uniformity_p_value": 0.0,
+          "num_passed": 18,
+          "num_total": 18,
+          "passed": false
+        },
+        {
+          "test_name": "NonOverlappingTemplate",
+          "uniformity_p_value": 0.0,
+          "num_passed": 18,
+          "num_total": 18,
+          "passed": false
+        },
+        {
+          "test_name": "NonOverlappingTemplate",
+          "uniformity_p_value": 0.0,
+          "num_passed": 18,
+          "num_total": 18,
+          "passed": false
+        },
+        {
+          "test_name": "NonOverlappingTemplate",
+          "uniformity_p_value": 0.0,
+          "num_passed": 18,
+          "num_total": 18,
+          "passed": false
+        },
+        {
+          "test_name": "NonOverlappingTemplate",
+          "uniformity_p_value": 0.0,
+          "num_passed": 18,
+          "num_total": 18,
+          "passed": false
+        },
+        {
+          "test_name": "NonOverlappingTemplate",
+          "uniformity_p_value": 0.0,
+          "num_passed": 18,
+          "num_total": 18,
+          "passed": false
+        },
+        {
+          "test_name": "NonOverlappingTemplate",
+          "uniformity_p_value": 0.0,
+          "num_passed": 18,
+          "num_total": 18,
+          "passed": false
+        },
+        {
+          "test_name": "NonOverlappingTemplate",
+          "uniformity_p_value": 0.0,
+          "num_passed": 18,
+          "num_total": 18,
+          "passed": false
+        },
+        {
+          "test_name": "NonOverlappingTemplate",
+          "uniformity_p_value": 0.0,
+          "num_passed": 18,
+          "num_total": 18,
+          "passed": false
+        },
+        {
+          "test_name": "NonOverlappingTemplate",
+          "uniformity_p_value": 0.0,
+          "num_passed": 18,
+          "num_total": 18,
+          "passed": false
+        },
+        {
+          "test_name": "NonOverlappingTemplate",
+          "uniformity_p_value": 0.0,
+          "num_passed": 18,
+          "num_total": 18,
+          "passed": false
+        },
+        {
+          "test_name": "NonOverlappingTemplate",
+          "uniformity_p_value": 0.0,
+          "num_passed": 18,
+          "num_total": 18,
+          "passed": false
+        },
+        {
+          "test_name": "NonOverlappingTemplate",
+          "uniformity_p_value": 0.0,
+          "num_passed": 18,
+          "num_total": 18,
+          "passed": false
+        },
+        {
+          "test_name": "NonOverlappingTemplate",
+          "uniformity_p_value": 0.0,
+          "num_passed": 18,
+          "num_total": 18,
+          "passed": false
+        },
+        {
+          "test_name": "NonOverlappingTemplate",
+          "uniformity_p_value": 0.0,
+          "num_passed": 18,
+          "num_total": 18,
+          "passed": false
+        },
+        {
+          "test_name": "NonOverlappingTemplate",
+          "uniformity_p_value": 0.0,
+          "num_passed": 18,
+          "num_total": 18,
+          "passed": false
+        },
+        {
+          "test_name": "NonOverlappingTemplate",
+          "uniformity_p_value": 0.0,
+          "num_passed": 18,
+          "num_total": 18,
+          "passed": false
+        },
+        {
+          "test_name": "NonOverlappingTemplate",
+          "uniformity_p_value": 0.0,
+          "num_passed": 18,
+          "num_total": 18,
+          "passed": false
+        },
+        {
+          "test_name": "NonOverlappingTemplate",
+          "uniformity_p_value": 0.0,
+          "num_passed": 18,
+          "num_total": 18,
+          "passed": false
+        },
+        {
+          "test_name": "NonOverlappingTemplate",
+          "uniformity_p_value": 0.0,
+          "num_passed": 18,
+          "num_total": 18,
+          "passed": false
+        },
+        {
+          "test_name": "NonOverlappingTemplate",
+          "uniformity_p_value": 0.0,
+          "num_passed": 18,
+          "num_total": 18,
+          "passed": false
+        },
+        {
+          "test_name": "NonOverlappingTemplate",
+          "uniformity_p_value": 0.0,
+          "num_passed": 17,
+          "num_total": 18,
+          "passed": false
+        },
+        {
+          "test_name": "NonOverlappingTemplate",
+          "uniformity_p_value": 0.0,
+          "num_passed": 18,
+          "num_total": 18,
+          "passed": false
+        },
+        {
+          "test_name": "NonOverlappingTemplate",
+          "uniformity_p_value": 0.0,
+          "num_passed": 18,
+          "num_total": 18,
+          "passed": false
+        },
+        {
+          "test_name": "NonOverlappingTemplate",
+          "uniformity_p_value": 0.0,
+          "num_passed": 17,
+          "num_total": 18,
+          "passed": false
+        },
+        {
+          "test_name": "NonOverlappingTemplate",
+          "uniformity_p_value": 0.0,
+          "num_passed": 18,
+          "num_total": 18,
+          "passed": false
+        },
+        {
+          "test_name": "NonOverlappingTemplate",
+          "uniformity_p_value": 0.0,
+          "num_passed": 18,
+          "num_total": 18,
+          "passed": false
+        },
+        {
+          "test_name": "NonOverlappingTemplate",
+          "uniformity_p_value": 0.0,
+          "num_passed": 18,
+          "num_total": 18,
+          "passed": false
+        },
+        {
+          "test_name": "NonOverlappingTemplate",
+          "uniformity_p_value": 0.0,
+          "num_passed": 18,
+          "num_total": 18,
+          "passed": false
+        },
+        {
+          "test_name": "NonOverlappingTemplate",
+          "uniformity_p_value": 0.0,
+          "num_passed": 18,
+          "num_total": 18,
+          "passed": false
+        },
+        {
+          "test_name": "NonOverlappingTemplate",
+          "uniformity_p_value": 0.0,
+          "num_passed": 18,
+          "num_total": 18,
+          "passed": false
+        },
+        {
+          "test_name": "NonOverlappingTemplate",
+          "uniformity_p_value": 0.0,
+          "num_passed": 17,
+          "num_total": 18,
+          "passed": false
+        },
+        {
+          "test_name": "NonOverlappingTemplate",
+          "uniformity_p_value": 0.0,
+          "num_passed": 18,
+          "num_total": 18,
+          "passed": false
+        },
+        {
+          "test_name": "NonOverlappingTemplate",
+          "uniformity_p_value": 0.0,
+          "num_passed": 18,
+          "num_total": 18,
+          "passed": false
+        },
+        {
+          "test_name": "NonOverlappingTemplate",
+          "uniformity_p_value": 0.0,
+          "num_passed": 18,
+          "num_total": 18,
+          "passed": false
+        },
+        {
+          "test_name": "NonOverlappingTemplate",
+          "uniformity_p_value": 0.0,
+          "num_passed": 18,
+          "num_total": 18,
+          "passed": false
+        },
+        {
+          "test_name": "NonOverlappingTemplate",
+          "uniformity_p_value": 0.0,
+          "num_passed": 18,
+          "num_total": 18,
+          "passed": false
+        },
+        {
+          "test_name": "NonOverlappingTemplate",
+          "uniformity_p_value": 0.0,
+          "num_passed": 18,
+          "num_total": 18,
+          "passed": false
+        },
+        {
+          "test_name": "NonOverlappingTemplate",
+          "uniformity_p_value": 0.0,
+          "num_passed": 18,
+          "num_total": 18,
+          "passed": false
+        },
+        {
+          "test_name": "NonOverlappingTemplate",
+          "uniformity_p_value": 0.0,
+          "num_passed": 18,
+          "num_total": 18,
+          "passed": false
+        },
+        {
+          "test_name": "NonOverlappingTemplate",
+          "uniformity_p_value": 0.0,
+          "num_passed": 18,
+          "num_total": 18,
+          "passed": false
+        },
+        {
+          "test_name": "NonOverlappingTemplate",
+          "uniformity_p_value": 0.0,
+          "num_passed": 18,
+          "num_total": 18,
+          "passed": false
+        },
+        {
+          "test_name": "NonOverlappingTemplate",
+          "uniformity_p_value": 0.0,
+          "num_passed": 18,
+          "num_total": 18,
+          "passed": false
+        },
+        {
+          "test_name": "NonOverlappingTemplate",
+          "uniformity_p_value": 0.0,
+          "num_passed": 18,
+          "num_total": 18,
+          "passed": false
+        },
+        {
+          "test_name": "NonOverlappingTemplate",
+          "uniformity_p_value": 0.0,
+          "num_passed": 18,
+          "num_total": 18,
+          "passed": false
+        },
+        {
+          "test_name": "NonOverlappingTemplate",
+          "uniformity_p_value": 0.0,
+          "num_passed": 18,
+          "num_total": 18,
+          "passed": false
+        },
+        {
+          "test_name": "NonOverlappingTemplate",
+          "uniformity_p_value": 0.0,
+          "num_passed": 18,
+          "num_total": 18,
+          "passed": false
+        },
+        {
+          "test_name": "NonOverlappingTemplate",
+          "uniformity_p_value": 0.0,
+          "num_passed": 18,
+          "num_total": 18,
+          "passed": false
+        },
+        {
+          "test_name": "NonOverlappingTemplate",
+          "uniformity_p_value": 0.0,
+          "num_passed": 18,
+          "num_total": 18,
+          "passed": false
+        },
+        {
+          "test_name": "NonOverlappingTemplate",
+          "uniformity_p_value": 0.0,
+          "num_passed": 18,
+          "num_total": 18,
+          "passed": false
+        },
+        {
+          "test_name": "NonOverlappingTemplate",
+          "uniformity_p_value": 0.0,
+          "num_passed": 18,
+          "num_total": 18,
+          "passed": false
+        },
+        {
+          "test_name": "NonOverlappingTemplate",
+          "uniformity_p_value": 0.0,
+          "num_passed": 18,
+          "num_total": 18,
+          "passed": false
+        },
+        {
+          "test_name": "NonOverlappingTemplate",
+          "uniformity_p_value": 0.0,
+          "num_passed": 18,
+          "num_total": 18,
+          "passed": false
+        },
+        {
+          "test_name": "NonOverlappingTemplate",
+          "uniformity_p_value": 0.0,
+          "num_passed": 18,
+          "num_total": 18,
+          "passed": false
+        },
+        {
+          "test_name": "NonOverlappingTemplate",
+          "uniformity_p_value": 0.0,
+          "num_passed": 18,
+          "num_total": 18,
+          "passed": false
         },
         {
           "test_name": "OverlappingTemplate",
-          "uniformity_p_value": 0.002043,
+          "uniformity_p_value": 0.0,
           "num_passed": 18,
           "num_total": 18,
-          "passed": true
+          "passed": false
         },
         {
           "test_name": "Universal",
-          "uniformity_p_value": 0.000954,
+          "uniformity_p_value": 0.0,
           "num_passed": 18,
           "num_total": 18,
-          "passed": true
+          "passed": false
         },
         {
           "test_name": "ApproximateEntropy",
-          "uniformity_p_value": 0.004301,
+          "uniformity_p_value": 0.0,
           "num_passed": 18,
           "num_total": 18,
-          "passed": true
+          "passed": false
         },
         {
           "test_name": "RandomExcursions",
-          "uniformity_p_value": 0.911413,
-          "num_passed": 10,
-          "num_total": 10,
-          "passed": true
+          "uniformity_p_value": 0.0,
+          "num_passed": 18,
+          "num_total": 18,
+          "passed": false
         },
         {
           "test_name": "RandomExcursions",
-          "uniformity_p_value": 0.534146,
-          "num_passed": 10,
-          "num_total": 10,
-          "passed": true
+          "uniformity_p_value": 0.0,
+          "num_passed": 18,
+          "num_total": 18,
+          "passed": false
         },
         {
           "test_name": "RandomExcursions",
-          "uniformity_p_value": 0.534146,
-          "num_passed": 10,
-          "num_total": 10,
-          "passed": true
+          "uniformity_p_value": 0.0,
+          "num_passed": 18,
+          "num_total": 18,
+          "passed": false
         },
         {
           "test_name": "RandomExcursions",
-          "uniformity_p_value": 0.739918,
-          "num_passed": 10,
-          "num_total": 10,
-          "passed": true
+          "uniformity_p_value": 0.0,
+          "num_passed": 18,
+          "num_total": 18,
+          "passed": false
         },
         {
           "test_name": "RandomExcursions",
-          "uniformity_p_value": 0.350485,
-          "num_passed": 10,
-          "num_total": 10,
-          "passed": true
+          "uniformity_p_value": 0.0,
+          "num_passed": 18,
+          "num_total": 18,
+          "passed": false
         },
         {
           "test_name": "RandomExcursions",
-          "uniformity_p_value": 0.739918,
-          "num_passed": 10,
-          "num_total": 10,
-          "passed": true
+          "uniformity_p_value": 0.0,
+          "num_passed": 18,
+          "num_total": 18,
+          "passed": false
         },
         {
           "test_name": "RandomExcursions",
-          "uniformity_p_value": 0.350485,
-          "num_passed": 10,
-          "num_total": 10,
-          "passed": true
+          "uniformity_p_value": 0.0,
+          "num_passed": 18,
+          "num_total": 18,
+          "passed": false
         },
         {
           "test_name": "RandomExcursions",
-          "uniformity_p_value": 0.739918,
-          "num_passed": 10,
-          "num_total": 10,
-          "passed": true
+          "uniformity_p_value": 0.0,
+          "num_passed": 18,
+          "num_total": 18,
+          "passed": false
         },
         {
           "test_name": "RandomExcursionsVariant",
-          "uniformity_p_value": 0.739918,
-          "num_passed": 10,
-          "num_total": 10,
-          "passed": true
+          "uniformity_p_value": 0.0,
+          "num_passed": 18,
+          "num_total": 18,
+          "passed": false
         },
         {
           "test_name": "RandomExcursionsVariant",
-          "uniformity_p_value": 0.739918,
-          "num_passed": 10,
-          "num_total": 10,
-          "passed": true
+          "uniformity_p_value": 0.0,
+          "num_passed": 18,
+          "num_total": 18,
+          "passed": false
         },
         {
           "test_name": "RandomExcursionsVariant",
-          "uniformity_p_value": 0.350485,
-          "num_passed": 10,
-          "num_total": 10,
-          "passed": true
+          "uniformity_p_value": 0.0,
+          "num_passed": 18,
+          "num_total": 18,
+          "passed": false
         },
         {
           "test_name": "RandomExcursionsVariant",
-          "uniformity_p_value": 0.004301,
-          "num_passed": 10,
-          "num_total": 10,
-          "passed": true
+          "uniformity_p_value": 0.0,
+          "num_passed": 18,
+          "num_total": 18,
+          "passed": false
         },
         {
           "test_name": "RandomExcursionsVariant",
-          "uniformity_p_value": 0.213309,
-          "num_passed": 10,
-          "num_total": 10,
-          "passed": true
+          "uniformity_p_value": 0.0,
+          "num_passed": 18,
+          "num_total": 18,
+          "passed": false
         },
         {
           "test_name": "RandomExcursionsVariant",
-          "uniformity_p_value": 0.008879,
-          "num_passed": 10,
-          "num_total": 10,
-          "passed": true
+          "uniformity_p_value": 0.0,
+          "num_passed": 18,
+          "num_total": 18,
+          "passed": false
         },
         {
           "test_name": "RandomExcursionsVariant",
-          "uniformity_p_value": 0.122325,
-          "num_passed": 10,
-          "num_total": 10,
-          "passed": true
+          "uniformity_p_value": 0.0,
+          "num_passed": 18,
+          "num_total": 18,
+          "passed": false
         },
         {
           "test_name": "RandomExcursionsVariant",
-          "uniformity_p_value": 0.213309,
-          "num_passed": 10,
-          "num_total": 10,
-          "passed": true
+          "uniformity_p_value": 0.0,
+          "num_passed": 18,
+          "num_total": 18,
+          "passed": false
         },
         {
           "test_name": "RandomExcursionsVariant",
-          "uniformity_p_value": 0.122325,
-          "num_passed": 10,
-          "num_total": 10,
-          "passed": true
+          "uniformity_p_value": 0.0,
+          "num_passed": 18,
+          "num_total": 18,
+          "passed": false
         },
         {
           "test_name": "RandomExcursionsVariant",
-          "uniformity_p_value": 0.534146,
-          "num_passed": 10,
-          "num_total": 10,
-          "passed": true
+          "uniformity_p_value": 0.0,
+          "num_passed": 18,
+          "num_total": 18,
+          "passed": false
         },
         {
           "test_name": "RandomExcursionsVariant",
-          "uniformity_p_value": 0.213309,
-          "num_passed": 10,
-          "num_total": 10,
-          "passed": true
+          "uniformity_p_value": 0.0,
+          "num_passed": 18,
+          "num_total": 18,
+          "passed": false
         },
         {
           "test_name": "RandomExcursionsVariant",
-          "uniformity_p_value": 0.739918,
-          "num_passed": 10,
-          "num_total": 10,
-          "passed": true
+          "uniformity_p_value": 0.0,
+          "num_passed": 18,
+          "num_total": 18,
+          "passed": false
         },
         {
           "test_name": "RandomExcursionsVariant",
-          "uniformity_p_value": 0.911413,
-          "num_passed": 10,
-          "num_total": 10,
-          "passed": true
+          "uniformity_p_value": 0.0,
+          "num_passed": 18,
+          "num_total": 18,
+          "passed": false
         },
         {
           "test_name": "RandomExcursionsVariant",
-          "uniformity_p_value": 0.350485,
-          "num_passed": 10,
-          "num_total": 10,
-          "passed": true
+          "uniformity_p_value": 0.0,
+          "num_passed": 18,
+          "num_total": 18,
+          "passed": false
         },
         {
           "test_name": "RandomExcursionsVariant",
-          "uniformity_p_value": 0.911413,
-          "num_passed": 10,
-          "num_total": 10,
-          "passed": true
+          "uniformity_p_value": 0.0,
+          "num_passed": 18,
+          "num_total": 18,
+          "passed": false
         },
         {
           "test_name": "RandomExcursionsVariant",
-          "uniformity_p_value": 0.534146,
-          "num_passed": 10,
-          "num_total": 10,
-          "passed": true
+          "uniformity_p_value": 0.0,
+          "num_passed": 18,
+          "num_total": 18,
+          "passed": false
         },
         {
           "test_name": "RandomExcursionsVariant",
-          "uniformity_p_value": 0.534146,
-          "num_passed": 10,
-          "num_total": 10,
-          "passed": true
+          "uniformity_p_value": 0.0,
+          "num_passed": 18,
+          "num_total": 18,
+          "passed": false
         },
         {
           "test_name": "RandomExcursionsVariant",
-          "uniformity_p_value": 0.739918,
-          "num_passed": 10,
-          "num_total": 10,
-          "passed": true
+          "uniformity_p_value": 0.0,
+          "num_passed": 18,
+          "num_total": 18,
+          "passed": false
         },
         {
           "test_name": "Serial",
-          "uniformity_p_value": 0.002043,
+          "uniformity_p_value": 0.0,
           "num_passed": 18,
           "num_total": 18,
-          "passed": true
+          "passed": false
         },
         {
           "test_name": "Serial",
-          "uniformity_p_value": 4e-05,
+          "uniformity_p_value": 0.0,
           "num_passed": 18,
           "num_total": 18,
           "passed": false
         },
         {
           "test_name": "LinearComplexity",
-          "uniformity_p_value": 0.000954,
+          "uniformity_p_value": 0.0,
           "num_passed": 18,
           "num_total": 18,
-          "passed": true
+          "passed": false
         }
       ]
     }
