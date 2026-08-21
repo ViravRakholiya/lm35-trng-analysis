@@ -1129,6 +1129,72 @@
         ],
         "file_size_mb": 282.0,
         "source_file": "LM35_A3_24C_5V_10M.csv"
+      },
+      "40_5": {
+        "rows": [
+          {
+            "Index": 0,
+            "Raw_ADC": 25244,
+            "Voltage_mV": 394.4375,
+            "Temperature_C": 39.44
+          },
+          {
+            "Index": 1,
+            "Raw_ADC": 25226,
+            "Voltage_mV": 394.1562,
+            "Temperature_C": 39.42
+          },
+          {
+            "Index": 2,
+            "Raw_ADC": 25204,
+            "Voltage_mV": 393.8125,
+            "Temperature_C": 39.38
+          },
+          {
+            "Index": 3,
+            "Raw_ADC": 25196,
+            "Voltage_mV": 393.6875,
+            "Temperature_C": 39.37
+          },
+          {
+            "Index": 4,
+            "Raw_ADC": 25224,
+            "Voltage_mV": 394.125,
+            "Temperature_C": 39.41
+          },
+          {
+            "Index": 5,
+            "Raw_ADC": 25196,
+            "Voltage_mV": 393.6875,
+            "Temperature_C": 39.37
+          },
+          {
+            "Index": 6,
+            "Raw_ADC": 25213,
+            "Voltage_mV": 393.9531,
+            "Temperature_C": 39.4
+          },
+          {
+            "Index": 7,
+            "Raw_ADC": 25238,
+            "Voltage_mV": 394.3438,
+            "Temperature_C": 39.43
+          },
+          {
+            "Index": 8,
+            "Raw_ADC": 25194,
+            "Voltage_mV": 393.6562,
+            "Temperature_C": 39.37
+          },
+          {
+            "Index": 9,
+            "Raw_ADC": 25207,
+            "Voltage_mV": 393.8594,
+            "Temperature_C": 39.39
+          }
+        ],
+        "file_size_mb": 281.9,
+        "source_file": "LM35_A3_40C_5V_10M.csv"
       }
     },
     "A4": {
@@ -1395,6 +1461,72 @@
         ],
         "file_size_mb": 281.9,
         "source_file": "LM35_A4_24C_5V_10M.csv"
+      },
+      "40_5": {
+        "rows": [
+          {
+            "Index": 0,
+            "Raw_ADC": 25427,
+            "Voltage_mV": 397.2969,
+            "Temperature_C": 39.73
+          },
+          {
+            "Index": 1,
+            "Raw_ADC": 25390,
+            "Voltage_mV": 396.7188,
+            "Temperature_C": 39.67
+          },
+          {
+            "Index": 2,
+            "Raw_ADC": 25405,
+            "Voltage_mV": 396.9531,
+            "Temperature_C": 39.7
+          },
+          {
+            "Index": 3,
+            "Raw_ADC": 25401,
+            "Voltage_mV": 396.8906,
+            "Temperature_C": 39.69
+          },
+          {
+            "Index": 4,
+            "Raw_ADC": 25403,
+            "Voltage_mV": 396.9219,
+            "Temperature_C": 39.69
+          },
+          {
+            "Index": 5,
+            "Raw_ADC": 25404,
+            "Voltage_mV": 396.9375,
+            "Temperature_C": 39.69
+          },
+          {
+            "Index": 6,
+            "Raw_ADC": 25389,
+            "Voltage_mV": 396.7031,
+            "Temperature_C": 39.67
+          },
+          {
+            "Index": 7,
+            "Raw_ADC": 25406,
+            "Voltage_mV": 396.9688,
+            "Temperature_C": 39.7
+          },
+          {
+            "Index": 8,
+            "Raw_ADC": 25392,
+            "Voltage_mV": 396.75,
+            "Temperature_C": 39.67
+          },
+          {
+            "Index": 9,
+            "Raw_ADC": 25397,
+            "Voltage_mV": 396.8281,
+            "Temperature_C": 39.68
+          }
+        ],
+        "file_size_mb": 282.2,
+        "source_file": "LM35_A4_40C_5V_10M.csv"
       }
     },
     "A5": {
@@ -1661,6 +1793,72 @@
         ],
         "file_size_mb": 281.9,
         "source_file": "LM35_A5_24C_5V_10M.csv"
+      },
+      "40_5": {
+        "rows": [
+          {
+            "Index": 0,
+            "Raw_ADC": 25680,
+            "Voltage_mV": 401.25,
+            "Temperature_C": 40.12
+          },
+          {
+            "Index": 1,
+            "Raw_ADC": 25649,
+            "Voltage_mV": 400.7656,
+            "Temperature_C": 40.08
+          },
+          {
+            "Index": 2,
+            "Raw_ADC": 25647,
+            "Voltage_mV": 400.7344,
+            "Temperature_C": 40.07
+          },
+          {
+            "Index": 3,
+            "Raw_ADC": 25644,
+            "Voltage_mV": 400.6875,
+            "Temperature_C": 40.07
+          },
+          {
+            "Index": 4,
+            "Raw_ADC": 25647,
+            "Voltage_mV": 400.7344,
+            "Temperature_C": 40.07
+          },
+          {
+            "Index": 5,
+            "Raw_ADC": 25656,
+            "Voltage_mV": 400.875,
+            "Temperature_C": 40.09
+          },
+          {
+            "Index": 6,
+            "Raw_ADC": 25726,
+            "Voltage_mV": 401.9688,
+            "Temperature_C": 40.2
+          },
+          {
+            "Index": 7,
+            "Raw_ADC": 25651,
+            "Voltage_mV": 400.7969,
+            "Temperature_C": 40.08
+          },
+          {
+            "Index": 8,
+            "Raw_ADC": 25643,
+            "Voltage_mV": 400.6719,
+            "Temperature_C": 40.07
+          },
+          {
+            "Index": 9,
+            "Raw_ADC": 25649,
+            "Voltage_mV": 400.7656,
+            "Temperature_C": 40.08
+          }
+        ],
+        "file_size_mb": 281.9,
+        "source_file": "LM35_A5_40C_5V_10M.csv"
       }
     },
     "A6": {
@@ -1927,6 +2125,72 @@
         ],
         "file_size_mb": 281.9,
         "source_file": "LM35_A6_24C_5V_10M.csv"
+      },
+      "40_5": {
+        "rows": [
+          {
+            "Index": 0,
+            "Raw_ADC": 25451,
+            "Voltage_mV": 397.6719,
+            "Temperature_C": 39.77
+          },
+          {
+            "Index": 1,
+            "Raw_ADC": 25436,
+            "Voltage_mV": 397.4375,
+            "Temperature_C": 39.74
+          },
+          {
+            "Index": 2,
+            "Raw_ADC": 25468,
+            "Voltage_mV": 397.9375,
+            "Temperature_C": 39.79
+          },
+          {
+            "Index": 3,
+            "Raw_ADC": 25429,
+            "Voltage_mV": 397.3281,
+            "Temperature_C": 39.73
+          },
+          {
+            "Index": 4,
+            "Raw_ADC": 25454,
+            "Voltage_mV": 397.7188,
+            "Temperature_C": 39.77
+          },
+          {
+            "Index": 5,
+            "Raw_ADC": 25443,
+            "Voltage_mV": 397.5469,
+            "Temperature_C": 39.75
+          },
+          {
+            "Index": 6,
+            "Raw_ADC": 25491,
+            "Voltage_mV": 398.2969,
+            "Temperature_C": 39.83
+          },
+          {
+            "Index": 7,
+            "Raw_ADC": 25440,
+            "Voltage_mV": 397.5,
+            "Temperature_C": 39.75
+          },
+          {
+            "Index": 8,
+            "Raw_ADC": 25436,
+            "Voltage_mV": 397.4375,
+            "Temperature_C": 39.74
+          },
+          {
+            "Index": 9,
+            "Raw_ADC": 25436,
+            "Voltage_mV": 397.4375,
+            "Temperature_C": 39.74
+          }
+        ],
+        "file_size_mb": 282.3,
+        "source_file": "LM35_A6_40C_5V_10M.csv"
       }
     },
     "A7": {
@@ -2193,6 +2457,72 @@
         ],
         "file_size_mb": 281.9,
         "source_file": "LM35_A7_24C_5V_10M.csv"
+      },
+      "40_5": {
+        "rows": [
+          {
+            "Index": 0,
+            "Raw_ADC": 3257,
+            "Voltage_mV": 50.8906,
+            "Temperature_C": 5.09
+          },
+          {
+            "Index": 1,
+            "Raw_ADC": 25462,
+            "Voltage_mV": 397.8438,
+            "Temperature_C": 39.78
+          },
+          {
+            "Index": 2,
+            "Raw_ADC": 25460,
+            "Voltage_mV": 397.8125,
+            "Temperature_C": 39.78
+          },
+          {
+            "Index": 3,
+            "Raw_ADC": 25464,
+            "Voltage_mV": 397.875,
+            "Temperature_C": 39.79
+          },
+          {
+            "Index": 4,
+            "Raw_ADC": 25458,
+            "Voltage_mV": 397.7813,
+            "Temperature_C": 39.78
+          },
+          {
+            "Index": 5,
+            "Raw_ADC": 25453,
+            "Voltage_mV": 397.7031,
+            "Temperature_C": 39.77
+          },
+          {
+            "Index": 6,
+            "Raw_ADC": 25459,
+            "Voltage_mV": 397.7969,
+            "Temperature_C": 39.78
+          },
+          {
+            "Index": 7,
+            "Raw_ADC": 25455,
+            "Voltage_mV": 397.7344,
+            "Temperature_C": 39.77
+          },
+          {
+            "Index": 8,
+            "Raw_ADC": 25460,
+            "Voltage_mV": 397.8125,
+            "Temperature_C": 39.78
+          },
+          {
+            "Index": 9,
+            "Raw_ADC": 25454,
+            "Voltage_mV": 397.7188,
+            "Temperature_C": 39.77
+          }
+        ],
+        "file_size_mb": 282.2,
+        "source_file": "LM35_A7_40C_5V_10M.csv"
       }
     },
     "B1": {
@@ -4051,6 +4381,72 @@
         ],
         "file_size_mb": 281.9,
         "source_file": "LM35_B5_24C_5V_10M.csv"
+      },
+      "40_5": {
+        "rows": [
+          {
+            "Index": 0,
+            "Raw_ADC": 26238,
+            "Voltage_mV": 409.9688,
+            "Temperature_C": 41.0
+          },
+          {
+            "Index": 1,
+            "Raw_ADC": 26240,
+            "Voltage_mV": 410.0,
+            "Temperature_C": 41.0
+          },
+          {
+            "Index": 2,
+            "Raw_ADC": 26235,
+            "Voltage_mV": 409.9219,
+            "Temperature_C": 40.99
+          },
+          {
+            "Index": 3,
+            "Raw_ADC": 26229,
+            "Voltage_mV": 409.8281,
+            "Temperature_C": 40.98
+          },
+          {
+            "Index": 4,
+            "Raw_ADC": 26238,
+            "Voltage_mV": 409.9688,
+            "Temperature_C": 41.0
+          },
+          {
+            "Index": 5,
+            "Raw_ADC": 26236,
+            "Voltage_mV": 409.9375,
+            "Temperature_C": 40.99
+          },
+          {
+            "Index": 6,
+            "Raw_ADC": 26230,
+            "Voltage_mV": 409.8438,
+            "Temperature_C": 40.98
+          },
+          {
+            "Index": 7,
+            "Raw_ADC": 26228,
+            "Voltage_mV": 409.8125,
+            "Temperature_C": 40.98
+          },
+          {
+            "Index": 8,
+            "Raw_ADC": 26238,
+            "Voltage_mV": 409.9688,
+            "Temperature_C": 41.0
+          },
+          {
+            "Index": 9,
+            "Raw_ADC": 26235,
+            "Voltage_mV": 409.9219,
+            "Temperature_C": 40.99
+          }
+        ],
+        "file_size_mb": 281.1,
+        "source_file": "LM35_B5_40C_5V_10M.csv"
       }
     },
     "B6": {
@@ -4317,6 +4713,72 @@
         ],
         "file_size_mb": 281.9,
         "source_file": "LM35_B6_24C_5V_10M.csv"
+      },
+      "40_5": {
+        "rows": [
+          {
+            "Index": 0,
+            "Raw_ADC": 27383,
+            "Voltage_mV": 427.8594,
+            "Temperature_C": 42.79
+          },
+          {
+            "Index": 1,
+            "Raw_ADC": 27376,
+            "Voltage_mV": 427.75,
+            "Temperature_C": 42.77
+          },
+          {
+            "Index": 2,
+            "Raw_ADC": 27383,
+            "Voltage_mV": 427.8594,
+            "Temperature_C": 42.79
+          },
+          {
+            "Index": 3,
+            "Raw_ADC": 27382,
+            "Voltage_mV": 427.8438,
+            "Temperature_C": 42.78
+          },
+          {
+            "Index": 4,
+            "Raw_ADC": 27385,
+            "Voltage_mV": 427.8906,
+            "Temperature_C": 42.79
+          },
+          {
+            "Index": 5,
+            "Raw_ADC": 27378,
+            "Voltage_mV": 427.7812,
+            "Temperature_C": 42.78
+          },
+          {
+            "Index": 6,
+            "Raw_ADC": 27385,
+            "Voltage_mV": 427.8906,
+            "Temperature_C": 42.79
+          },
+          {
+            "Index": 7,
+            "Raw_ADC": 27375,
+            "Voltage_mV": 427.7344,
+            "Temperature_C": 42.77
+          },
+          {
+            "Index": 8,
+            "Raw_ADC": 27376,
+            "Voltage_mV": 427.75,
+            "Temperature_C": 42.77
+          },
+          {
+            "Index": 9,
+            "Raw_ADC": 27383,
+            "Voltage_mV": 427.8594,
+            "Temperature_C": 42.79
+          }
+        ],
+        "file_size_mb": 281.9,
+        "source_file": "LM35_B6_40C_5V_10M.csv"
       }
     },
     "C1": {
@@ -4583,6 +5045,72 @@
         ],
         "file_size_mb": 281.9,
         "source_file": "LM35_C1_24C_5V_10M.csv"
+      },
+      "40_5": {
+        "rows": [
+          {
+            "Index": 0,
+            "Raw_ADC": 26591,
+            "Voltage_mV": 415.4844,
+            "Temperature_C": 41.55
+          },
+          {
+            "Index": 1,
+            "Raw_ADC": 26592,
+            "Voltage_mV": 415.5,
+            "Temperature_C": 41.55
+          },
+          {
+            "Index": 2,
+            "Raw_ADC": 26607,
+            "Voltage_mV": 415.7344,
+            "Temperature_C": 41.57
+          },
+          {
+            "Index": 3,
+            "Raw_ADC": 26562,
+            "Voltage_mV": 415.0312,
+            "Temperature_C": 41.5
+          },
+          {
+            "Index": 4,
+            "Raw_ADC": 26542,
+            "Voltage_mV": 414.7188,
+            "Temperature_C": 41.47
+          },
+          {
+            "Index": 5,
+            "Raw_ADC": 26508,
+            "Voltage_mV": 414.1875,
+            "Temperature_C": 41.42
+          },
+          {
+            "Index": 6,
+            "Raw_ADC": 26540,
+            "Voltage_mV": 414.6875,
+            "Temperature_C": 41.47
+          },
+          {
+            "Index": 7,
+            "Raw_ADC": 26541,
+            "Voltage_mV": 414.7031,
+            "Temperature_C": 41.47
+          },
+          {
+            "Index": 8,
+            "Raw_ADC": 26531,
+            "Voltage_mV": 414.5469,
+            "Temperature_C": 41.45
+          },
+          {
+            "Index": 9,
+            "Raw_ADC": 26472,
+            "Voltage_mV": 413.625,
+            "Temperature_C": 41.36
+          }
+        ],
+        "file_size_mb": 282.0,
+        "source_file": "LM35_C1_40C_5V_10M.csv"
       }
     },
     "C2": {
@@ -5247,6 +5775,72 @@
         ],
         "file_size_mb": 281.9,
         "source_file": "LM35_C3_24C_5V_10M.csv"
+      },
+      "40_5": {
+        "rows": [
+          {
+            "Index": 0,
+            "Raw_ADC": 25790,
+            "Voltage_mV": 402.9688,
+            "Temperature_C": 40.3
+          },
+          {
+            "Index": 1,
+            "Raw_ADC": 25794,
+            "Voltage_mV": 403.0312,
+            "Temperature_C": 40.3
+          },
+          {
+            "Index": 2,
+            "Raw_ADC": 25820,
+            "Voltage_mV": 403.4375,
+            "Temperature_C": 40.34
+          },
+          {
+            "Index": 3,
+            "Raw_ADC": 25809,
+            "Voltage_mV": 403.2656,
+            "Temperature_C": 40.33
+          },
+          {
+            "Index": 4,
+            "Raw_ADC": 25795,
+            "Voltage_mV": 403.0469,
+            "Temperature_C": 40.3
+          },
+          {
+            "Index": 5,
+            "Raw_ADC": 25782,
+            "Voltage_mV": 402.8438,
+            "Temperature_C": 40.28
+          },
+          {
+            "Index": 6,
+            "Raw_ADC": 25792,
+            "Voltage_mV": 403.0,
+            "Temperature_C": 40.3
+          },
+          {
+            "Index": 7,
+            "Raw_ADC": 25785,
+            "Voltage_mV": 402.8906,
+            "Temperature_C": 40.29
+          },
+          {
+            "Index": 8,
+            "Raw_ADC": 25774,
+            "Voltage_mV": 402.7188,
+            "Temperature_C": 40.27
+          },
+          {
+            "Index": 9,
+            "Raw_ADC": 25807,
+            "Voltage_mV": 403.2344,
+            "Temperature_C": 40.32
+          }
+        ],
+        "file_size_mb": 282.4,
+        "source_file": "LM35_C3_40C_5V_10M.csv"
       }
     },
     "C4": {
@@ -5513,6 +6107,72 @@
         ],
         "file_size_mb": 281.9,
         "source_file": "LM35_C4_24C_5V_10M.csv"
+      },
+      "40_5": {
+        "rows": [
+          {
+            "Index": 0,
+            "Raw_ADC": 26060,
+            "Voltage_mV": 407.1875,
+            "Temperature_C": 40.72
+          },
+          {
+            "Index": 1,
+            "Raw_ADC": 26066,
+            "Voltage_mV": 407.2812,
+            "Temperature_C": 40.73
+          },
+          {
+            "Index": 2,
+            "Raw_ADC": 26074,
+            "Voltage_mV": 407.4062,
+            "Temperature_C": 40.74
+          },
+          {
+            "Index": 3,
+            "Raw_ADC": 26049,
+            "Voltage_mV": 407.0156,
+            "Temperature_C": 40.7
+          },
+          {
+            "Index": 4,
+            "Raw_ADC": 26068,
+            "Voltage_mV": 407.3125,
+            "Temperature_C": 40.73
+          },
+          {
+            "Index": 5,
+            "Raw_ADC": 26052,
+            "Voltage_mV": 407.0625,
+            "Temperature_C": 40.71
+          },
+          {
+            "Index": 6,
+            "Raw_ADC": 26047,
+            "Voltage_mV": 406.9844,
+            "Temperature_C": 40.7
+          },
+          {
+            "Index": 7,
+            "Raw_ADC": 26059,
+            "Voltage_mV": 407.1719,
+            "Temperature_C": 40.72
+          },
+          {
+            "Index": 8,
+            "Raw_ADC": 26054,
+            "Voltage_mV": 407.0938,
+            "Temperature_C": 40.71
+          },
+          {
+            "Index": 9,
+            "Raw_ADC": 26048,
+            "Voltage_mV": 407.0,
+            "Temperature_C": 40.7
+          }
+        ],
+        "file_size_mb": 281.7,
+        "source_file": "LM35_C4_40C_5V_10M.csv"
       }
     },
     "C5": {
@@ -5779,6 +6439,72 @@
         ],
         "file_size_mb": 281.9,
         "source_file": "LM35_C5_24C_5V_10M.csv"
+      },
+      "40_5": {
+        "rows": [
+          {
+            "Index": 0,
+            "Raw_ADC": 25896,
+            "Voltage_mV": 404.625,
+            "Temperature_C": 40.46
+          },
+          {
+            "Index": 1,
+            "Raw_ADC": 25887,
+            "Voltage_mV": 404.4844,
+            "Temperature_C": 40.45
+          },
+          {
+            "Index": 2,
+            "Raw_ADC": 25881,
+            "Voltage_mV": 404.3906,
+            "Temperature_C": 40.44
+          },
+          {
+            "Index": 3,
+            "Raw_ADC": 25885,
+            "Voltage_mV": 404.4531,
+            "Temperature_C": 40.45
+          },
+          {
+            "Index": 4,
+            "Raw_ADC": 25891,
+            "Voltage_mV": 404.5469,
+            "Temperature_C": 40.45
+          },
+          {
+            "Index": 5,
+            "Raw_ADC": 25871,
+            "Voltage_mV": 404.2344,
+            "Temperature_C": 40.42
+          },
+          {
+            "Index": 6,
+            "Raw_ADC": 25883,
+            "Voltage_mV": 404.4219,
+            "Temperature_C": 40.44
+          },
+          {
+            "Index": 7,
+            "Raw_ADC": 25881,
+            "Voltage_mV": 404.3906,
+            "Temperature_C": 40.44
+          },
+          {
+            "Index": 8,
+            "Raw_ADC": 25882,
+            "Voltage_mV": 404.4062,
+            "Temperature_C": 40.44
+          },
+          {
+            "Index": 9,
+            "Raw_ADC": 25865,
+            "Voltage_mV": 404.1406,
+            "Temperature_C": 40.41
+          }
+        ],
+        "file_size_mb": 281.3,
+        "source_file": "LM35_C5_40C_5V_10M.csv"
       }
     },
     "C6": {
@@ -6045,6 +6771,72 @@
         ],
         "file_size_mb": 281.9,
         "source_file": "LM35_C6_24C_5V_10M.csv"
+      },
+      "40_5": {
+        "rows": [
+          {
+            "Index": 0,
+            "Raw_ADC": 26088,
+            "Voltage_mV": 407.625,
+            "Temperature_C": 40.76
+          },
+          {
+            "Index": 1,
+            "Raw_ADC": 26099,
+            "Voltage_mV": 407.7969,
+            "Temperature_C": 40.78
+          },
+          {
+            "Index": 2,
+            "Raw_ADC": 26088,
+            "Voltage_mV": 407.625,
+            "Temperature_C": 40.76
+          },
+          {
+            "Index": 3,
+            "Raw_ADC": 26089,
+            "Voltage_mV": 407.6406,
+            "Temperature_C": 40.76
+          },
+          {
+            "Index": 4,
+            "Raw_ADC": 26080,
+            "Voltage_mV": 407.5,
+            "Temperature_C": 40.75
+          },
+          {
+            "Index": 5,
+            "Raw_ADC": 26099,
+            "Voltage_mV": 407.7969,
+            "Temperature_C": 40.78
+          },
+          {
+            "Index": 6,
+            "Raw_ADC": 26092,
+            "Voltage_mV": 407.6875,
+            "Temperature_C": 40.77
+          },
+          {
+            "Index": 7,
+            "Raw_ADC": 26087,
+            "Voltage_mV": 407.6094,
+            "Temperature_C": 40.76
+          },
+          {
+            "Index": 8,
+            "Raw_ADC": 26090,
+            "Voltage_mV": 407.6562,
+            "Temperature_C": 40.77
+          },
+          {
+            "Index": 9,
+            "Raw_ADC": 26089,
+            "Voltage_mV": 407.6406,
+            "Temperature_C": 40.76
+          }
+        ],
+        "file_size_mb": 282.0,
+        "source_file": "LM35_C6_40C_5V_10M.csv"
       }
     }
   }
